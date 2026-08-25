@@ -1,0 +1,11 @@
+{
+  "database": {
+    "file": "C:\\Users\\amal4\\PycharmProjects\\AgentPreDeployment_check\\agent_pre_deployer\\modules\\database.db",
+    "sqlite_version": "3.50.4",
+    "foreign_keys_enabled": false
+  },
+  "tables": {},
+  "views": {},
+  "indexes": {},
+  "triggers": {}
+}

@@ -1,0 +1,344 @@
+/* ============================================================
+   MODULE 3 — CAPABILITY NORMALIZATION
+   Minimal Viable UI
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.header {
+    background: #172554;
+    color: white;
+    padding: 24px 32px;
+}
+
+.header h1 {
+    margin: 0 0 5px;
+    font-size: 24px;
+}
+
+.header p {
+    margin: 0;
+    color: #bfdbfe;
+    font-size: 14px;
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 24px;
+}
+
+/* ============================================================
+   SUMMARY
+   ============================================================ */
+
+.summary {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.summary-card {
+    background: white;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    padding: 16px 20px;
+    min-width: 150px;
+}
+
+.summary-number {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1d4ed8;
+}
+
+.summary-label {
+    margin-top: 3px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.search {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search:focus {
+    border-color: #2563eb;
+}
+
+/* ============================================================
+   TOOL LIST
+   ============================================================ */
+
+.tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tool-card {
+    background: white;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ============================================================
+   TOOL HEADER
+   ============================================================ */
+
+.tool-header {
+    background: #eef2ff;
+    border-bottom: 1px solid #dbe2ea;
+    padding: 15px 18px;
+}
+
+.tool-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #172554;
+}
+
+.tool-description {
+    margin-top: 5px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* ============================================================
+   TOOL BODY
+   ============================================================ */
+
+.tool-body {
+    padding: 18px;
+}
+
+.section {
+    margin-bottom: 18px;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+/* ============================================================
+   CAPABILITY
+   ============================================================ */
+
+.capabilities {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.capability {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 5px;
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   CONFIDENCE
+   ============================================================ */
+
+.confidence {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.confidence-bar {
+    width: 220px;
+    height: 9px;
+    background: #e5e7eb;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: #2563eb;
+}
+
+.confidence-value {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   FEATURES
+   ============================================================ */
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.feature {
+    padding: 4px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.feature.true {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.feature.false {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.feature.unknown {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+/* ============================================================
+   MATCHES
+   ============================================================ */
+
+.match {
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.match:last-child {
+    margin-bottom: 0;
+}
+
+.match-row {
+    margin-bottom: 5px;
+}
+
+.match-row:last-child {
+    margin-bottom: 0;
+}
+
+.match code {
+    background: #e2e8f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* ============================================================
+   MAPPING
+   ============================================================ */
+
+.mapping {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.mapping-row {
+    margin-bottom: 7px;
+}
+
+.mapping-row:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================================
+   RAW JSON
+   ============================================================ */
+
+details {
+    margin-top: 15px;
+}
+
+summary {
+    cursor: pointer;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+pre {
+    margin-top: 10px;
+    padding: 14px;
+    background: #111827;
+    color: #e5e7eb;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 12px;
+}
+
+/* ============================================================
+   EMPTY
+   ============================================================ */
+
+.empty {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .container {
+        padding: 15px;
+    }
+
+    .summary-card {
+        flex: 1;
+    }
+
+    .confidence-bar {
+        width: 150px;
+    }
+}

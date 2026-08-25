@@ -1,0 +1,381 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1400px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #0f172a;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.app-header {
+    margin-bottom: 2rem;
+}
+
+.main-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+.section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-top: 2.4rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.subsection-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 1.4rem;
+    margin-bottom: 0.7rem;
+}
+
+
+/* =========================================================
+   ASSESSMENT NOTE
+   ========================================================= */
+
+.assessment-note {
+    background: #f8fafc;
+    border-left: 4px solid #64748b;
+    padding: 0.9rem 1rem;
+    margin-bottom: 1.25rem;
+    border-radius: 4px;
+    color: #475569;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LANDING PAGE
+   ========================================================= */
+
+.info-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.25rem;
+    min-height: 170px;
+    background: #ffffff;
+}
+
+.info-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+}
+
+.info-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-text {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CAPABILITY CARDS
+   ========================================================= */
+
+.capability-card {
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    min-height: 120px;
+}
+
+.capability-id {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+.capability-count {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 0.35rem;
+}
+
+.capability-label {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   COMPOSITION CARDS
+   ========================================================= */
+
+.composition-card {
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    background: #000000;
+    padding: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.composition-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.pattern-id {
+    color: #64748b;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pattern-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+
+.sequence-label {
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.sequence {
+    margin-top: 0.4rem;
+    padding: 0.7rem 0.85rem;
+    background: #0b3863;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.status-badge {
+    display: inline-block;
+    padding: 0.28rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.severity-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.severity-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.severity-low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.coverage-covered {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.coverage-partial {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.coverage-gap {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.coverage-unknown {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.success-card {
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #22c55e;
+    border-radius: 6px;
+    background: #f0fdf4;
+    padding: 1rem;
+    color: #166534;
+}
+
+
+/* =========================================================
+   MITIGATION CARDS
+   ========================================================= */
+
+.mitigation-card {
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 1rem;
+    margin-bottom: 0.7rem;
+}
+
+.mitigation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+
+/* =========================================================
+   OPEN GAPS
+   ========================================================= */
+
+.gap-card {
+    border: 1px solid #fecaca;
+    border-left: 4px solid #dc2626;
+    border-radius: 6px;
+    background: #fffafa;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.gap-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1rem;
+}
+
+.gap-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #dc2626;
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.gap-text {
+    margin-top: 0.6rem;
+    color: #7f1d1d;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   P1–P9 COVERAGE
+   ========================================================= */
+
+.coverage-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    padding: 0.9rem;
+    background: #ffffff;
+    margin-bottom: 0.8rem;
+}
+
+.coverage-pattern {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.45rem;
+}
+
+.coverage-counts {
+    color: #64748b;
+    font-size: 0.75rem;
+    margin-top: 0.65rem;
+}
+
+
+/* =========================================================
+   INTERPRETATION LIMITS
+   ========================================================= */
+
+.limit-card {
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #94a3b8;
+    border-radius: 5px;
+    background: #f8fafc;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.7rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   STREAMLIT CLEANUP
+   ========================================================= */
+
+div[data-testid="stMetric"] {
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    padding: 0.8rem;
+    background: black;
+}
+
+div[data-testid="stMetricLabel"] {
+    font-size: 0.8rem;
+}
+
+div[data-testid="stMetricValue"] {
+    font-size: 1.65rem;
+}
+
+div[data-testid="stExpander"] {
+    border-color: #e5e7eb;
+}
+
+.stButton button {
+    font-weight: 600;
+}
+
+[data-testid="stSidebar"] {
+    border-right: 1px solid #e5e7eb;
+}
