@@ -1,0 +1,297 @@
+{
+    "experiment": "Experiment 1 — Gold-set capability mapping accuracy",
+    "ontology_source": "modules.module_3_capability_normalization.CAPABILITY_ONTOLOGY",
+    "tool_count": 15,
+    "results": [
+        {
+            "tool": "echo",
+            "source_file": "everything_tools.json",
+            "description": "Echoes back the input string",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-annotated-message",
+            "source_file": "everything_tools.json",
+            "description": "Demonstrates how annotations can be used to provide metadata about content.",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-env",
+            "source_file": "everything_tools.json",
+            "description": "Returns environment variables for debugging MCP server configuration",
+            "gold_capabilities": [
+                "C5"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "env"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: env. Evidence: C2 Sensitive Data Access via 'env' (Medium)",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-resource-links",
+            "source_file": "everything_tools.json",
+            "description": "Returns resource links that reference different types of resources",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-resource-reference",
+            "source_file": "everything_tools.json",
+            "description": "Returns a resource reference that can be used by MCP clients",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-roots-list",
+            "source_file": "everything_tools.json",
+            "description": "Lists the current MCP roots provided by the client",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-structured-content",
+            "source_file": "everything_tools.json",
+            "description": "Returns structured content along with an output schema",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-sum",
+            "source_file": "everything_tools.json",
+            "description": "Returns the sum of two numbers",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "get-tiny-image",
+            "source_file": "everything_tools.json",
+            "description": "Returns a tiny MCP logo image",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "gzip-file-as-resource",
+            "source_file": "everything_tools.json",
+            "description": "Compresses a file using gzip and returns a resource or resource link",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "gzip",
+                "openWorldHint"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: gzip, openWorldHint. Evidence: C4 State Modification via 'gzip' (Medium); C1 External Data Ingestion via 'openWorldHint' (Low)",
+            "is_ambiguous": true
+        },
+        {
+            "tool": "toggle-simulated-logging",
+            "source_file": "everything_tools.json",
+            "description": "Toggles simulated random-level logging on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "toggle"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: toggle. Evidence: C4 State Modification via 'toggle' (Medium)",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "toggle-subscriber-updates",
+            "source_file": "everything_tools.json",
+            "description": "Toggles simulated resource subscription updates on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (High)",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "trigger-long-running-operation",
+            "source_file": "everything_tools.json",
+            "description": "Demonstrates a long-running operation with progress updates",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (Medium) [readOnlyHint=true contradicts write-side capability -> lowered one step]",
+            "is_ambiguous": false
+        },
+        {
+            "tool": "trigger-elicitation-request",
+            "source_file": "everything_tools.json",
+            "description": "Triggers a request from the server for user elicitation",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true
+        },
+        {
+            "tool": "trigger-elicitation-request-async",
+            "source_file": "everything_tools.json",
+            "description": "Triggers an asynchronous elicitation request",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true
+        }
+    ]
+}

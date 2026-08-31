@@ -1,6 +1,30 @@
 """
 Module 1: Server Selection / Discovery
+
 Reads MCP server tools from JSON file and displays them.
+
+Supports:
+1. Normalized tool format:
+   {
+       "tool": "...",
+       "description": "...",
+       "readOnlyHint": true,
+       "destructiveHint": false,
+       "idempotentHint": true,
+       "openWorldHint": false,
+       "source": "list_tools()"
+   }
+
+2. MCPTox pure_tool.json format:
+   {
+       "server_name": "...",
+       "tool_name": "...",
+       "query": "...",
+       "tool_content": "...",
+       "security risk": "...",
+       "paradigm": "...",
+       "tool_address": "def_tool/1.py"
+   }
 """
 
 import json
@@ -15,7 +39,7 @@ def run(input_file):
         input_file (str): Path to JSON file containing tools
 
     Returns:
-        dict: Parsed tools data
+        dict: Parsed and normalized tools data
     """
     print("=" * 70)
     print("Module 1: Server Selection / Discovery")
@@ -27,7 +51,11 @@ def run(input_file):
 
 def process(input_file):
     """
-    Read and display tools from JSON file
+    Read and display tools from JSON file.
+
+    Supports both:
+    - Normalized MCP tool JSON
+    - MCPTox pure_tool.json format
 
     Args:
         input_file (str): Path to JSON file
@@ -44,6 +72,9 @@ def process(input_file):
         print(f"\nLoaded tools from: {input_file}")
         print(f"Total tools found: {len(tools)}\n")
 
+        # Normalize input format if it is MCPTox
+        tools = normalize_tools(tools)
+
         # Display each tool
         display_tools(tools)
 
@@ -56,18 +87,100 @@ def process(input_file):
 
     except FileNotFoundError:
         raise FileNotFoundError(f"Input file not found: {input_file}")
+
     except json.JSONDecodeError:
         raise ValueError(f"Invalid JSON file: {input_file}")
+
     except Exception as e:
         raise Exception(f"Error processing input file: {str(e)}")
 
 
-def display_tools(tools):
+def normalize_tools(tools):
     """
-    Display tools in formatted table
+    Detect the input format and normalize tools into the format
+    expected by the rest of the pipeline.
+
+    Supported formats:
+
+    Normalized format:
+        tool
+        description
+        readOnlyHint
+        destructiveHint
+        idempotentHint
+        openWorldHint
+        source
+
+    MCPTox format:
+        server_name
+        tool_name
+        query
+        tool_content
+        security risk
+        paradigm
+        tool_address
 
     Args:
-        tools (list): List of tool dictionaries
+        tools (list): Raw tool dictionaries
+
+    Returns:
+        list: Normalized tool dictionaries
+    """
+
+    if not tools:
+        return tools
+
+    normalized_tools = []
+
+    for tool in tools:
+
+        # ---------------------------------------------------------
+        # Format 1: Already normalized MCP tool format
+        # ---------------------------------------------------------
+        if "tool" in tool and "description" in tool:
+
+            normalized_tools.append(tool)
+
+        # ---------------------------------------------------------
+        # Format 2: MCPTox pure_tool.json format
+        # ---------------------------------------------------------
+        elif "tool_name" in tool and "tool_content" in tool:
+
+            normalized_tool = {
+                "tool": tool.get("tool_name", "N/A"),
+                "description": tool.get("tool_content", "N/A"),
+
+                # MCPTox does not provide these MCP annotations.
+                # Keep them as None rather than assuming False.
+                "readOnlyHint": None,
+                "destructiveHint": None,
+                "idempotentHint": None,
+                "openWorldHint": None,
+
+                # Preserve the original source information.
+                "source": f"MCPTox:{tool.get('tool_address', 'N/A')}"
+            }
+
+            normalized_tools.append(normalized_tool)
+
+        # ---------------------------------------------------------
+        # Unknown format
+        # ---------------------------------------------------------
+        else:
+            raise ValueError(
+                "Unsupported tool format. Expected either the "
+                "normalized MCP format or the MCPTox pure_tool.json format."
+            )
+
+    return normalized_tools
+
+
+def display_tools(tools):
+    """
+    Display tools in formatted table.
+
+    Args:
+        tools (list): List of normalized tool dictionaries
     """
     if not tools:
         print("No tools found.")
@@ -75,7 +188,12 @@ def display_tools(tools):
 
     # Print table header
     print("-" * 70)
-    print(f"{'Tool Name':<30} | {'ReadOnly':<10} | {'Destructive':<12} | {'Source':<15}")
+    print(
+        f"{'Tool Name':<30} | "
+        f"{'ReadOnly':<10} | "
+        f"{'Destructive':<12} | "
+        f"{'Source':<15}"
+    )
     print("-" * 70)
 
     # Print each tool
@@ -86,12 +204,18 @@ def display_tools(tools):
         destructive = str(tool.get('destructiveHint', 'N/A'))
         source = tool.get('source', 'N/A')
 
-        print(f"{tool_name:<30} | {readonly:<10} | {destructive:<12} | {source:<15}")
+        print(
+            f"{tool_name:<30} | "
+            f"{readonly:<10} | "
+            f"{destructive:<12} | "
+            f"{source:<15}"
+        )
 
     print("-" * 70)
 
     # Print detailed information
     print("\n[DETAILED TOOL INFORMATION]\n")
+
     for idx, tool in enumerate(tools, 1):
         print(f"{idx}. {tool.get('tool', 'Unknown')}")
         print(f"   Description: {tool.get('description', 'N/A')}")

@@ -1,0 +1,16 @@
+tool,source_file,gold_capabilities,predicted_capabilities,exact_match,status,primary_prediction,normalized_concepts,matched_expressions,normalization_confidence,mapping_reason,is_ambiguous
+echo,everything_tools.json,,,True,CORRECT,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-annotated-message,everything_tools.json,C2,,False,MISCLASSIFIED,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-env,everything_tools.json,C5,C2,False,MISCLASSIFIED,C2,Sensitive Data Access,env,0.7,Tool matches: env. Evidence: C2 Sensitive Data Access via 'env' (Medium),False
+get-resource-links,everything_tools.json,C2,,False,MISCLASSIFIED,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-resource-reference,everything_tools.json,,,True,CORRECT,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-roots-list,everything_tools.json,C2,,False,MISCLASSIFIED,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-structured-content,everything_tools.json,,,True,CORRECT,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-sum,everything_tools.json,,,True,CORRECT,,,,1.0,No normalized capabilities found - UNMAPPED,False
+get-tiny-image,everything_tools.json,,,True,CORRECT,,,,1.0,No normalized capabilities found - UNMAPPED,False
+gzip-file-as-resource,everything_tools.json,C4,"C1,C4",False,MISCLASSIFIED,C4,"State Modification,External Data Ingestion","gzip,openWorldHint",0.7,"Tool matches: gzip, openWorldHint. Evidence: C4 State Modification via 'gzip' (Medium); C1 External Data Ingestion via 'openWorldHint' (Low)",True
+toggle-simulated-logging,everything_tools.json,C4,C4,True,CORRECT,C4,State Modification,toggle,0.7,Tool matches: toggle. Evidence: C4 State Modification via 'toggle' (Medium),False
+toggle-subscriber-updates,everything_tools.json,C4,C4,True,CORRECT,C4,State Modification,updates,1.0,Tool matches: updates. Evidence: C4 State Modification via 'updates' (High),False
+trigger-long-running-operation,everything_tools.json,,C4,False,MISCLASSIFIED,C4,State Modification,updates,0.7,Tool matches: updates. Evidence: C4 State Modification via 'updates' (Medium) [readOnlyHint=true contradicts write-side capability -> lowered one step],False
+trigger-elicitation-request,everything_tools.json,,"C1,C4",False,MISCLASSIFIED,C4,"State Modification,External Data Ingestion","trigger,elicitation",0.4,"Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",True
+trigger-elicitation-request-async,everything_tools.json,,"C1,C4",False,MISCLASSIFIED,C4,"State Modification,External Data Ingestion","trigger,elicitation",0.4,"Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",True

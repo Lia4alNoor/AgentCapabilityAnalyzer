@@ -1,0 +1,693 @@
+{
+    "experiment": "Experiment 1 — Gold-set capability mapping accuracy",
+    "ontology_source": "modules.module_3_capability_normalization.CAPABILITY_ONTOLOGY",
+    "tool_count": 30,
+    "results": [
+        {
+            "annotation_id": 1,
+            "tool": "echo",
+            "source_file": "everything_tools.json",
+            "description": "Echoes back the input string",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 2,
+            "tool": "get-annotated-message",
+            "source_file": "everything_tools.json",
+            "description": "Demonstrates how annotations can be used to provide metadata about content.",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 3,
+            "tool": "get-env",
+            "source_file": "everything_tools.json",
+            "description": "Returns environment variables for debugging MCP server configuration",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "env"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: env. Evidence: C2 Sensitive Data Access via 'env' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 4,
+            "tool": "get-resource-links",
+            "source_file": "everything_tools.json",
+            "description": "Returns resource links that reference different types of resources",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 5,
+            "tool": "get-resource-reference",
+            "source_file": "everything_tools.json",
+            "description": "Returns a resource reference that can be used by MCP clients",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 6,
+            "tool": "get-roots-list",
+            "source_file": "everything_tools.json",
+            "description": "Lists the current MCP roots provided by the client",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 7,
+            "tool": "get-structured-content",
+            "source_file": "everything_tools.json",
+            "description": "Returns structured content along with an output schema",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 8,
+            "tool": "get-sum",
+            "source_file": "everything_tools.json",
+            "description": "Returns the sum of two numbers",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 9,
+            "tool": "get-tiny-image",
+            "source_file": "everything_tools.json",
+            "description": "Returns a tiny MCP logo image",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 10,
+            "tool": "gzip-file-as-resource",
+            "source_file": "everything_tools.json",
+            "description": "Compresses a file using gzip and returns a resource or resource link",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "gzip",
+                "openWorldHint"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: gzip, openWorldHint. Evidence: C4 State Modification via 'gzip' (Medium); C1 External Data Ingestion via 'openWorldHint' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "The gold label is C4 because the tool compresses a file and returns the compressed resource, which involves processing/modifying file state. C1 was not assigned because the tool does not explicitly ingest external data; the pipeline incorrectly inferred C1 from openWorldHint=True, which is insufficient evidence for external data ingestion."
+        },
+        {
+            "annotation_id": 11,
+            "tool": "toggle-simulated-logging",
+            "source_file": "everything_tools.json",
+            "description": "Toggles simulated random-level logging on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "toggle"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: toggle. Evidence: C4 State Modification via 'toggle' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 12,
+            "tool": "toggle-subscriber-updates",
+            "source_file": "everything_tools.json",
+            "description": "Toggles simulated resource subscription updates on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 13,
+            "tool": "trigger-long-running-operation",
+            "source_file": "everything_tools.json",
+            "description": "Demonstrates a long-running operation with progress updates",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (Medium) [readOnlyHint=true contradicts write-side capability -> lowered one step]",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because “updates” refers to progress updates reported during the long-running operation, not modification of persistent system or application state. The pipeline incorrectly mapped the word “updates” to C4 State Modification without considering the context. The readOnlyHint=True metadata also indicates that the tool is not intended to modify state."
+        },
+        {
+            "annotation_id": 14,
+            "tool": "trigger-elicitation-request",
+            "source_file": "everything_tools.json",
+            "description": "Triggers a request from the server for user elicitation",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "The gold label is C3 because the tool triggers a request from the server for user elicitation, representing external communication/interaction. The pipeline incorrectly mapped “trigger” to C4 State Modification and “elicitation” to C1 External Data Ingestion. These keyword matches are low-confidence and do not reflect the semantic purpose of the tool. The pipeline therefore missed the actual C3 capability."
+        },
+        {
+            "annotation_id": 15,
+            "tool": "trigger-elicitation-request-async",
+            "source_file": "everything_tools.json",
+            "description": "Triggers an asynchronous elicitation request",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "The gold label is C3 because the tool triggers an asynchronous elicitation request, representing external communication/interaction. The pipeline incorrectly mapped “trigger” to C4 State Modification and “elicitation” to C1 External Data Ingestion. These low-confidence keyword matches do not represent the actual purpose of the tool, and the asynchronous execution does not change its underlying capability. The pipeline therefore missed the correct C3 classification."
+        },
+        {
+            "annotation_id": 16,
+            "tool": "trigger-sampling-request",
+            "source_file": "everything_tools.json",
+            "description": "Triggers a request from the server for LLM sampling",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sampling-request",
+                "trigger"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: sampling-request, trigger. Evidence: C1 External Data Ingestion via 'sampling-request' (Medium) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "The gold label is C3 because the tool triggers a request from the server for LLM sampling, which represents external communication with an LLM. The pipeline incorrectly mapped “sampling-request” to C1 External Data Ingestion and “trigger” to C4 State Modification. These mappings are based on isolated keywords and metadata rather than the semantic purpose of the tool. The openWorldHint=True metadata was also incorrectly used to strengthen the C1 prediction, even though it does not by itself establish external data ingestion. The pipeline therefore missed the correct C3 classification."
+        },
+        {
+            "annotation_id": 17,
+            "tool": "trigger-sampling-request-async",
+            "source_file": "everything_tools.json",
+            "description": "Triggers an asynchronous sampling request",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sampling-request",
+                "trigger"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: sampling-request, trigger. Evidence: C1 External Data Ingestion via 'sampling-request' (Medium) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "The gold label is C3 because the tool triggers an asynchronous request from the server for LLM sampling, representing external communication with an LLM. The pipeline incorrectly mapped “sampling-request” to C1 External Data Ingestion and “trigger” to C4 State Modification. These mappings rely on isolated keywords rather than the semantic purpose of the tool. The openWorldHint=True metadata was also incorrectly used to strengthen the C1 prediction, even though it does not establish external data ingestion. The asynchronous nature of the request does not change its underlying capability. The pipeline therefore missed the correct C3 classification."
+        },
+        {
+            "annotation_id": 18,
+            "tool": "simulate-research-query",
+            "source_file": "everything_tools.json",
+            "description": "Simulates a deep research operation",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C1"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "research-query"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: research-query. Evidence: C1 External Data Ingestion via 'research-query' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only simulates a deep research operation and does not explicitly state that it retrieves or ingests external data. The pipeline incorrectly mapped “research-query” to C1 External Data Ingestion based on the lexical association between research queries and external data retrieval. This keyword-level match does not establish that actual external data is ingested, resulting in a false-positive C1 prediction."
+        },
+        {
+            "annotation_id": 19,
+            "tool": "trigger-url-elicitation",
+            "source_file": "everything_tools.json",
+            "description": "Triggers URL elicitation for a browser flow",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "url",
+                "trigger"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: url, trigger. Evidence: C1 External Data Ingestion via 'url' (High) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "The gold label is C3 because the tool triggers URL elicitation for a browser flow, representing external communication/interaction. The pipeline incorrectly mapped “url” to C1 External Data Ingestion and “trigger” to C4 State Modification. The C1 prediction was further strengthened by openWorldHint=True, even though the presence of a URL does not prove that the tool retrieves or ingests external data. The C4 prediction is also a weak keyword-based inference from “trigger” and does not represent state modification. The pipeline therefore missed the semantic purpose of the tool and incorrectly assigned C1 and C4."
+        },
+        {
+            "annotation_id": 20,
+            "tool": "write_file",
+            "source_file": "filesystem_tools.json",
+            "description": "Create/overwrite a file",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 21,
+            "tool": "edit_file",
+            "source_file": "filesystem_tools.json",
+            "description": "Replace exact text in a file",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "replace"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: replace. Evidence: C4 State Modification via 'replace' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 22,
+            "tool": "create_directory",
+            "source_file": "filesystem_tools.json",
+            "description": "Create a directory",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 23,
+            "tool": "list_directory",
+            "source_file": "filesystem_tools.json",
+            "description": "List directory contents",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_directory list directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_directory list directory. Evidence: C2 Sensitive Data Access via 'list_directory list directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only lists directory contents and does not explicitly access sensitive data. The pipeline incorrectly inferred C2 Sensitive Data Access from the generic filesystem operation “list directory.” This is a semantic overgeneralization: filesystem access does not necessarily mean sensitive-data access, and the readOnlyHint=True metadata supports that the tool is only performing a read operation without establishing sensitivity."
+        },
+        {
+            "annotation_id": 24,
+            "tool": "list_directory_with_sizes",
+            "source_file": "filesystem_tools.json",
+            "description": "List contents and sizes",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_directory. Evidence: C2 Sensitive Data Access via 'list_directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only lists directory contents and their sizes; it does not explicitly access or retrieve sensitive data. The pipeline incorrectly mapped the generic expression “list_directory” to C2 Sensitive Data Access. This is a semantic overgeneralization in which ordinary filesystem metadata access is treated as sensitive-data access without evidence that the data itself is sensitive."
+        },
+        {
+            "annotation_id": 25,
+            "tool": "directory_tree",
+            "source_file": "filesystem_tools.json",
+            "description": "Recursively show directory tree",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "show directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: show directory. Evidence: C2 Sensitive Data Access via 'show directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only recursively displays the directory structure and does not explicitly access or retrieve sensitive data. The pipeline incorrectly mapped the generic expression “show directory” to C2 Sensitive Data Access. This is a semantic overgeneralization, as viewing directory structure does not establish that sensitive information is being accessed."
+        },
+        {
+            "annotation_id": 26,
+            "tool": "move_file",
+            "source_file": "filesystem_tools.json",
+            "description": "Move/rename files or directories",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "move"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: move. Evidence: C4 State Modification via 'move' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 27,
+            "tool": "search_files",
+            "source_file": "filesystem_tools.json",
+            "description": "Search files/directories by pattern",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "search_files search files/directories"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: search_files search files/directories. Evidence: C2 Sensitive Data Access via 'search_files search files/directories' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only searches files and directories by pattern and does not explicitly read, retrieve, or access sensitive data. The pipeline incorrectly mapped the generic filesystem search operation to C2 Sensitive Data Access. This is a semantic overgeneralization: searching for files does not establish that the files contain sensitive information or that their contents are accessed."
+        },
+        {
+            "annotation_id": 28,
+            "tool": "get_file_info",
+            "source_file": "filesystem_tools.json",
+            "description": "Retrieve file/directory metadata",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "file/directory metadata"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: file/directory metadata. Evidence: C2 Sensitive Data Access via 'file/directory metadata' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only retrieves file or directory metadata and does not explicitly access sensitive data or file contents. The pipeline incorrectly mapped the generic expression “file/directory metadata” to C2 Sensitive Data Access. This is a semantic overgeneralization: retrieving metadata such as file size, type, timestamps, or permissions does not establish access to sensitive information."
+        },
+        {
+            "annotation_id": 29,
+            "tool": "list_allowed_directories",
+            "source_file": "filesystem_tools.json",
+            "description": "List accessible directories",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_allowed_directories list accessible directories"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_allowed_directories list accessible directories. Evidence: C2 Sensitive Data Access via 'list_allowed_directories list accessible directories' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only lists directories that are accessible to the server and does not read their contents or access sensitive data. The pipeline incorrectly mapped the generic expression “list accessible directories” to C2 Sensitive Data Access. This is a semantic overgeneralization: knowing which directories are accessible does not establish that sensitive information within those directories is being accessed."
+        },
+        {
+            "annotation_id": 30,
+            "tool": "git_status",
+            "source_file": "git_tools.json",
+            "description": "Shows the working tree status",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_status"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_status. Evidence: C2 Sensitive Data Access via 'git_status' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": "The gold label is NONE because the tool only reports the Git working-tree status and does not explicitly access sensitive data. The pipeline incorrectly mapped “git_status” to C2 Sensitive Data Access based on the tool name rather than its actual function. This is a low-confidence lexical false positive, as Git repository status information does not by itself establish access to sensitive data."
+        }
+    ]
+}
