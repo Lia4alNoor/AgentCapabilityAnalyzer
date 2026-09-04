@@ -1,0 +1,1208 @@
+{
+    "experiment": "Experiment 2 — Gold-set capability mapping accuracy",
+    "ontology_source": "modules.module_3_capability_normalization.CAPABILITY_ONTOLOGY",
+    "tool_count": 50,
+    "results": [
+        {
+            "annotation_id": 1,
+            "tool": "fetch",
+            "source_file": "c1c2c3.json",
+            "description": "Fetches a URL from the internet and retrieves external web content",
+            "gold_capabilities": [
+                "C1"
+            ],
+            "predicted_capabilities": [
+                "C1"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "fetch"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: fetch. Evidence: C1 External Data Ingestion via 'fetch' (High) [openWorldHint=true supports external-facing capability -> raised one step]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 2,
+            "tool": "read_mail",
+            "source_file": "c1c2c3.json",
+            "description": "Reads messages from the user's mailbox",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "read_mail"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: read_mail. Evidence: C2 Sensitive Data Access via 'read_mail' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 3,
+            "tool": "send_mail",
+            "source_file": "c1c2c3.json",
+            "description": "Sends an email to an external recipient",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C3"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication"
+            ],
+            "matched_expressions": [
+                "send_mail"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: send_mail. Evidence: C3 External Communication via 'send_mail' (High) [openWorldHint=true supports external-facing capability -> raised one step]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 4,
+            "tool": "echo",
+            "source_file": "everything_tools.json",
+            "description": "Echoes back the input string",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 5,
+            "tool": "get-annotated-message",
+            "source_file": "everything_tools.json",
+            "description": "Demonstrates how annotations can be used to provide metadata about content.",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 6,
+            "tool": "get-env",
+            "source_file": "everything_tools.json",
+            "description": "Returns environment variables for debugging MCP server configuration",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "env"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: env. Evidence: C2 Sensitive Data Access via 'env' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 7,
+            "tool": "get-resource-links",
+            "source_file": "everything_tools.json",
+            "description": "Returns resource links that reference different types of resources",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 8,
+            "tool": "get-resource-reference",
+            "source_file": "everything_tools.json",
+            "description": "Returns a resource reference that can be used by MCP clients",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 9,
+            "tool": "get-roots-list",
+            "source_file": "everything_tools.json",
+            "description": "Lists the current MCP roots provided by the client",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": "NONE"
+        },
+        {
+            "annotation_id": 10,
+            "tool": "get-structured-content",
+            "source_file": "everything_tools.json",
+            "description": "Returns structured content along with an output schema",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 11,
+            "tool": "get-sum",
+            "source_file": "everything_tools.json",
+            "description": "Returns the sum of two numbers",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 12,
+            "tool": "get-tiny-image",
+            "source_file": "everything_tools.json",
+            "description": "Returns a tiny MCP logo image",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 13,
+            "tool": "gzip-file-as-resource",
+            "source_file": "everything_tools.json",
+            "description": "Compresses a file using gzip and returns a resource or resource link",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "gzip",
+                "openWorldHint"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: gzip, openWorldHint. Evidence: C4 State Modification via 'gzip' (Medium); C1 External Data Ingestion via 'openWorldHint' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "pipeline false positive, unlike Error 1, where the gold label was probably wrong"
+        },
+        {
+            "annotation_id": 14,
+            "tool": "toggle-simulated-logging",
+            "source_file": "everything_tools.json",
+            "description": "Toggles simulated random-level logging on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "toggle"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: toggle. Evidence: C4 State Modification via 'toggle' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 15,
+            "tool": "toggle-subscriber-updates",
+            "source_file": "everything_tools.json",
+            "description": "Toggles simulated resource subscription updates on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 16,
+            "tool": "trigger-long-running-operation",
+            "source_file": "everything_tools.json",
+            "description": "Demonstrates a long-running operation with progress updates",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (Medium) [readOnlyHint=true contradicts write-side capability -> lowered one step]",
+            "is_ambiguous": false,
+            "error_analysis": "lexical ambiguity in your normalization rules."
+        },
+        {
+            "annotation_id": 17,
+            "tool": "trigger-elicitation-request",
+            "source_file": "everything_tools.json",
+            "description": "Triggers a request from the server for user elicitation",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "trigger and elicitation are being interpreted as capabilities rather than recognizing the explicit communication/request semantics of the tool."
+        },
+        {
+            "annotation_id": 18,
+            "tool": "trigger-elicitation-request-async",
+            "source_file": "everything_tools.json",
+            "description": "Triggers an asynchronous elicitation request",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "Pipeline error: the lexical mapper incorrectly maps trigger and elicitation to C4 and C1 instead of recognizing the explicit communication/request capability C3."
+        },
+        {
+            "annotation_id": 19,
+            "tool": "trigger-sampling-request",
+            "source_file": "everything_tools.json",
+            "description": "Triggers a request from the server for LLM sampling",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sampling-request",
+                "trigger"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: sampling-request, trigger. Evidence: C1 External Data Ingestion via 'sampling-request' (Medium) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "confusing request/interaction verbs with C1/C4."
+        },
+        {
+            "annotation_id": 20,
+            "tool": "trigger-sampling-request-async",
+            "source_file": "everything_tools.json",
+            "description": "Triggers an asynchronous sampling request",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sampling-request",
+                "trigger"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: sampling-request, trigger. Evidence: C1 External Data Ingestion via 'sampling-request' (Medium) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "lexical-mapping weakness"
+        },
+        {
+            "annotation_id": 21,
+            "tool": "simulate-research-query",
+            "source_file": "everything_tools.json",
+            "description": "Simulates a deep research operation",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C1"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "research-query"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: research-query. Evidence: C1 External Data Ingestion via 'research-query' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "LD:       NONE"
+        },
+        {
+            "annotation_id": 22,
+            "tool": "trigger-url-elicitation",
+            "source_file": "everything_tools.json",
+            "description": "Triggers URL elicitation for a browser flow",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "url",
+                "trigger"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: url, trigger. Evidence: C1 External Data Ingestion via 'url' (High) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": "PREDICTED:  C1"
+        },
+        {
+            "annotation_id": 23,
+            "tool": "write_file",
+            "source_file": "filesystem_tools.json",
+            "description": "Create/overwrite a file",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 24,
+            "tool": "edit_file",
+            "source_file": "filesystem_tools.json",
+            "description": "Replace exact text in a file",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "replace"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: replace. Evidence: C4 State Modification via 'replace' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 25,
+            "tool": "create_directory",
+            "source_file": "filesystem_tools.json",
+            "description": "Create a directory",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 26,
+            "tool": "list_directory",
+            "source_file": "filesystem_tools.json",
+            "description": "List directory contents",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_directory list directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_directory list directory. Evidence: C2 Sensitive Data Access via 'list_directory list directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 27,
+            "tool": "list_directory_with_sizes",
+            "source_file": "filesystem_tools.json",
+            "description": "List contents and sizes",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_directory. Evidence: C2 Sensitive Data Access via 'list_directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 28,
+            "tool": "directory_tree",
+            "source_file": "filesystem_tools.json",
+            "description": "Recursively show directory tree",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "show directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: show directory. Evidence: C2 Sensitive Data Access via 'show directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 29,
+            "tool": "move_file",
+            "source_file": "filesystem_tools.json",
+            "description": "Move/rename files or directories",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "move"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: move. Evidence: C4 State Modification via 'move' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 30,
+            "tool": "search_files",
+            "source_file": "filesystem_tools.json",
+            "description": "Search files/directories by pattern",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "search_files search files/directories"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: search_files search files/directories. Evidence: C2 Sensitive Data Access via 'search_files search files/directories' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 31,
+            "tool": "get_file_info",
+            "source_file": "filesystem_tools.json",
+            "description": "Retrieve file/directory metadata",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "file/directory metadata"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: file/directory metadata. Evidence: C2 Sensitive Data Access via 'file/directory metadata' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 32,
+            "tool": "list_allowed_directories",
+            "source_file": "filesystem_tools.json",
+            "description": "List accessible directories",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_allowed_directories list accessible directories"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_allowed_directories list accessible directories. Evidence: C2 Sensitive Data Access via 'list_allowed_directories list accessible directories' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 33,
+            "tool": "git_status",
+            "source_file": "git_tools.json",
+            "description": "Shows the working tree status",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_status"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_status. Evidence: C2 Sensitive Data Access via 'git_status' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 34,
+            "tool": "git_diff_unstaged",
+            "source_file": "git_tools.json",
+            "description": "Shows changes in the working directory that are not yet staged",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "shows changes in the working directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: shows changes in the working directory. Evidence: C2 Sensitive Data Access via 'shows changes in the working directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 35,
+            "tool": "git_diff_staged",
+            "source_file": "git_tools.json",
+            "description": "Shows changes that are staged for commit",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_diff"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_diff. Evidence: C2 Sensitive Data Access via 'git_diff' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 36,
+            "tool": "git_diff",
+            "source_file": "git_tools.json",
+            "description": "Shows differences between branches or commits",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_diff"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_diff. Evidence: C2 Sensitive Data Access via 'git_diff' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 37,
+            "tool": "git_commit",
+            "source_file": "git_tools.json",
+            "description": "Records changes to the repository",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "git_commit"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: git_commit. Evidence: C4 State Modification via 'git_commit' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 38,
+            "tool": "git_add",
+            "source_file": "git_tools.json",
+            "description": "Adds file contents to the staging area",
+            "gold_capabilities": [
+                "C2",
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "git_add"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: git_add. Evidence: C4 State Modification via 'git_add' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": "Pipeline evidence:"
+        },
+        {
+            "annotation_id": 39,
+            "tool": "git_reset",
+            "source_file": "git_tools.json",
+            "description": "Unstages all staged changes",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "git_reset"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: git_reset. Evidence: C4 State Modification via 'git_reset' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 40,
+            "tool": "git_log",
+            "source_file": "git_tools.json",
+            "description": "Shows the commit logs",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_log"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_log. Evidence: C2 Sensitive Data Access via 'git_log' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 41,
+            "tool": "git_create_branch",
+            "source_file": "git_tools.json",
+            "description": "Creates a new branch from an optional base branch",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "creates"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: creates. Evidence: C4 State Modification via 'creates' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 42,
+            "tool": "git_checkout",
+            "source_file": "git_tools.json",
+            "description": "Switches branches",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "git_checkout"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: git_checkout. Evidence: C4 State Modification via 'git_checkout' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 43,
+            "tool": "git_show",
+            "source_file": "git_tools.json",
+            "description": "Shows the contents of a commit",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_show"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_show. Evidence: C2 Sensitive Data Access via 'git_show' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 44,
+            "tool": "git_branch",
+            "source_file": "git_tools.json",
+            "description": "List Git branches",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "git_branch"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_branch. Evidence: C4 State Modification via 'git_branch' (Low) [readOnlyHint=true contradicts write-side capability -> lowered one step]",
+            "is_ambiguous": false,
+            "error_analysis": "Normalized concepts: ['External Data Ingestion']"
+        },
+        {
+            "annotation_id": 45,
+            "tool": "create_entities",
+            "source_file": "memory_tools.json",
+            "description": "Create multiple new entities in the knowledge graph",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 46,
+            "tool": "create_relations",
+            "source_file": "memory_tools.json",
+            "description": "Create multiple new relations between entities in the knowledge graph. Relations should be in active voice",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 47,
+            "tool": "add_observations",
+            "source_file": "memory_tools.json",
+            "description": "Add new observations to existing entities in the knowledge graph",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "add"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: add. Evidence: C4 State Modification via 'add' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 48,
+            "tool": "delete_entities",
+            "source_file": "memory_tools.json",
+            "description": "Delete multiple entities and their associated relations from the knowledge graph",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "delete"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: delete. Evidence: C4 State Modification via 'delete' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 49,
+            "tool": "delete_observations",
+            "source_file": "memory_tools.json",
+            "description": "Delete specific observations from entities in the knowledge graph",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "delete"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: delete. Evidence: C4 State Modification via 'delete' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 50,
+            "tool": "delete_relations",
+            "source_file": "memory_tools.json",
+            "description": "Delete multiple relations from the knowledge graph",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "delete"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: delete. Evidence: C4 State Modification via 'delete' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        }
+    ]
+}

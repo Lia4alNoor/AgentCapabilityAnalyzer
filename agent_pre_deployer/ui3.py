@@ -14,6 +14,7 @@ from modules import (
     module_7_attack_pattern_analysis,
     module_8_risk_assessment,
     module_9_report_generation,
+    module_10,
 )
 
 CAPABILITY_SEED = module_5_ontology_database.CAPABILITY_SEED
@@ -63,6 +64,7 @@ def load_css():
 
 load_css()
 
+
 # =========================================================
 # HEADER
 # =========================================================
@@ -76,6 +78,7 @@ st.markdown(
     '<div class="subtitle">Pre-deployment security assessment for agent tool permissions</div>',
     unsafe_allow_html=True,
 )
+
 
 # =========================================================
 # SIDEBAR
@@ -91,6 +94,7 @@ with st.sidebar:
 
     st.divider()
     st.caption("Pipeline")
+
     for i, step in enumerate([
         "Tool Discovery",
         "Capability Extraction",
@@ -100,8 +104,10 @@ with st.sidebar:
         "Attack Pattern Analysis",
         "Risk Assessment",
         "Report Generation",
+        "Threat Chain Curation",
     ], 1):
         st.caption(f"{i}. {step}")
+
 
 # =========================================================
 # NO FILE UPLOADED
@@ -111,6 +117,7 @@ if uploaded_file is None:
     st.info("Upload a JSON tool metadata file from the sidebar to begin.")
 
     st.markdown("### What this tool checks")
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -127,6 +134,7 @@ if uploaded_file is None:
 
     st.stop()
 
+
 # =========================================================
 # SESSION STATE
 # =========================================================
@@ -137,83 +145,192 @@ if "analysis_result" not in st.session_state:
 if "report_text" not in st.session_state:
     st.session_state.report_text = None
 
+
 # =========================================================
 # RUN PIPELINE
 # =========================================================
 
-if st.button("Run Security Analysis", type="primary", use_container_width=True):
+if st.button(
+    "Run Security Analysis",
+    type="primary",
+    use_container_width=True,
+):
+
     with tempfile.TemporaryDirectory() as temp_dir:
-        input_path = os.path.join(temp_dir, uploaded_file.name)
+
+        input_path = os.path.join(
+            temp_dir,
+            uploaded_file.name,
+        )
 
         with open(input_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
 
         try:
-            with st.status("Running AgentPreDeployer...", expanded=True) as status:
 
-                st.write("Module 1 — Server discovery")
-                result_1 = module_1_server_selection.run(input_path)
+            with st.status(
+                "Running AgentPreDeployer...",
+                expanded=True,
+            ) as status:
 
-                st.write("Module 2 — Capability extraction")
-                result_2 = module_2_capability_extraction.run(result_1)
+                st.write(
+                    "Module 1 — Server discovery"
+                )
+                result_1 = (
+                    module_1_server_selection.run(
+                        input_path
+                    )
+                )
 
-                st.write("Module 3 — Capability normalization")
-                result_3 = module_3_capability_normalization.run(result_2)
+                st.write(
+                    "Module 2 — Capability extraction"
+                )
+                result_2 = (
+                    module_2_capability_extraction.run(
+                        result_1
+                    )
+                )
 
-                st.write("Module 5 — Ontology database")
-                result_5 = module_5_ontology_database.run(result_3)
+                st.write(
+                    "Module 3 — Capability normalization"
+                )
+                result_3 = (
+                    module_3_capability_normalization.run(
+                        result_2
+                    )
+                )
 
-                st.write("Module 6 — Composition analysis")
-                result_6 = module_6_composition_analysis.run(result_5)
+                st.write(
+                    "Module 5 — Ontology database"
+                )
+                result_5 = (
+                    module_5_ontology_database.run(
+                        result_3
+                    )
+                )
 
-                st.write("Module 7 — Attack pattern analysis")
-                result_7 = module_7_attack_pattern_analysis.run(result_6)
+                st.write(
+                    "Module 6 — Composition analysis"
+                )
+                result_6 = (
+                    module_6_composition_analysis.run(
+                        result_5
+                    )
+                )
 
-                st.write("Module 8 — Risk assessment")
-                result_8 = module_8_risk_assessment.run(result_7)
+                st.write(
+                    "Module 7 — Attack pattern analysis"
+                )
+                result_7 = (
+                    module_7_attack_pattern_analysis.run(
+                        result_6
+                    )
+                )
 
-                st.write("Module 9 — Report generation")
-                result_9 = module_9_report_generation.run(result_8)
+                st.write(
+                    "Module 8 — Risk assessment"
+                )
+                result_8 = (
+                    module_8_risk_assessment.run(
+                        result_7
+                    )
+                )
 
-                status.update(label="Analysis complete", state="complete")
+                st.write(
+                    "Module 9 — Report generation"
+                )
+                result_9 = (
+                    module_9_report_generation.run(
+                        result_8
+                    )
+                )
+
+                status.update(
+                    label="Analysis complete",
+                    state="complete",
+                )
 
             st.session_state.analysis_result = result_9
 
-            generated_report_path = result_9.get("final_report_path")
-            if generated_report_path:
-                report_path = Path(generated_report_path)
-                if report_path.exists():
-                    st.session_state.report_text = report_path.read_text(encoding="utf-8")
+            generated_report_path = (
+                result_9.get(
+                    "final_report_path"
+                )
+            )
 
-            st.success("Security assessment completed successfully.")
+            if generated_report_path:
+
+                report_path = Path(
+                    generated_report_path
+                )
+
+                if report_path.exists():
+
+                    st.session_state.report_text = (
+                        report_path.read_text(
+                            encoding="utf-8"
+                        )
+                    )
+
+            st.success(
+                "Security assessment completed successfully."
+            )
 
         except Exception as e:
-            st.error(f"Analysis failed: {e}")
+
+            st.error(
+                f"Analysis failed: {e}"
+            )
+
             st.exception(e)
+
 
 # =========================================================
 # RESULTS
 # =========================================================
 
-analysis_result = st.session_state.analysis_result
+analysis_result = (
+    st.session_state.analysis_result
+)
 
 if analysis_result is None:
     st.stop()
+
 
 # =========================================================
 # EXTRACT MODULE OUTPUTS
 # =========================================================
 
-all_tools = analysis_result.get("tools", [])
-composition_analysis_data = analysis_result.get("composition_analysis", {})
-mitigation_assessment_data = analysis_result.get("mitigation_assessment", {})
+all_tools = analysis_result.get(
+    "tools",
+    []
+)
+
+composition_analysis_data = (
+    analysis_result.get(
+        "composition_analysis",
+        {}
+    )
+)
+
+mitigation_assessment_data = (
+    analysis_result.get(
+        "mitigation_assessment",
+        {}
+    )
+)
+
 
 # Extract all tool names
 all_tool_names = {
-    tool.get("tool", "Unknown tool")
+    tool.get(
+        "tool",
+        "Unknown tool"
+    )
     for tool in all_tools
     if isinstance(tool, dict)
 }
+
 
 # =========================================================
 # BUILD CAPABILITY PROFILE
@@ -222,106 +339,220 @@ all_tool_names = {
 capability_to_tools = {}
 
 for tool in all_tools:
+
     if not isinstance(tool, dict):
         continue
 
-    tool_name = tool.get("tool", "Unknown tool")
-    tool_mapping = tool.get("mapping", {})
-    tool_mappings_list = tool_mapping.get("mappings", [])
+    tool_name = tool.get(
+        "tool",
+        "Unknown tool"
+    )
 
-    if not isinstance(tool_mappings_list, list):
+    tool_mapping = tool.get(
+        "mapping",
+        {}
+    )
+
+    tool_mappings_list = (
+        tool_mapping.get(
+            "mappings",
+            []
+        )
+    )
+
+    if not isinstance(
+        tool_mappings_list,
+        list,
+    ):
         continue
 
     for mapping_entry in tool_mappings_list:
-        if not isinstance(mapping_entry, dict):
+
+        if not isinstance(
+            mapping_entry,
+            dict,
+        ):
             continue
 
-        cap_id = mapping_entry.get("capability_id")
+        cap_id = mapping_entry.get(
+            "capability_id"
+        )
+
         if cap_id:
-            capability_to_tools.setdefault(cap_id, set()).add(tool_name)
+            capability_to_tools.setdefault(
+                cap_id,
+                set(),
+            ).add(tool_name)
+
 
 # =========================================================
 # EXTRACT DETECTIONS & GAPS
 # =========================================================
 
-matched_compositions = composition_analysis_data.get("detections", [])
-if not isinstance(matched_compositions, list):
+matched_compositions = (
+    composition_analysis_data.get(
+        "detections",
+        []
+    )
+)
+
+if not isinstance(
+    matched_compositions,
+    list,
+):
     matched_compositions = []
 
-matched_mitigations = mitigation_assessment_data.get("matched_composition_assessments", [])
-if not isinstance(matched_mitigations, list):
+
+matched_mitigations = (
+    mitigation_assessment_data.get(
+        "matched_composition_assessments",
+        []
+    )
+)
+
+if not isinstance(
+    matched_mitigations,
+    list,
+):
     matched_mitigations = []
 
-open_mitigation_gaps = mitigation_assessment_data.get("open_mitigation_gaps", [])
-if not isinstance(open_mitigation_gaps, list):
+
+open_mitigation_gaps = (
+    mitigation_assessment_data.get(
+        "open_mitigation_gaps",
+        []
+    )
+)
+
+if not isinstance(
+    open_mitigation_gaps,
+    list,
+):
     open_mitigation_gaps = []
+
 
 # =========================================================
 # OVERVIEW METRICS
 # =========================================================
 
-st.header("Assessment Overview")
+st.header(
+    "Assessment Overview"
+)
 
-metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+metric_col1, metric_col2, metric_col3, metric_col4 = (
+    st.columns(4)
+)
 
 with metric_col1:
-    st.metric("Tools Analysed", len(all_tools))
+    st.metric(
+        "Tools Analysed",
+        len(all_tools),
+    )
 
 with metric_col2:
-    st.metric("Capabilities Found", len(capability_to_tools))
+    st.metric(
+        "Capabilities Found",
+        len(capability_to_tools),
+    )
 
 with metric_col3:
-    st.metric("Matched Compositions", len(matched_compositions))
+    st.metric(
+        "Matched Compositions",
+        len(matched_compositions),
+    )
 
 with metric_col4:
-    st.metric("Open Gaps", len(open_mitigation_gaps))
+    st.metric(
+        "Open Gaps",
+        len(open_mitigation_gaps),
+    )
+
 
 # =========================================================
 # TABBED INTERFACE
 # =========================================================
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+
+
+TAB_LABELS = [
     "Tools & Capabilities",
-    "Composition Analysis",
-    "CIA Risk & Mitigations",
+    "Composition Analysis & CIA Risk",
+    "Mitigations",
     "Interpretation Limits",
     "Final Report",
-])
+    "Threat Chain Curation",
+]
+
+active_tab = st.radio(
+    "Section",
+    TAB_LABELS,
+    key="active_tab",          # persists across reruns — no more snapping back
+    horizontal=True,
+    label_visibility="collapsed",
+)
+st.divider()
 
 # =========================================================
 # TAB 1: TOOLS & CAPABILITIES
 # =========================================================
 
-with tab1:
-
+if active_tab == "Tools & Capabilities":
     # =====================================================
     # IDENTIFIED TOOLS
     # =====================================================
 
-    st.header("Identified Tools")
-    st.caption(f"Total: {len(all_tool_names)} tool(s) analysed")
+    st.header(
+        "Identified Tools"
+    )
+
+    st.caption(
+        f"Total: {len(all_tool_names)} tool(s) analysed"
+    )
 
     if all_tool_names:
-        # Display tools in columns for compact view
-        tools_list = sorted(all_tool_names)
 
-        # Create 3-column layout for tools
-        tools_per_col = (len(tools_list) + 2) // 3
+        tools_list = sorted(
+            all_tool_names
+        )
+
+        tools_per_col = (
+            len(tools_list) + 2
+        ) // 3
+
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            for tool in tools_list[:tools_per_col]:
-                st.write(f"• {tool}")
+
+            for tool in tools_list[
+                :tools_per_col
+            ]:
+                st.write(
+                    f"• {tool}"
+                )
 
         with col2:
-            for tool in tools_list[tools_per_col:2 * tools_per_col]:
-                st.write(f"• {tool}")
+
+            for tool in tools_list[
+                tools_per_col:2 * tools_per_col
+            ]:
+                st.write(
+                    f"• {tool}"
+                )
 
         with col3:
-            for tool in tools_list[2 * tools_per_col:]:
-                st.write(f"• {tool}")
+
+            for tool in tools_list[
+                2 * tools_per_col:
+            ]:
+                st.write(
+                    f"• {tool}"
+                )
+
     else:
-        st.info("No tools identified.")
+
+        st.info(
+            "No tools identified."
+        )
 
     st.divider()
 
@@ -329,122 +560,288 @@ with tab1:
     # ANALYSIS: CAPABILITY & TOOL MAPPING
     # =====================================================
 
-    st.header("Capability Analysis")
-    st.caption("Which capabilities each tool implements")
-
-    mapped_tool_names = (
-        set().union(*capability_to_tools.values())
-        if capability_to_tools else set()
+    st.header(
+        "Capability Analysis"
     )
 
-    unmapped_tool_names = sorted(all_tool_names - mapped_tool_names)
+    st.caption(
+        "Which capabilities each tool implements"
+    )
 
-    # Capability Profile (Main Analysis)
+    mapped_tool_names = (
+        set().union(
+            *capability_to_tools.values()
+        )
+        if capability_to_tools
+        else set()
+    )
+
+    unmapped_tool_names = sorted(
+        all_tool_names
+        - mapped_tool_names
+    )
+
+    # Capability Profile
     if capability_to_tools:
-        for cap_id, tool_set in sorted(capability_to_tools.items()):
-            tool_count = len(tool_set)
-            cap_label = describe_capability(cap_id)
+
+        for cap_id, tool_set in sorted(
+            capability_to_tools.items()
+        ):
+
+            tool_count = len(
+                tool_set
+            )
+
+            cap_label = describe_capability(
+                cap_id
+            )
 
             st.markdown(
                 f'<span class="capability">{cap_label} — {tool_count} tool(s)</span>',
                 unsafe_allow_html=True,
             )
 
-            with st.expander(f"{cap_label}"):
-                cap_definition = CAPABILITY_INFO.get(cap_id, {}).get("definition")
-                if cap_definition:
-                    st.caption(cap_definition)
+            with st.expander(
+                f"{cap_label}"
+            ):
 
-                for tool_name in sorted(tool_set):
-                    st.write(f"• {tool_name}")
+                cap_definition = (
+                    CAPABILITY_INFO
+                    .get(
+                        cap_id,
+                        {}
+                    )
+                    .get(
+                        "definition"
+                    )
+                )
+
+                if cap_definition:
+                    st.caption(
+                        cap_definition
+                    )
+
+                for tool_name in sorted(
+                    tool_set
+                ):
+                    st.write(
+                        f"• {tool_name}"
+                    )
+
     else:
-        st.info("No capability information available.")
+
+        st.info(
+            "No capability information available."
+        )
 
     # Unmapped Tools
     if unmapped_tool_names:
-        st.divider()
-        st.subheader("Unmapped Tools")
-        st.caption("These tools matched none of the C1–C6 capabilities. Worth a manual check.")
 
-        unmapped_col1, unmapped_col2, unmapped_col3 = st.columns(3)
-        unmapped_per_col = (len(unmapped_tool_names) + 2) // 3
+        st.divider()
+
+        st.subheader(
+            "Unmapped Tools"
+        )
+
+        st.caption(
+            "These tools matched none of the C1–C6 capabilities. Worth a manual check."
+        )
+
+        unmapped_col1, unmapped_col2, unmapped_col3 = (
+            st.columns(3)
+        )
+
+        unmapped_per_col = (
+            len(unmapped_tool_names) + 2
+        ) // 3
 
         with unmapped_col1:
-            for tool in unmapped_tool_names[:unmapped_per_col]:
-                st.write(f"• {tool}")
+
+            for tool in unmapped_tool_names[
+                :unmapped_per_col
+            ]:
+                st.write(
+                    f"• {tool}"
+                )
 
         with unmapped_col2:
-            for tool in unmapped_tool_names[unmapped_per_col:2 * unmapped_per_col]:
-                st.write(f"• {tool}")
+
+            for tool in unmapped_tool_names[
+                unmapped_per_col:2 * unmapped_per_col
+            ]:
+                st.write(
+                    f"• {tool}"
+                )
 
         with unmapped_col3:
-            for tool in unmapped_tool_names[2 * unmapped_per_col:]:
-                st.write(f"• {tool}")
+
+            for tool in unmapped_tool_names[
+                2 * unmapped_per_col:
+            ]:
+                st.write(
+                    f"• {tool}"
+                )
 
     st.divider()
-    st.markdown("### 📚 Reference Materials")
-    st.caption("The following section contains reference material only — not analysis results.")
+
+    st.markdown(
+        "### 📚 Reference Materials"
+    )
+
+    st.caption(
+        "The following section contains reference material only — not analysis results."
+    )
+
     st.divider()
 
     # =====================================================
     # REFERENCE: CAPABILITY TAXONOMY
     # =====================================================
 
-    with st.expander("📚 **REFERENCE: Capability Taxonomy (C1–C6)**", expanded=False):
-        st.caption("Fixed ontology definitions. These are reference material only.")
+    with st.expander(
+        "📚 **REFERENCE: Capability Taxonomy (C1–C6)**",
+        expanded=False,
+    ):
 
-        ref_col1, ref_col2 = st.columns(2, gap="large")
+        st.caption(
+            "Fixed ontology definitions. These are reference material only."
+        )
 
-        cap_list = list(CAPABILITY_SEED)
-        mid = len(cap_list) // 2
+        ref_col1, ref_col2 = st.columns(
+            2,
+            gap="large",
+        )
+
+        cap_list = list(
+            CAPABILITY_SEED
+        )
+
+        mid = len(
+            cap_list
+        ) // 2
 
         with ref_col1:
-            for cap_id, cap_name, cap_definition, cap_risk in cap_list[:mid]:
-                with st.expander(f"{cap_id} — {cap_name}"):
-                    st.write(cap_definition)
+
+            for (
+                cap_id,
+                cap_name,
+                cap_definition,
+                cap_risk,
+            ) in cap_list[:mid]:
+
+                with st.expander(
+                    f"{cap_id} — {cap_name}"
+                ):
+
+                    st.write(
+                        cap_definition
+                    )
+
                     if cap_risk:
-                        st.caption(f"Example risk: {cap_risk}")
+                        st.caption(
+                            f"Example risk: {cap_risk}"
+                        )
 
         with ref_col2:
-            for cap_id, cap_name, cap_definition, cap_risk in cap_list[mid:]:
-                with st.expander(f"{cap_id} — {cap_name}"):
-                    st.write(cap_definition)
+
+            for (
+                cap_id,
+                cap_name,
+                cap_definition,
+                cap_risk,
+            ) in cap_list[mid:]:
+
+                with st.expander(
+                    f"{cap_id} — {cap_name}"
+                ):
+
+                    st.write(
+                        cap_definition
+                    )
+
                     if cap_risk:
-                        st.caption(f"Example risk: {cap_risk}")
+                        st.caption(
+                            f"Example risk: {cap_risk}"
+                        )
 
 
 # =========================================================
 # TAB 2: COMPOSITION ANALYSIS
 # =========================================================
 
-with tab2:
+if active_tab == "Composition Analysis & CIA Risk":
 
-    st.header("Matched Literature-Backed Capability Compositions")
+    st.header(
+        "Matched Literature-Backed Capability Compositions"
+    )
+
     st.caption(
         "Level-1 composition matches indicate required capabilities are present. "
         "A match does not establish that an attack was executed."
     )
 
     if not matched_compositions:
-        st.success("No literature-backed capability compositions matched.")
+
+        st.success(
+            "No literature-backed capability compositions matched."
+        )
+
     else:
+
         for detection in matched_compositions:
-            if not isinstance(detection, dict):
-                st.write(detection)
+
+            if not isinstance(
+                detection,
+                dict,
+            ):
+                st.write(
+                    detection
+                )
                 continue
 
-            pattern_id = detection.get("pattern_id", "Unknown")
-            pattern_name = detection.get("pattern_name", "Unknown pattern")
-            severity = detection.get("severity", "Unknown")
-            finding_type = detection.get("finding_type", "Unknown")
-            confidence = detection.get("confidence", "Unknown")
-            cap_sequence = detection.get("capability_sequence", [])
-            sequence_text = describe_sequence(cap_sequence)
+            pattern_id = detection.get(
+                "pattern_id",
+                "Unknown"
+            )
+
+            pattern_name = detection.get(
+                "pattern_name",
+                "Unknown pattern"
+            )
+
+            severity = detection.get(
+                "severity",
+                "Unknown"
+            )
+
+            finding_type = detection.get(
+                "finding_type",
+                "Unknown"
+            )
+
+            confidence = detection.get(
+                "confidence",
+                "Unknown"
+            )
+
+            cap_sequence = detection.get(
+                "capability_sequence",
+                []
+            )
+
+            sequence_text = (
+                describe_sequence(
+                    cap_sequence
+                )
+            )
 
             severity_class = {
                 "high": "severity-high",
                 "medium": "severity-medium",
-            }.get(str(severity).lower(), "severity-low")
+            }.get(
+                str(severity).lower(),
+                "severity-low",
+            )
 
             st.markdown(
                 f'''<div class="composition-card">
@@ -463,131 +860,361 @@ with tab2:
             col_left, col_right = st.columns(2)
 
             with col_left:
-                st.markdown("**Sequence**")
-                st.code(sequence_text, language="text")
+
+                st.markdown(
+                    "**Sequence**"
+                )
+
+                st.code(
+                    sequence_text,
+                    language="text",
+                )
 
             with col_right:
-                st.markdown("**Finding**")
-                st.write(finding_type)
-                st.markdown("**Confidence**")
-                st.write(f"{confidence} (literature-mapping)")
 
-            # CIA Impact
-            impact_data = detection.get("impact_assessment")
+                st.markdown(
+                    "**Finding**"
+                )
+
+                st.write(
+                    finding_type
+                )
+
+                st.markdown(
+                    "**Confidence**"
+                )
+
+                st.write(
+                    f"{confidence} (literature-mapping)"
+                )
+
+            impact_data = detection.get(
+                "impact_assessment"
+            )
+
             if impact_data:
-                st.markdown("#### CIA Impact")
-                cia_col1, cia_col2, cia_col3, cia_col4 = st.columns(4)
+
+                st.markdown(
+                    "#### CIA Impact"
+                )
+
+                cia_col1, cia_col2, cia_col3, cia_col4 = (
+                    st.columns(4)
+                )
 
                 with cia_col1:
-                    st.metric("Confidentiality", impact_data.get("confidentiality", "-"))
-                with cia_col2:
-                    st.metric("Integrity", impact_data.get("integrity", "-"))
-                with cia_col3:
-                    st.metric("Availability", impact_data.get("availability", "-"))
-                with cia_col4:
-                    st.metric("Total", impact_data.get("total", "-"))
+                    st.metric(
+                        "Confidentiality",
+                        impact_data.get(
+                            "confidentiality",
+                            "-"
+                        ),
+                    )
 
-                if impact_data.get("rationale"):
-                    st.markdown("**Rationale**")
-                    st.write(impact_data.get("rationale"))
+                with cia_col2:
+                    st.metric(
+                        "Integrity",
+                        impact_data.get(
+                            "integrity",
+                            "-"
+                        ),
+                    )
+
+                with cia_col3:
+                    st.metric(
+                        "Availability",
+                        impact_data.get(
+                            "availability",
+                            "-"
+                        ),
+                    )
+
+                with cia_col4:
+                    st.metric(
+                        "Total",
+                        impact_data.get(
+                            "total",
+                            "-"
+                        ),
+                    )
+
+                if impact_data.get(
+                    "rationale"
+                ):
+
+                    st.markdown(
+                        "**Rationale**"
+                    )
+
+                    st.write(
+                        impact_data.get(
+                            "rationale"
+                        )
+                    )
 
             st.divider()
 
     st.divider()
-    st.markdown("### 📚 Reference Materials")
-    st.caption("The following section contains reference material only — not analysis results.")
+
+    st.markdown(
+        "### 📚 Reference Materials"
+    )
+
+    st.caption(
+        "The following section contains reference material only — not analysis results."
+    )
+
     st.divider()
 
-    # Excluded patterns
-    excluded_patterns = composition_analysis_data.get("excluded_patterns", [])
+    excluded_patterns = (
+        composition_analysis_data.get(
+            "excluded_patterns",
+            []
+        )
+    )
+
     if excluded_patterns:
-        with st.expander("📚 **REFERENCE: Excluded Patterns**", expanded=False):
-            st.caption("Literature patterns excluded from composition matching (retained as evidence only).")
+
+        with st.expander(
+            "📚 **REFERENCE: Excluded Patterns**",
+            expanded=False,
+        ):
+
+            st.caption(
+                "Literature patterns excluded from composition matching (retained as evidence only)."
+            )
+
             for pattern_id in excluded_patterns:
-                st.write(f"• {pattern_id}")
+                st.write(
+                    f"• {pattern_id}"
+                )
 
 
 # =========================================================
 # TAB 3: CIA RISK & MITIGATIONS
 # =========================================================
 
-with tab3:
+if active_tab == "Mitigations":
 
-    st.header("Mitigation Coverage for Matched Compositions")
+    st.header(
+        "Mitigation Coverage for Matched Compositions"
+    )
 
     if not matched_mitigations:
+
         if matched_compositions:
-            st.warning("Matched compositions found, but no mitigation assessments available.")
+
+            st.warning(
+                "Matched compositions found, but no mitigation assessments available."
+            )
+
         else:
-            st.info("No matched compositions require mitigation coverage.")
+
+            st.info(
+                "No matched compositions require mitigation coverage."
+            )
+
     else:
+
         for assessment in matched_mitigations:
-            if not isinstance(assessment, dict):
+
+            if not isinstance(
+                assessment,
+                dict,
+            ):
                 continue
 
-            pattern_id = assessment.get("pattern_id", "Unknown")
-            pattern_name = assessment.get("pattern_name", "Unknown pattern")
-            coverage_status = assessment.get("coverage_status", "Unknown")
+            pattern_id = assessment.get(
+                "pattern_id",
+                "Unknown"
+            )
 
-            st.markdown(f"### {pattern_id} — {pattern_name}")
-            st.markdown(f"**Coverage:** `{coverage_status}`")
+            pattern_name = assessment.get(
+                "pattern_name",
+                "Unknown pattern"
+            )
 
-            if assessment.get("note"):
-                st.info(assessment.get("note"))
+            coverage_status = assessment.get(
+                "coverage_status",
+                "Unknown"
+            )
 
-            # Literature mitigations
-            lit_mitigations = assessment.get("literature_mitigations", [])
+            st.markdown(
+                f"### {pattern_id} — {pattern_name}"
+            )
+
+            st.markdown(
+                f"**Coverage:** `{coverage_status}`"
+            )
+
+            if assessment.get(
+                "note"
+            ):
+
+                st.info(
+                    assessment.get(
+                        "note"
+                    )
+                )
+
+            lit_mitigations = assessment.get(
+                "literature_mitigations",
+                []
+            )
+
             if lit_mitigations:
-                st.markdown("#### Literature-backed Mitigations")
+
+                st.markdown(
+                    "#### Literature-backed Mitigations"
+                )
+
                 for mitigation in lit_mitigations:
-                    m_id = mitigation.get("mitigation_id", "Unknown")
-                    m_name = mitigation.get("mitigation_name", "Unknown")
 
-                    with st.expander(f"{m_id} — {m_name}"):
-                        st.write(f"**Type:** {mitigation.get('evidence_type', '-')}")
-                        st.write(f"**Applicable:** {mitigation.get('applicability', '-')}")
+                    m_id = mitigation.get(
+                        "mitigation_id",
+                        "Unknown"
+                    )
 
-                        if mitigation.get("supporting_papers"):
-                            st.write(f"**Papers:** {mitigation.get('supporting_papers')}")
-                        if mitigation.get("timing"):
-                            st.write(f"**Timing:** {mitigation.get('timing')}")
-                        if mitigation.get("effectiveness_evidence"):
-                            st.write(f"**Evidence:** {mitigation.get('effectiveness_evidence')}")
-                        if mitigation.get("limitations"):
-                            st.write(f"**Limits:** {mitigation.get('limitations')}")
+                    m_name = mitigation.get(
+                        "mitigation_name",
+                        "Unknown"
+                    )
 
-            # Project mitigations
-            proj_mitigations = assessment.get("project_mitigations", [])
+                    with st.expander(
+                        f"{m_id} — {m_name}"
+                    ):
+
+                        st.write(
+                            f"**Type:** {mitigation.get('evidence_type', '-')}"
+                        )
+
+                        st.write(
+                            f"**Applicable:** {mitigation.get('applicability', '-')}"
+                        )
+
+                        if mitigation.get(
+                            "supporting_papers"
+                        ):
+
+                            st.write(
+                                f"**Papers:** {mitigation.get('supporting_papers')}"
+                            )
+
+                        if mitigation.get(
+                            "timing"
+                        ):
+
+                            st.write(
+                                f"**Timing:** {mitigation.get('timing')}"
+                            )
+
+                        if mitigation.get(
+                            "effectiveness_evidence"
+                        ):
+
+                            st.write(
+                                f"**Evidence:** {mitigation.get('effectiveness_evidence')}"
+                            )
+
+                        if mitigation.get(
+                            "limitations"
+                        ):
+
+                            st.write(
+                                f"**Limits:** {mitigation.get('limitations')}"
+                            )
+
+            proj_mitigations = assessment.get(
+                "project_mitigations",
+                []
+            )
+
             if proj_mitigations:
-                st.markdown("#### Project-derived Mitigations")
+
+                st.markdown(
+                    "#### Project-derived Mitigations"
+                )
+
                 for mitigation in proj_mitigations:
-                    m_id = mitigation.get("mitigation_id", "Unknown")
-                    m_name = mitigation.get("mitigation_name", "Unknown")
 
-                    with st.expander(f"{m_id} — {m_name}"):
-                        st.write(f"**Type:** {mitigation.get('control_type', '-')}")
-                        st.write(f"**Timing:** {mitigation.get('timing', '-')}")
-                        st.write(f"**Status:** {mitigation.get('evidence_status', '-')}")
-                        st.write(f"**Rationale:** {mitigation.get('project_rationale', '')}")
+                    m_id = mitigation.get(
+                        "mitigation_id",
+                        "Unknown"
+                    )
 
-            if assessment.get("warning"):
-                st.warning(assessment.get("warning"))
+                    m_name = mitigation.get(
+                        "mitigation_name",
+                        "Unknown"
+                    )
+
+                    with st.expander(
+                        f"{m_id} — {m_name}"
+                    ):
+
+                        st.write(
+                            f"**Type:** {mitigation.get('control_type', '-')}"
+                        )
+
+                        st.write(
+                            f"**Timing:** {mitigation.get('timing', '-')}"
+                        )
+
+                        st.write(
+                            f"**Status:** {mitigation.get('evidence_status', '-')}"
+                        )
+
+                        st.write(
+                            f"**Rationale:** {mitigation.get('project_rationale', '')}"
+                        )
+
+            if assessment.get(
+                "warning"
+            ):
+
+                st.warning(
+                    assessment.get(
+                        "warning"
+                    )
+                )
 
             st.divider()
 
     # Open gaps
-    st.header("Open Mitigation Gaps")
+
+    st.header(
+        "Open Mitigation Gaps"
+    )
 
     if not open_mitigation_gaps:
-        st.success("No open mitigation gaps.")
+
+        st.success(
+            "No open mitigation gaps."
+        )
+
     else:
+
         for gap in open_mitigation_gaps:
-            if not isinstance(gap, dict):
+
+            if not isinstance(
+                gap,
+                dict,
+            ):
                 continue
 
-            pattern_id = gap.get("pattern_id", "Unknown")
-            gap_text = gap.get("gap", "No description.")
-            proposals = gap.get("project_proposals", [])
+            pattern_id = gap.get(
+                "pattern_id",
+                "Unknown"
+            )
+
+            gap_text = gap.get(
+                "gap",
+                "No description."
+            )
+
+            proposals = gap.get(
+                "project_proposals",
+                []
+            )
 
             st.markdown(
                 f'''<div class="finding risk-high">
@@ -598,137 +1225,350 @@ with tab3:
             )
 
             if proposals:
-                st.markdown("**Proposals**")
-                for proposal in proposals:
-                    st.write(f"• {proposal}")
 
-            if gap.get("warning"):
-                st.warning(gap.get("warning"))
+                st.markdown(
+                    "**Proposals**"
+                )
+
+                for proposal in proposals:
+                    st.write(
+                        f"• {proposal}"
+                    )
+
+            if gap.get(
+                "warning"
+            ):
+
+                st.warning(
+                    gap.get(
+                        "warning"
+                    )
+                )
 
 
 # =========================================================
 # TAB 4: INTERPRETATION LIMITS & DISCLAIMERS
 # =========================================================
 
-with tab4:
+if active_tab == "Interpretation Limits":
 
-    st.header("Interpretation Limits and Disclaimers")
+    st.header(
+        "Interpretation Limits and Disclaimers"
+    )
 
-    limitation = composition_analysis_data.get("limitation")
+    limitation = (
+        composition_analysis_data.get(
+            "limitation"
+        )
+    )
+
     if limitation:
-        st.warning(limitation)
 
-    interpretation_data = composition_analysis_data.get("interpretation", {})
-    if interpretation_data.get("impact_assessment"):
-        st.info(interpretation_data.get("impact_assessment"))
+        st.warning(
+            limitation
+        )
 
-    mitigation_semantics = mitigation_assessment_data.get("semantics")
+    interpretation_data = (
+        composition_analysis_data.get(
+            "interpretation",
+            {}
+        )
+    )
+
+    if interpretation_data.get(
+        "impact_assessment"
+    ):
+
+        st.info(
+            interpretation_data.get(
+                "impact_assessment"
+            )
+        )
+
+    mitigation_semantics = (
+        mitigation_assessment_data.get(
+            "semantics"
+        )
+    )
+
     if mitigation_semantics:
-        st.info(mitigation_semantics)
 
-    applicability_rule = mitigation_assessment_data.get("applicability_rule")
+        st.info(
+            mitigation_semantics
+        )
+
+    applicability_rule = (
+        mitigation_assessment_data.get(
+            "applicability_rule"
+        )
+    )
+
     if applicability_rule:
-        st.info(applicability_rule)
 
-    st.caption("CIA totals represent CIA impact only, not converted to risk scores at this stage.")
+        st.info(
+            applicability_rule
+        )
+
+    st.caption(
+        "CIA totals represent CIA impact only, not converted to risk scores at this stage."
+    )
 
     st.divider()
-    st.markdown("### 📚 Reference Materials")
-    st.caption("The following sections contain reference material only — not analysis results.")
+
+    st.markdown(
+        "### 📚 Reference Materials"
+    )
+
+    st.caption(
+        "The following sections contain reference material only — not analysis results."
+    )
+
     st.divider()
 
     # =====================================================
     # REFERENCE: PATTERN COVERAGE (P1–P9)
     # =====================================================
 
-    pattern_coverage = mitigation_assessment_data.get("pattern_coverage_reference", [])
+    pattern_coverage = (
+        mitigation_assessment_data.get(
+            "pattern_coverage_reference",
+            []
+        )
+    )
+
     if pattern_coverage:
-        with st.expander("📚 **REFERENCE: Pattern Coverage (P1–P9)**", expanded=False):
-            st.caption("Reference mapping of patterns to mitigations. Use for cross-reference only.")
+
+        with st.expander(
+            "📚 **REFERENCE: Pattern Coverage (P1–P9)**",
+            expanded=False,
+        ):
+
+            st.caption(
+                "Reference mapping of patterns to mitigations. Use for cross-reference only."
+            )
 
             for coverage in pattern_coverage:
-                if not isinstance(coverage, dict):
+
+                if not isinstance(
+                    coverage,
+                    dict,
+                ):
                     continue
 
-                pattern_id = coverage.get("pattern_id", "Unknown")
-                coverage_status = coverage.get("coverage_status", "Unknown")
+                pattern_id = coverage.get(
+                    "pattern_id",
+                    "Unknown"
+                )
+
+                coverage_status = coverage.get(
+                    "coverage_status",
+                    "Unknown"
+                )
 
                 lit_ids = [
-                    m.get("mitigation_id", "Unknown")
-                    for m in coverage.get("literature_mitigations", [])
-                    if isinstance(m, dict)
+                    m.get(
+                        "mitigation_id",
+                        "Unknown"
+                    )
+                    for m in coverage.get(
+                        "literature_mitigations",
+                        []
+                    )
+                    if isinstance(
+                        m,
+                        dict,
+                    )
                 ]
 
                 proj_ids = [
-                    m.get("mitigation_id", "Unknown")
-                    for m in coverage.get("project_mitigations", [])
-                    if isinstance(m, dict)
+                    m.get(
+                        "mitigation_id",
+                        "Unknown"
+                    )
+                    for m in coverage.get(
+                        "project_mitigations",
+                        []
+                    )
+                    if isinstance(
+                        m,
+                        dict,
+                    )
                 ]
 
-                lit_text = ", ".join(lit_ids) if lit_ids else "-"
-                proj_text = ", ".join(proj_ids) if proj_ids else "-"
+                lit_text = (
+                    ", ".join(
+                        lit_ids
+                    )
+                    if lit_ids
+                    else "-"
+                )
 
-                st.markdown(f"**{pattern_id}:** `{coverage_status}`")
-                st.caption(f"Literature: {lit_text} | Project: {proj_text}")
+                proj_text = (
+                    ", ".join(
+                        proj_ids
+                    )
+                    if proj_ids
+                    else "-"
+                )
 
-                if coverage.get("note"):
-                    st.write(coverage.get("note"))
+                st.markdown(
+                    f"**{pattern_id}:** `{coverage_status}`"
+                )
+
+                st.caption(
+                    f"Literature: {lit_text} | Project: {proj_text}"
+                )
+
+                if coverage.get(
+                    "note"
+                ):
+
+                    st.write(
+                        coverage.get(
+                            "note"
+                        )
+                    )
 
     # =====================================================
     # REFERENCE: MANUAL VALIDATION
     # =====================================================
 
-    with st.expander("📚 **REFERENCE: Manual Validation (Mapper Calibration)**", expanded=False):
-        st.caption("Fixed, human-labelled reference tools used to calibrate the C1–C6 mapper. For reference only.")
+    with st.expander(
+        "📚 **REFERENCE: Manual Validation (Mapper Calibration)**",
+        expanded=False,
+    ):
+
+        st.caption(
+            "Fixed, human-labelled reference tools used to calibrate the C1–C6 mapper. For reference only."
+        )
 
         try:
-            validation_conn = sqlite3.connect(module_5_ontology_database.DB_PATH)
+
+            validation_conn = sqlite3.connect(
+                module_5_ontology_database.DB_PATH
+            )
+
             try:
+
                 mapper_rows = validation_conn.execute(
                     """
                     SELECT tools.name, tool_capabilities.capability_id
                     FROM tool_capabilities
-                    JOIN tools ON tools.tool_id = tool_capabilities.tool_id
+                    JOIN tools
+                        ON tools.tool_id = tool_capabilities.tool_id
                     WHERE tool_capabilities.source = 'mapper'
                     """
                 ).fetchall()
+
             finally:
+
                 validation_conn.close()
+
         except sqlite3.Error as db_error:
+
             mapper_rows = []
-            st.warning(f"Could not read ontology database: {db_error}")
+
+            st.warning(
+                f"Could not read ontology database: {db_error}"
+            )
 
         mapper_ids_by_name = {}
+
         for tool_name, capability_id in mapper_rows:
-            mapper_ids_by_name.setdefault(tool_name, set()).add(capability_id)
 
-        for ref_name, ref_description, ref_labels in module_5_ontology_database.MANUAL_VALIDATION_SET:
-            manual_ids = {cap_id for cap_id, _confidence, _reason in ref_labels}
+            mapper_ids_by_name.setdefault(
+                tool_name,
+                set(),
+            ).add(
+                capability_id
+            )
 
-            with st.expander(f"{ref_name} — {ref_description}"):
+        for (
+            ref_name,
+            ref_description,
+            ref_labels,
+        ) in module_5_ontology_database.MANUAL_VALIDATION_SET:
+
+            manual_ids = {
+                cap_id
+                for cap_id, _confidence, _reason
+                in ref_labels
+            }
+
+            with st.expander(
+                f"{ref_name} — {ref_description}"
+            ):
+
                 if ref_labels:
-                    for cap_id, confidence, reason in ref_labels:
-                        st.write(
-                            f"• Manual: {describe_capability(cap_id)} ({confidence}) — {reason}"
-                        )
-                else:
-                    st.write("• Manual: intentionally unmapped")
 
-                mapper_ids = mapper_ids_by_name.get(ref_name)
+                    for (
+                        cap_id,
+                        confidence,
+                        reason,
+                    ) in ref_labels:
+
+                        st.write(
+                            f"• Manual: "
+                            f"{describe_capability(cap_id)} "
+                            f"({confidence}) — {reason}"
+                        )
+
+                else:
+
+                    st.write(
+                        "• Manual: intentionally unmapped"
+                    )
+
+                mapper_ids = (
+                    mapper_ids_by_name.get(
+                        ref_name
+                    )
+                )
 
                 if mapper_ids is None:
-                    st.caption("No mapper verdict for same-named tool in this run.")
+
+                    st.caption(
+                        "No mapper verdict for same-named tool in this run."
+                    )
+
                 elif mapper_ids == manual_ids:
+
                     st.success(
                         "Mapper agrees: "
-                        + (", ".join(sorted(describe_capability(c) for c in mapper_ids)) or "none")
+                        + (
+                            ", ".join(
+                                sorted(
+                                    describe_capability(c)
+                                    for c in mapper_ids
+                                )
+                            )
+                            or "none"
+                        )
                     )
+
                 else:
+
                     st.error(
                         "Mapper disagrees — mapper: "
-                        + (", ".join(sorted(describe_capability(c) for c in mapper_ids)) or "none")
+                        + (
+                            ", ".join(
+                                sorted(
+                                    describe_capability(c)
+                                    for c in mapper_ids
+                                )
+                            )
+                            or "none"
+                        )
                         + " · manual: "
-                        + (", ".join(sorted(describe_capability(c) for c in manual_ids)) or "none")
+                        + (
+                            ", ".join(
+                                sorted(
+                                    describe_capability(c)
+                                    for c in manual_ids
+                                )
+                            )
+                            or "none"
+                        )
                     )
 
 
@@ -736,13 +1576,18 @@ with tab4:
 # TAB 5: FINAL REPORT
 # =========================================================
 
-with tab5:
+if active_tab == "Final Report":
 
-    st.header("Final Report")
+    st.header(
+        "Final Report"
+    )
 
-    report_text = st.session_state.report_text
+    report_text = (
+        st.session_state.report_text
+    )
 
     if report_text:
+
         st.download_button(
             label="Download Full Report",
             data=report_text,
@@ -751,15 +1596,44 @@ with tab5:
             use_container_width=True,
         )
 
-        with st.expander("View full report", expanded=False):
-            st.text(report_text)
+        with st.expander(
+            "View full report",
+            expanded=False,
+        ):
+
+            st.text(
+                report_text
+            )
 
     else:
+
         st.warning(
             "The analysis completed, but the generated report could not be loaded."
         )
 
-        final_report_path = analysis_result.get("final_report_path")
+        final_report_path = (
+            analysis_result.get(
+                "final_report_path"
+            )
+        )
+
         if final_report_path:
-            st.caption("Expected report path:")
-            st.code(str(final_report_path))
+
+            st.caption(
+                "Expected report path:"
+            )
+
+            st.code(
+                str(final_report_path)
+            )
+
+
+# =========================================================
+# TAB 6: THREAT CHAIN CURATION — MODULE 10
+# =========================================================
+
+if active_tab == "Threat Chain Curation":
+
+    module_10.render(
+        module_5_ontology_database.DB_PATH
+    )

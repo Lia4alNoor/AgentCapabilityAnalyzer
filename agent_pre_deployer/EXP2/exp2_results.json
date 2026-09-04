@@ -1,0 +1,1063 @@
+{
+    "experiment": "Experiment 2 — Gold-set capability mapping accuracy",
+    "input_gold_set": "gold_set.json",
+    "ontology_source": "modules.module_3_capability_normalization.CAPABILITY_ONTOLOGY",
+    "sampling_method": "First 30 tools from researcher-selected JSON files",
+    "tool_count": 30,
+    "gold_labels": [
+        {
+            "annotation_id": 1,
+            "tool": "echo",
+            "description": "Echoes back the input string",
+            "source_file": "everything_tools.json",
+            "source_index": 0,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 2,
+            "tool": "get-annotated-message",
+            "description": "Demonstrates how annotations can be used to provide metadata about content.",
+            "source_file": "everything_tools.json",
+            "source_index": 1,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 3,
+            "tool": "get-env",
+            "description": "Returns environment variables for debugging MCP server configuration",
+            "source_file": "everything_tools.json",
+            "source_index": 2,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 4,
+            "tool": "get-resource-links",
+            "description": "Returns resource links that reference different types of resources",
+            "source_file": "everything_tools.json",
+            "source_index": 3,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 5,
+            "tool": "get-resource-reference",
+            "description": "Returns a resource reference that can be used by MCP clients",
+            "source_file": "everything_tools.json",
+            "source_index": 4,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 6,
+            "tool": "get-roots-list",
+            "description": "Lists the current MCP roots provided by the client",
+            "source_file": "everything_tools.json",
+            "source_index": 5,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 7,
+            "tool": "get-structured-content",
+            "description": "Returns structured content along with an output schema",
+            "source_file": "everything_tools.json",
+            "source_index": 6,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 8,
+            "tool": "get-sum",
+            "description": "Returns the sum of two numbers",
+            "source_file": "everything_tools.json",
+            "source_index": 7,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 9,
+            "tool": "get-tiny-image",
+            "description": "Returns a tiny MCP logo image",
+            "source_file": "everything_tools.json",
+            "source_index": 8,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 10,
+            "tool": "gzip-file-as-resource",
+            "description": "Compresses a file using gzip and returns a resource or resource link",
+            "source_file": "everything_tools.json",
+            "source_index": 9,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 11,
+            "tool": "toggle-simulated-logging",
+            "description": "Toggles simulated random-level logging on or off",
+            "source_file": "everything_tools.json",
+            "source_index": 10,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 12,
+            "tool": "toggle-subscriber-updates",
+            "description": "Toggles simulated resource subscription updates on or off",
+            "source_file": "everything_tools.json",
+            "source_index": 11,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 13,
+            "tool": "trigger-long-running-operation",
+            "description": "Demonstrates a long-running operation with progress updates",
+            "source_file": "everything_tools.json",
+            "source_index": 12,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 14,
+            "tool": "trigger-elicitation-request",
+            "description": "Triggers a request from the server for user elicitation",
+            "source_file": "everything_tools.json",
+            "source_index": 13,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 15,
+            "tool": "trigger-elicitation-request-async",
+            "description": "Triggers an asynchronous elicitation request",
+            "source_file": "everything_tools.json",
+            "source_index": 14,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 16,
+            "tool": "trigger-sampling-request",
+            "description": "Triggers a request from the server for LLM sampling",
+            "source_file": "everything_tools.json",
+            "source_index": 15,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 17,
+            "tool": "trigger-sampling-request-async",
+            "description": "Triggers an asynchronous sampling request",
+            "source_file": "everything_tools.json",
+            "source_index": 16,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 18,
+            "tool": "simulate-research-query",
+            "description": "Simulates a deep research operation",
+            "source_file": "everything_tools.json",
+            "source_index": 17,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 19,
+            "tool": "trigger-url-elicitation",
+            "description": "Triggers URL elicitation for a browser flow",
+            "source_file": "everything_tools.json",
+            "source_index": 18,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 20,
+            "tool": "write_file",
+            "description": "Create/overwrite a file",
+            "source_file": "filesystem_tools.json",
+            "source_index": 0,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 21,
+            "tool": "edit_file",
+            "description": "Replace exact text in a file",
+            "source_file": "filesystem_tools.json",
+            "source_index": 1,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 22,
+            "tool": "create_directory",
+            "description": "Create a directory",
+            "source_file": "filesystem_tools.json",
+            "source_index": 2,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 23,
+            "tool": "list_directory",
+            "description": "List directory contents",
+            "source_file": "filesystem_tools.json",
+            "source_index": 3,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 24,
+            "tool": "list_directory_with_sizes",
+            "description": "List contents and sizes",
+            "source_file": "filesystem_tools.json",
+            "source_index": 4,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 25,
+            "tool": "directory_tree",
+            "description": "Recursively show directory tree",
+            "source_file": "filesystem_tools.json",
+            "source_index": 5,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 26,
+            "tool": "move_file",
+            "description": "Move/rename files or directories",
+            "source_file": "filesystem_tools.json",
+            "source_index": 6,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 27,
+            "tool": "search_files",
+            "description": "Search files/directories by pattern",
+            "source_file": "filesystem_tools.json",
+            "source_index": 7,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 28,
+            "tool": "get_file_info",
+            "description": "Retrieve file/directory metadata",
+            "source_file": "filesystem_tools.json",
+            "source_index": 8,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 29,
+            "tool": "list_allowed_directories",
+            "description": "List accessible directories",
+            "source_file": "filesystem_tools.json",
+            "source_index": 9,
+            "gold_capabilities": []
+        },
+        {
+            "annotation_id": 30,
+            "tool": "git_status",
+            "description": "Shows the working tree status",
+            "source_file": "git_tools.json",
+            "source_index": 0,
+            "gold_capabilities": []
+        }
+    ],
+    "results": [
+        {
+            "annotation_id": 1,
+            "tool": "echo",
+            "source_file": "everything_tools.json",
+            "source_index": 0,
+            "description": "Echoes back the input string",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 2,
+            "tool": "get-annotated-message",
+            "source_file": "everything_tools.json",
+            "source_index": 1,
+            "description": "Demonstrates how annotations can be used to provide metadata about content.",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 3,
+            "tool": "get-env",
+            "source_file": "everything_tools.json",
+            "source_index": 2,
+            "description": "Returns environment variables for debugging MCP server configuration",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "env"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: env. Evidence: C2 Sensitive Data Access via 'env' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 4,
+            "tool": "get-resource-links",
+            "source_file": "everything_tools.json",
+            "source_index": 3,
+            "description": "Returns resource links that reference different types of resources",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 5,
+            "tool": "get-resource-reference",
+            "source_file": "everything_tools.json",
+            "source_index": 4,
+            "description": "Returns a resource reference that can be used by MCP clients",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 6,
+            "tool": "get-roots-list",
+            "source_file": "everything_tools.json",
+            "source_index": 5,
+            "description": "Lists the current MCP roots provided by the client",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 7,
+            "tool": "get-structured-content",
+            "source_file": "everything_tools.json",
+            "source_index": 6,
+            "description": "Returns structured content along with an output schema",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 8,
+            "tool": "get-sum",
+            "source_file": "everything_tools.json",
+            "source_index": 7,
+            "description": "Returns the sum of two numbers",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 9,
+            "tool": "get-tiny-image",
+            "source_file": "everything_tools.json",
+            "source_index": 8,
+            "description": "Returns a tiny MCP logo image",
+            "gold_capabilities": [],
+            "predicted_capabilities": [],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 10,
+            "tool": "gzip-file-as-resource",
+            "source_file": "everything_tools.json",
+            "source_index": 9,
+            "description": "Compresses a file using gzip and returns a resource or resource link",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "gzip",
+                "openWorldHint"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: gzip, openWorldHint. Evidence: C4 State Modification via 'gzip' (Medium); C1 External Data Ingestion via 'openWorldHint' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 11,
+            "tool": "toggle-simulated-logging",
+            "source_file": "everything_tools.json",
+            "source_index": 10,
+            "description": "Toggles simulated random-level logging on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "toggle"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: toggle. Evidence: C4 State Modification via 'toggle' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 12,
+            "tool": "toggle-subscriber-updates",
+            "source_file": "everything_tools.json",
+            "source_index": 11,
+            "description": "Toggles simulated resource subscription updates on or off",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 13,
+            "tool": "trigger-long-running-operation",
+            "source_file": "everything_tools.json",
+            "source_index": 12,
+            "description": "Demonstrates a long-running operation with progress updates",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "updates"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: updates. Evidence: C4 State Modification via 'updates' (Medium) [readOnlyHint=true contradicts write-side capability -> lowered one step]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 14,
+            "tool": "trigger-elicitation-request",
+            "source_file": "everything_tools.json",
+            "source_index": 13,
+            "description": "Triggers a request from the server for user elicitation",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 15,
+            "tool": "trigger-elicitation-request-async",
+            "source_file": "everything_tools.json",
+            "source_index": 14,
+            "description": "Triggers an asynchronous elicitation request",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "trigger",
+                "elicitation"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: trigger, elicitation. Evidence: C4 State Modification via 'trigger' (Low); C1 External Data Ingestion via 'elicitation' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 16,
+            "tool": "trigger-sampling-request",
+            "source_file": "everything_tools.json",
+            "source_index": 15,
+            "description": "Triggers a request from the server for LLM sampling",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sampling-request",
+                "trigger"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: sampling-request, trigger. Evidence: C1 External Data Ingestion via 'sampling-request' (Medium) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 17,
+            "tool": "trigger-sampling-request-async",
+            "source_file": "everything_tools.json",
+            "source_index": 16,
+            "description": "Triggers an asynchronous sampling request",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sampling-request",
+                "trigger"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: sampling-request, trigger. Evidence: C1 External Data Ingestion via 'sampling-request' (Medium) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 18,
+            "tool": "simulate-research-query",
+            "source_file": "everything_tools.json",
+            "source_index": 17,
+            "description": "Simulates a deep research operation",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C1"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "research-query"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: research-query. Evidence: C1 External Data Ingestion via 'research-query' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 19,
+            "tool": "trigger-url-elicitation",
+            "source_file": "everything_tools.json",
+            "source_index": 18,
+            "description": "Triggers URL elicitation for a browser flow",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "url",
+                "trigger"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: url, trigger. Evidence: C1 External Data Ingestion via 'url' (High) [openWorldHint=true supports external-facing capability -> raised one step]; C4 State Modification via 'trigger' (Low)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 20,
+            "tool": "write_file",
+            "source_file": "filesystem_tools.json",
+            "source_index": 0,
+            "description": "Create/overwrite a file",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 21,
+            "tool": "edit_file",
+            "source_file": "filesystem_tools.json",
+            "source_index": 1,
+            "description": "Replace exact text in a file",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "replace"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: replace. Evidence: C4 State Modification via 'replace' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 22,
+            "tool": "create_directory",
+            "source_file": "filesystem_tools.json",
+            "source_index": 2,
+            "description": "Create a directory",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "create"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: create. Evidence: C4 State Modification via 'create' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 23,
+            "tool": "list_directory",
+            "source_file": "filesystem_tools.json",
+            "source_index": 3,
+            "description": "List directory contents",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_directory list directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_directory list directory. Evidence: C2 Sensitive Data Access via 'list_directory list directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 24,
+            "tool": "list_directory_with_sizes",
+            "source_file": "filesystem_tools.json",
+            "source_index": 4,
+            "description": "List contents and sizes",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_directory. Evidence: C2 Sensitive Data Access via 'list_directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 25,
+            "tool": "directory_tree",
+            "source_file": "filesystem_tools.json",
+            "source_index": 5,
+            "description": "Recursively show directory tree",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "show directory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: show directory. Evidence: C2 Sensitive Data Access via 'show directory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 26,
+            "tool": "move_file",
+            "source_file": "filesystem_tools.json",
+            "source_index": 6,
+            "description": "Move/rename files or directories",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "move"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: move. Evidence: C4 State Modification via 'move' (High) [destructiveHint=true confirms C4 -> confidence forced to High]",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 27,
+            "tool": "search_files",
+            "source_file": "filesystem_tools.json",
+            "source_index": 7,
+            "description": "Search files/directories by pattern",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "search_files search files/directories"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: search_files search files/directories. Evidence: C2 Sensitive Data Access via 'search_files search files/directories' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 28,
+            "tool": "get_file_info",
+            "source_file": "filesystem_tools.json",
+            "source_index": 8,
+            "description": "Retrieve file/directory metadata",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "file/directory metadata"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: file/directory metadata. Evidence: C2 Sensitive Data Access via 'file/directory metadata' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 29,
+            "tool": "list_allowed_directories",
+            "source_file": "filesystem_tools.json",
+            "source_index": 9,
+            "description": "List accessible directories",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "list_allowed_directories list accessible directories"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: list_allowed_directories list accessible directories. Evidence: C2 Sensitive Data Access via 'list_allowed_directories list accessible directories' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 30,
+            "tool": "git_status",
+            "source_file": "git_tools.json",
+            "source_index": 0,
+            "description": "Shows the working tree status",
+            "gold_capabilities": [],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "git_status"
+            ],
+            "normalization_confidence": 0.4,
+            "mapping_reason": "Tool matches: git_status. Evidence: C2 Sensitive Data Access via 'git_status' (Low)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        }
+    ],
+    "metrics": {
+        "C1": {
+            "capability": "C1",
+            "canonical": "External Data Ingestion",
+            "true_positive": 0,
+            "false_positive": 7,
+            "false_negative": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        "C2": {
+            "capability": "C2",
+            "canonical": "Sensitive Data Access",
+            "true_positive": 1,
+            "false_positive": 7,
+            "false_negative": 0,
+            "precision": 0.125,
+            "recall": 1.0,
+            "f1": 0.2222222222222222
+        },
+        "C3": {
+            "capability": "C3",
+            "canonical": "External Communication",
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 5,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        "C4": {
+            "capability": "C4",
+            "canonical": "State Modification",
+            "true_positive": 7,
+            "false_positive": 6,
+            "false_negative": 0,
+            "precision": 0.5384615384615384,
+            "recall": 1.0,
+            "f1": 0.7000000000000001
+        },
+        "C5": {
+            "capability": "C5",
+            "canonical": "System Execution",
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        "C6": {
+            "capability": "C6",
+            "canonical": "Physical Actuation",
+            "true_positive": 0,
+            "false_positive": 0,
+            "false_negative": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        "_overall": {
+            "tool_count": 30,
+            "exact_set_correct": 15,
+            "exact_set_accuracy": 0.5,
+            "micro_precision": 0.2857142857142857,
+            "micro_recall": 0.6153846153846154,
+            "micro_f1": 0.3902439024390244
+        }
+    }
+}

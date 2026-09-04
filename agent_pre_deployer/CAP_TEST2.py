@@ -6,15 +6,51 @@ EXPERIMENT 2 — GOLD-SET CAPABILITY MAPPING ACCURACY
 Purpose
 -------
 Evaluate the accuracy of the project's capability normalization and
-C1-C6 mapping pipeline against an independently created gold-standard
-reference set.
+C1-C6 mapping pipeline against the gold-standard reference set
+provided as input.
 
+The gold set is NOT created in this experiment.
+
+Instead, Experiment 2 accepts an existing gold-set JSON containing:
+
+    {
+        "experiment": "...",
+        "ontology_source": "...",
+        "sampling_method": "...",
+        "tool_count": 30,
+        "gold_labels": [...]
+    }
 
 The C1-C6 ontology is imported directly from:
 
     modules/module_3_capability_normalization.py
 
 No second ontology is maintained in this experiment.
+
+Process
+-------
+Gold-set JSON
+      |
+      v
+Load gold_labels
+      |
+      v
+Locate exact tools using source_file + source_index
+      |
+      v
+Module 2 — Capability Extraction
+      |
+      v
+Module 3 — Capability Normalization + C1-C6 Mapping
+      |
+      v
+Compare predictions against supplied gold labels
+      |
+      v
+Calculate metrics
+      |
+      v
+Save EXP2 results
 
 ======================================================================
 """
@@ -27,128 +63,92 @@ from modules import module_2_capability_extraction
 from modules import module_3_capability_normalization
 
 
+# ======================================================================
 # CONFIGURATION
+# ======================================================================
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
 DATA_DIR = SCRIPT_DIR / "data"
 
-OUTPUT_DIR = SCRIPT_DIR / ("exp_2_50_capabilities")
+# Input gold-set JSON
+GOLD_INPUT_JSON = SCRIPT_DIR / r"C:\Users\amal4\PycharmProjects\AgentPreDeployment_check\agent_pre_deployer\experiment_2_results\gold_set.json"
 
-NUMBER_OF_TOOLS = 50
+# Experiment 2 output directory
+OUTPUT_DIR = SCRIPT_DIR / "EXP2"
 
-GOLD_JSON = OUTPUT_DIR / "gold_set.json"
-COMPARISON_JSON = OUTPUT_DIR / "gold_vs_pipeline.json"
-COMPARISON_CSV = OUTPUT_DIR / "gold_vs_pipeline.csv"
-METRICS_JSON = OUTPUT_DIR / "metrics.json"
+# Experiment 2 output files
+RESULT_JSON = OUTPUT_DIR / "exp2_results.json"
+COMPARISON_CSV = OUTPUT_DIR / "exp2_results.csv"
+METRICS_JSON = OUTPUT_DIR / "exp2_metrics.json"
 
 
+# Use the exact ontology from Module 3.
 CAPABILITY_ONTOLOGY = (
     module_3_capability_normalization.CAPABILITY_ONTOLOGY
 )
 
 
-# FILE DISCOVERY
-
-def find_json_files():
-    """
-    Find JSON files directly inside the data directory.
-
-    Files are sorted alphabetically to make selection deterministic.
-    """
-
-    if not DATA_DIR.exists():
-        print()
-        print("ERROR: Data directory does not exist:")
-        print(DATA_DIR)
-        return []
-
-    return sorted(
-        DATA_DIR.glob("*.json"),
-        key=lambda path: path.name.lower()
-    )
-
-
 # ======================================================================
-# FILE SELECTION
+# LOAD GOLD SET
 # ======================================================================
 
-def select_json_files(json_files):
+def load_gold_set():
     """
-    Display available JSON files and allow the researcher to select
-    one or more files using their numbers.
+    Load the existing gold-set JSON supplied as input.
 
-    Example:
-        1,3,5
-    """
+    The gold set must contain:
 
-    print()
-    print("=" * 100)
-    print("AVAILABLE JSON FILES")
-    print("=" * 100)
-
-    print()
-    print(f"Data directory: {DATA_DIR}")
-    print()
-
-    for number, filepath in enumerate(json_files, start=1):
-        print(f"{number:>3}. {filepath.name}")
-
-    print()
-    print("Select one or more files by number.")
-    print("Example: 1,3,5")
-
-    while True:
-
-        answer = input("\nFile numbers: ").strip()
-
-        if not answer:
-            print("Please select at least one file.")
-            continue
-
-        try:
-            indices = [
-                int(value.strip())
-                for value in answer.split(",")
-                if value.strip()
+        {
+            "gold_labels": [
+                {
+                    "annotation_id": ...,
+                    "tool": ...,
+                    "description": ...,
+                    "source_file": ...,
+                    "source_index": ...,
+                    "gold_capabilities": [...]
+                }
             ]
-        except ValueError:
-            print("Invalid input. Use numbers separated by commas.")
-            continue
+        }
+    """
 
-        # Remove duplicates while preserving order.
-        indices = list(dict.fromkeys(indices))
+    if not GOLD_INPUT_JSON.exists():
+        raise FileNotFoundError(
+            f"Gold-set input file does not exist:\n"
+            f"{GOLD_INPUT_JSON}"
+        )
 
-        invalid = [
-            index
-            for index in indices
-            if index < 1 or index > len(json_files)
-        ]
+    with open(
+        GOLD_INPUT_JSON,
+        "r",
+        encoding="utf-8"
+    ) as file:
+        data = json.load(file)
 
-        if invalid:
-            print(f"Invalid file number(s): {invalid}")
-            continue
+    if not isinstance(data, dict):
+        raise ValueError(
+            "Gold-set JSON must contain a JSON object."
+        )
 
-        selected = [
-            json_files[index - 1]
-            for index in indices
-        ]
+    gold_labels = data.get("gold_labels")
 
-        break
+    if not isinstance(gold_labels, list):
+        raise ValueError(
+            "Gold-set JSON does not contain a valid "
+            "'gold_labels' list."
+        )
 
-    print()
-    print("=" * 100)
-    print("SELECTED JSON FILES")
-    print("=" * 100)
+    if not gold_labels:
+        raise ValueError(
+            "Gold-set contains no gold labels."
+        )
 
-    for number, filepath in enumerate(selected, start=1):
-        print(f"{number}. {filepath.name}")
-
-    return selected
+    return data
 
 
 # ======================================================================
-# JSON LOADING
+# LOAD TOOLS FROM SOURCE FILES
 # ======================================================================
 
 def load_json_file(filepath):
@@ -177,7 +177,11 @@ def load_json_file(filepath):
         }
     """
 
-    with open(filepath, "r", encoding="utf-8") as file:
+    with open(
+        filepath,
+        "r",
+        encoding="utf-8"
+    ) as file:
         data = json.load(file)
 
     if isinstance(data, list):
@@ -205,432 +209,125 @@ def load_json_file(filepath):
 
 
 # ======================================================================
-# TOOL EXTRACTION
+# RECONSTRUCT TOOLS FROM GOLD SET
 # ======================================================================
 
-def load_tools_from_files(selected_files):
+def reconstruct_tools(gold_labels):
     """
-    Load all tools from the selected JSON files.
+    Reconstruct exactly the tools referenced by the gold set.
 
-    Every tool receives internal metadata:
+    Each gold record contains:
 
-        _source_file
-        _source_index
+        source_file
+        source_index
 
-    These fields are used only by the experiment and are removed before
-    Module 2 is executed.
-    """
+    Therefore the experiment does NOT perform:
 
-    all_tools = []
+        - file selection
+        - tool selection
+        - random sampling
+        - manual annotation
 
-    print()
-    print("=" * 100)
-    print("EXTRACTING TOOLS")
-    print("=" * 100)
-
-    for filepath in selected_files:
-
-        print()
-        print(f"Reading: {filepath.name}")
-
-        try:
-            tools = load_json_file(filepath)
-        except Exception as error:
-            print(f"ERROR reading {filepath.name}: {error}")
-            continue
-
-        valid_count = 0
-
-        for index, tool in enumerate(tools):
-
-            if not isinstance(tool, dict):
-                continue
-
-            tool_copy = dict(tool)
-
-            tool_copy["_source_file"] = filepath.name
-            tool_copy["_source_index"] = index
-
-            all_tools.append(tool_copy)
-
-            valid_count += 1
-
-        print(f"  Tools found: {valid_count}")
-
-    print()
-    print(f"TOTAL VALID TOOLS FOUND: {len(all_tools)}")
-
-    return all_tools
-
-
-# SELECT FIRST 15 TOOLS
-
-def select_first_15_tools(all_tools):
-    """
-    Automatically select the first 15 tools.
-
-    This makes the sampling procedure deterministic:
-
-        selected JSON files
-              ↓
-        file order
-              ↓
-        tool order within files
-              ↓
-        first 15 tools
+    The gold set itself determines exactly which tools are evaluated.
     """
 
-    if len(all_tools) < NUMBER_OF_TOOLS:
+    tools = []
 
-        print()
-        print(
-            f"ERROR: Only {len(all_tools)} valid tools were found."
-        )
-        print(
-            f"At least {NUMBER_OF_TOOLS} tools are required."
-        )
-
-        return []
-
-    selected_tools = all_tools[:NUMBER_OF_TOOLS]
-
-    print()
-    print("=" * 100)
-    print(
-        f"AUTOMATICALLY SELECTED FIRST {NUMBER_OF_TOOLS} TOOLS"
-    )
-    print("=" * 100)
-
-    for number, tool in enumerate(selected_tools, start=1):
-
-        print(
-            f"{number:>2}. "
-            f"{tool.get('tool', 'UNKNOWN')}"
-        )
-
-        print(
-            f"    Source: "
-            f"{tool.get('_source_file', 'UNKNOWN')}"
-        )
-
-    return selected_tools
-
-
-# ======================================================================
-# ONTOLOGY DISPLAY
-# ======================================================================
-
-def display_ontology():
-    """
-    Display the actual C1-C6 ontology imported from Module 3.
-    """
-
-    print()
-    print("-" * 100)
-    print("FIXED C1-C6 ONTOLOGY")
-    print("-" * 100)
-
-    #for capability_id, information in CAPABILITY_ONTOLOGY.items():
-#
- #       print(
-  #          f"{capability_id} — "
-   #         f"{information['canonical']}"
-    #    )
-
-     #   print(
-      #      f"    {information['definition']}"
-       # )
-
-        #print()
-
-    #print(
-       # "NONE — No C1-C6 capability applies."
-    #)
-
-
-# ======================================================================
-# MANUAL ANNOTATION DISPLAY
-# ======================================================================
-
-def display_tool_for_annotation(tool, number, total):
-    """
-    Display only information available before the pipeline runs.
-
-    Pipeline-derived information is deliberately hidden.
-
-    NOT displayed:
-
-        assumed_capability
-        capability_features
-        normalized
-        mapping
-    """
-
-    print()
     print()
     print("=" * 110)
-
-    print(
-        f"TOOL {number} OF {total}"
-    )
-
+    print("RECONSTRUCTING TOOLS FROM GOLD SET")
     print("=" * 110)
 
-    print()
-    print(
-        f"Source file: {tool.get('_source_file', 'UNKNOWN')}"
-    )
+    # Cache loaded JSON files so that each file is read only once.
+    file_cache = {}
 
-    print()
-    print(
-        f"Tool name: {tool.get('tool', 'UNKNOWN')}"
-    )
+    for gold_record in gold_labels:
 
-    print()
-    print("Description:")
-    print("-" * 110)
+        source_file = gold_record.get("source_file")
+        source_index = gold_record.get("source_index")
 
-    description = tool.get(
-        "description",
-        "NO DESCRIPTION PROVIDED"
-    )
-
-    print(description)
-
-    print()
-    print("Tool metadata:")
-
-    print(
-        f"readOnlyHint:    "
-        f"{tool.get('readOnlyHint', 'Not provided')}"
-    )
-
-    print(
-        f"destructiveHint: "
-        f"{tool.get('destructiveHint', 'Not provided')}"
-    )
-
-    print(
-        f"idempotentHint:  "
-        f"{tool.get('idempotentHint', 'Not provided')}"
-    )
-
-    print(
-        f"openWorldHint:   "
-        f"{tool.get('openWorldHint', 'Not provided')}"
-    )
-
-    display_ontology()
-
-
-# ======================================================================
-# GOLD LABEL INPUT
-# ======================================================================
-
-def get_gold_label():
-    """
-    Ask the researcher to assign one or more independent gold labels.
-
-    Examples:
-
-        C1
-        C2
-        C2,C4
-        C1,C3
-        C1,C2,C3
-        NONE
-    """
-
-    print()
-    print("ENTER GOLD CAPABILITY LABEL")
-    print("=" * 100)
-
-    print()
-    print("Use NONE if no C1-C6 capability applies.")
-
-    print()
-    print(
-        "Enter one or more capabilities separated by commas."
-    )
-
-
-    while True:
-
-        answer = input(
-            "\nGold capability(s): "
-        ).strip().upper()
-
-        if not answer:
-            print("Please enter C1-C6 or NONE.")
-            continue
-
-        if answer == "NONE":
-            return []
-
-        capabilities = [
-            value.strip()
-            for value in answer.split(",")
-            if value.strip()
-        ]
-
-        # Remove duplicates.
-        capabilities = list(
-            dict.fromkeys(capabilities)
+        tool_name = gold_record.get(
+            "tool",
+            "UNKNOWN"
         )
 
-        invalid = [
-            capability
-            for capability in capabilities
-            if capability not in CAPABILITY_ONTOLOGY
-        ]
-
-        if invalid:
-
-            print()
-            print(
-                f"Invalid capability(s): {invalid}"
+        if not source_file:
+            raise ValueError(
+                f"Missing source_file for tool: {tool_name}"
             )
 
-            print(
-                "Valid options: "
-                "C1, C2, C3, C4, C5, C6, NONE"
+        if source_index is None:
+            raise ValueError(
+                f"Missing source_index for tool: {tool_name}"
             )
 
-            continue
+        filepath = DATA_DIR / source_file
 
-        # Keep consistent C1 -> C6 order.
-        capabilities.sort(
-            key=lambda value: int(value[1:])
+        if not filepath.exists():
+            raise FileNotFoundError(
+                f"Source file for tool '{tool_name}' "
+                f"does not exist:\n{filepath}"
+            )
+
+        # Load file once.
+        if source_file not in file_cache:
+            file_cache[source_file] = load_json_file(
+                filepath
+            )
+
+        source_tools = file_cache[source_file]
+
+        if source_index < 0 or source_index >= len(source_tools):
+            raise IndexError(
+                f"source_index {source_index} is invalid "
+                f"for {source_file}"
+            )
+
+        original_tool = source_tools[source_index]
+
+        if not isinstance(original_tool, dict):
+            raise ValueError(
+                f"Tool at {source_file}[{source_index}] "
+                f"is not a JSON object."
+            )
+
+        actual_tool_name = original_tool.get(
+            "tool",
+            ""
         )
 
-        return capabilities
+        # Verify that the source position actually corresponds
+        # to the tool recorded in the gold set.
+        if actual_tool_name != tool_name:
 
+            raise ValueError(
+                "\nGold-set/source mismatch detected.\n"
+                f"  Gold tool:   {tool_name}\n"
+                f"  Source file: {source_file}\n"
+                f"  Source index:{source_index}\n"
+                f"  Actual tool: {actual_tool_name}\n"
+            )
 
-# ======================================================================
-# MANUAL GOLD SET CREATION
-# ======================================================================
+        tool_copy = dict(original_tool)
 
-def manually_label_tools(selected_tools):
-    """
-    Create the independent gold-standard reference set.
+        # Experiment-only metadata.
+        tool_copy["_source_file"] = source_file
+        tool_copy["_source_index"] = source_index
 
-    IMPORTANT:
+        tools.append(tool_copy)
 
-    No Module 2 or Module 3 processing has occurred yet.
-    """
-
-    print()
-    print()
-    print("=" * 110)
-    print("MANUAL GOLD-SET ANNOTATION")
-    print("=" * 110)
-
-    print()
-    print(
-        "You are now creating the GOLD STANDARD."
-    )
-
-    print()
-    print(
-        "Judge each tool using the information displayed above."
-    )
-
-    print(
-        "Do NOT use automated pipeline predictions."
-    )
-
-    print()
-    print(
-        "The gold set must be created independently "
-        "before the pipeline is executed."
-    )
-
-    input(
-        "\nPress ENTER to begin..."
-    )
-
-    gold_labels = []
-
-    for number, tool in enumerate(
-        selected_tools,
-        start=1
-    ):
-
-        display_tool_for_annotation(
-            tool,
-            number,
-            len(selected_tools)
-        )
-
-        gold_capabilities = get_gold_label()
-
-        record = {
-            "annotation_id": number,
-            "tool": tool.get("tool", ""),
-            "description": tool.get("description", ""),
-            "source_file": tool.get("_source_file", ""),
-            "source_index": tool.get("_source_index"),
-            "gold_capabilities": gold_capabilities
-        }
-
-        gold_labels.append(record)
-
-        print()
         print(
-            "Gold label saved:",
-            gold_capabilities if gold_capabilities else "NONE"
-        )
-
-        if number < len(selected_tools):
-            input(
-                "\nPress ENTER for the next tool..."
-            )
-
-    return gold_labels
-
-
-# ======================================================================
-# SAVE GOLD SET
-# ======================================================================
-
-def save_gold_set(gold_labels):
-
-    OUTPUT_DIR.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    data = {
-        "experiment": (
-            "Experiment 2 — Gold-set capability mapping accuracy"
-        ),
-        "ontology_source": (
-            "modules.module_3_capability_normalization."
-            "CAPABILITY_ONTOLOGY"
-        ),
-        "sampling_method": (
-            "First 15 tools from researcher-selected JSON files"
-        ),
-        "tool_count": len(gold_labels),
-        "gold_labels": gold_labels
-    }
-
-    with open(
-        GOLD_JSON,
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            data,
-            file,
-            indent=4,
-            ensure_ascii=False
+            f"{gold_record.get('annotation_id', '?'):>3}. "
+            f"{tool_name:<45} "
+            f"{source_file}[{source_index}]"
         )
 
     print()
-    print("Gold set saved:")
-    print(f"  {GOLD_JSON}")
+    print(
+        f"TOTAL TOOLS RECONSTRUCTED: {len(tools)}"
+    )
+
+    return tools
 
 
 # ======================================================================
@@ -639,7 +336,7 @@ def save_gold_set(gold_labels):
 
 def prepare_module_input(selected_tools):
     """
-    Convert selected tools into the structure expected by Module 2.
+    Convert reconstructed tools into the structure expected by Module 2.
 
     Experiment-only metadata beginning with '_' is removed.
     """
@@ -659,7 +356,7 @@ def prepare_module_input(selected_tools):
     return {
         "tools": clean_tools,
         "tool_count": len(clean_tools),
-        "source_file": "Experiment_1_Gold_Set"
+        "source_file": "EXP2_GOLD_SET"
     }
 
 
@@ -669,7 +366,6 @@ def prepare_module_input(selected_tools):
 
 def run_actual_pipeline(selected_tools):
 
-
     module_input = prepare_module_input(
         selected_tools
     )
@@ -678,7 +374,6 @@ def run_actual_pipeline(selected_tools):
     # MODULE 2
     # ------------------------------------------------------------------
 
-    print()
     print()
     print("=" * 100)
     print("RUNNING MODULE 2 — CAPABILITY EXTRACTION")
@@ -694,7 +389,6 @@ def run_actual_pipeline(selected_tools):
     # MODULE 3
     # ------------------------------------------------------------------
 
-    print()
     print()
     print("=" * 100)
     print(
@@ -756,21 +450,18 @@ def find_pipeline_tool(
     gold_record
 ):
     """
-    Find the exact pipeline tool corresponding to the gold record.
+    Match the pipeline result to the gold record.
 
-    Matching uses:
+    Matching is performed using:
 
-        1. source position where possible
-        2. tool name
+        1. tool name
 
-    Since Module 2 receives exactly the selected tools in the same
-    order, annotation_id is also preserved as a useful fallback.
+    The pipeline receives the exact tools reconstructed from the gold
+    set and in the same order, so this is deterministic.
     """
 
     tool_name = gold_record["tool"]
-    source_index = gold_record.get("source_index")
 
-    # First try exact name.
     for tool in pipeline_tools:
 
         if tool.get("tool") == tool_name:
@@ -788,7 +479,13 @@ def compare_results(
     pipeline_output
 ):
     """
-    Compare independent gold labels against Module 3 predictions.
+    Compare supplied gold labels against Module 3 predictions.
+
+    IMPORTANT:
+
+    The gold labels are read-only reference data.
+
+    This function does not modify them.
     """
 
     pipeline_tools = pipeline_output.get(
@@ -805,9 +502,10 @@ def compare_results(
             gold_record
         )
 
-        gold = gold_record[
-            "gold_capabilities"
-        ]
+        gold = gold_record.get(
+            "gold_capabilities",
+            []
+        )
 
         # --------------------------------------------------------------
         # Pipeline tool not found
@@ -816,6 +514,7 @@ def compare_results(
         if pipeline_tool is None:
 
             comparison.append({
+
                 "annotation_id":
                     gold_record["annotation_id"],
 
@@ -824,6 +523,9 @@ def compare_results(
 
                 "source_file":
                     gold_record["source_file"],
+
+                "source_index":
+                    gold_record["source_index"],
 
                 "description":
                     gold_record["description"],
@@ -889,6 +591,7 @@ def compare_results(
         )
 
         comparison.append({
+
             "annotation_id":
                 gold_record["annotation_id"],
 
@@ -897,6 +600,9 @@ def compare_results(
 
             "source_file":
                 gold_record["source_file"],
+
+            "source_index":
+                gold_record["source_index"],
 
             "description":
                 gold_record["description"],
@@ -955,115 +661,6 @@ def compare_results(
         })
 
     return comparison
-
-
-# ======================================================================
-# ERROR ANALYSIS
-# ======================================================================
-
-def collect_error_analysis(comparison):
-    """
-    For every incorrect prediction, allow the researcher to record
-    a brief explanation of why the pipeline differed from the gold
-    label.
-
-    This does NOT change the prediction or the gold label.
-    """
-
-    errors = [
-        result
-        for result in comparison
-        if not result["exact_match"]
-    ]
-
-    if not errors:
-        return
-
-    print()
-    print()
-    print("=" * 110)
-    print("ERROR ANALYSIS")
-    print("=" * 110)
-
-    print()
-    print(
-        "For each mismatch, record why the pipeline prediction "
-        "differs from the gold label."
-    )
-
-    print(
-        "This explanation is stored as qualitative error evidence."
-    )
-
-    for number, result in enumerate(
-        errors,
-        start=1
-    ):
-
-        gold = (
-            ", ".join(result["gold_capabilities"])
-            if result["gold_capabilities"]
-            else "NONE"
-        )
-
-        predicted = (
-            ", ".join(result["predicted_capabilities"])
-            if result["predicted_capabilities"]
-            else "NONE"
-        )
-
-        print()
-        print("-" * 110)
-
-        print(
-            f"ERROR {number}/{len(errors)}"
-        )
-
-        print(
-            f"Tool:       {result['tool']}"
-        )
-
-        print(
-            f"GOLD:       {gold}"
-        )
-
-        print(
-            f"PREDICTED:  {predicted}"
-        )
-
-        print()
-        print(
-            "Pipeline evidence:"
-        )
-
-        print(
-            f"  Normalized concepts: "
-            f"{result['normalized_concepts']}"
-        )
-
-        print(
-            f"  Matched expressions: "
-            f"{result['matched_expressions']}"
-        )
-
-        print(
-            f"  Confidence: "
-            f"{result['normalization_confidence']}"
-        )
-
-        print(
-            f"  Mapping reason: "
-            f"{result['mapping_reason']}"
-        )
-
-        print()
-
-        explanation = input(
-            "Why is this prediction different from the gold label? "
-            "\n> "
-        ).strip()
-
-        result["error_analysis"] = explanation
 
 
 # ======================================================================
@@ -1132,17 +729,32 @@ def calculate_metrics(comparison):
         )
 
         metrics[capability] = {
-            "capability": capability,
+
+            "capability":
+                capability,
+
             "canonical":
                 CAPABILITY_ONTOLOGY[
                     capability
                 ]["canonical"],
-            "true_positive": tp,
-            "false_positive": fp,
-            "false_negative": fn,
-            "precision": precision,
-            "recall": recall,
-            "f1": f1
+
+            "true_positive":
+                tp,
+
+            "false_positive":
+                fp,
+
+            "false_negative":
+                fn,
+
+            "precision":
+                precision,
+
+            "recall":
+                recall,
+
+            "f1":
+                f1
         }
 
     # ------------------------------------------------------------------
@@ -1201,12 +813,24 @@ def calculate_metrics(comparison):
     )
 
     metrics["_overall"] = {
-        "tool_count": total,
-        "exact_set_correct": exact_correct,
-        "exact_set_accuracy": exact_set_accuracy,
-        "micro_precision": micro_precision,
-        "micro_recall": micro_recall,
-        "micro_f1": micro_f1
+
+        "tool_count":
+            total,
+
+        "exact_set_correct":
+            exact_correct,
+
+        "exact_set_accuracy":
+            exact_set_accuracy,
+
+        "micro_precision":
+            micro_precision,
+
+        "micro_recall":
+            micro_recall,
+
+        "micro_f1":
+            micro_f1
     }
 
     return metrics
@@ -1219,7 +843,6 @@ def calculate_metrics(comparison):
 def print_comparison(comparison):
 
     print()
-    print()
     print("=" * 115)
     print("GOLD SET VS PIPELINE PREDICTION")
     print("=" * 115)
@@ -1227,13 +850,17 @@ def print_comparison(comparison):
     for result in comparison:
 
         gold = (
-            ", ".join(result["gold_capabilities"])
+            ", ".join(
+                result["gold_capabilities"]
+            )
             if result["gold_capabilities"]
             else "NONE"
         )
 
         predicted = (
-            ", ".join(result["predicted_capabilities"])
+            ", ".join(
+                result["predicted_capabilities"]
+            )
             if result["predicted_capabilities"]
             else "NONE"
         )
@@ -1254,6 +881,7 @@ def print_comparison(comparison):
         print(
             f"    Source:       "
             f"{result['source_file']}"
+            f"[{result['source_index']}]"
         )
 
         print(
@@ -1304,15 +932,6 @@ def print_comparison(comparison):
             f"{result['mapping_reason']}"
         )
 
-        if result["error_analysis"]:
-
-            print()
-
-            print(
-                f"    Error analysis: "
-                f"{result['error_analysis']}"
-            )
-
 
 # ======================================================================
 # PRINT METRICS
@@ -1320,7 +939,6 @@ def print_comparison(comparison):
 
 def print_metrics(metrics):
 
-    print()
     print()
     print("=" * 105)
     print("PER-CAPABILITY METRICS")
@@ -1391,14 +1009,40 @@ def print_metrics(metrics):
 
 
 # ======================================================================
-# SAVE COMPARISON JSON
+# SAVE EXP2 RESULTS
 # ======================================================================
 
-def save_comparison_json(comparison):
+def save_results(
+    gold_input,
+    comparison,
+    metrics
+):
+    """
+    Save the complete Experiment 2 result.
 
-    data = {
+    The original gold labels are preserved exactly as supplied.
+
+    The output contains:
+
+        - experiment metadata
+        - input gold-set metadata
+        - gold_labels
+        - pipeline comparison
+        - metrics
+    """
+
+    OUTPUT_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    result = {
+
         "experiment":
             "Experiment 2 — Gold-set capability mapping accuracy",
+
+        "input_gold_set":
+            GOLD_INPUT_JSON.name,
 
         "ontology_source":
             (
@@ -1406,41 +1050,55 @@ def save_comparison_json(comparison):
                 "CAPABILITY_ONTOLOGY"
             ),
 
+        "sampling_method":
+            gold_input.get(
+                "sampling_method",
+                "Provided externally"
+            ),
+
         "tool_count":
             len(comparison),
 
+        "gold_labels":
+            gold_input["gold_labels"],
+
         "results":
-            comparison
+            comparison,
+
+        "metrics":
+            metrics
     }
 
     with open(
-        COMPARISON_JSON,
+        RESULT_JSON,
         "w",
         encoding="utf-8"
     ) as file:
 
         json.dump(
-            data,
+            result,
             file,
             indent=4,
             ensure_ascii=False
         )
 
     print()
-    print("Comparison JSON saved:")
-    print(f"  {COMPARISON_JSON}")
+    print("Experiment 2 JSON saved:")
+    print(f"  {RESULT_JSON}")
 
 
 # ======================================================================
-# SAVE COMPARISON CSV
+# SAVE CSV
 # ======================================================================
 
 def save_comparison_csv(comparison):
 
     fieldnames = [
+
         "annotation_id",
         "tool",
         "source_file",
+        "source_index",
         "gold_capabilities",
         "predicted_capabilities",
         "exact_match",
@@ -1471,6 +1129,7 @@ def save_comparison_csv(comparison):
         for result in comparison:
 
             writer.writerow({
+
                 "annotation_id":
                     result["annotation_id"],
 
@@ -1479,6 +1138,9 @@ def save_comparison_csv(comparison):
 
                 "source_file":
                     result["source_file"],
+
+                "source_index":
+                    result["source_index"],
 
                 "gold_capabilities":
                     ",".join(
@@ -1523,7 +1185,7 @@ def save_comparison_csv(comparison):
             })
 
     print()
-    print("Comparison CSV saved:")
+    print("Experiment 2 CSV saved:")
     print(f"  {COMPARISON_CSV}")
 
 
@@ -1547,7 +1209,7 @@ def save_metrics(metrics):
         )
 
     print()
-    print("Metrics saved:")
+    print("Experiment 2 metrics saved:")
     print(f"  {METRICS_JSON}")
 
 
@@ -1565,118 +1227,50 @@ def main():
     print("=" * 110)
 
     print()
+    print("Input:")
     print(
-        "Objective:"
-    )
-
-    print(
-        "Evaluate whether the project's automated capability "
-        "mapping correctly assigns C1-C6 capabilities to tools."
+        f"  {GOLD_INPUT_JSON}"
     )
 
     print()
+    print("Ontology source:")
     print(
-        "Ontology source:"
-    )
-
-    print(
-        "modules.module_3_capability_normalization."
+        "  modules.module_3_capability_normalization."
         "CAPABILITY_ONTOLOGY"
     )
 
     print()
     print(
-        "Sampling:"
+        "The gold set is supplied externally."
     )
 
     print(
-        f"First {NUMBER_OF_TOOLS} tools from the selected JSON files."
+        "No file selection or manual annotation is performed."
     )
 
     # ==================================================================
-    # STEP 1 — FIND JSON FILES
+    # STEP 1 — LOAD EXISTING GOLD SET
     # ==================================================================
 
-    json_files = find_json_files()
+    gold_input = load_gold_set()
 
-    if not json_files:
+    gold_labels = gold_input["gold_labels"]
 
-        print()
-        print("No JSON files found.")
-        return
-
-    # ==================================================================
-    # STEP 2 — SELECT JSON FILES
-    # ==================================================================
-
-    selected_files = select_json_files(
-        json_files
+    print()
+    print(
+        f"Gold labels loaded: {len(gold_labels)}"
     )
 
     # ==================================================================
-    # STEP 3 — LOAD TOOLS
+    # STEP 2 — RECONSTRUCT EXACT TOOLS
     # ==================================================================
 
-    all_tools = load_tools_from_files(
-        selected_files
-    )
-
-    if len(all_tools) < NUMBER_OF_TOOLS:
-
-        print()
-        print(
-            f"ERROR: Need at least {NUMBER_OF_TOOLS} tools."
-        )
-
-        return
-
-    # ==================================================================
-    # STEP 4 — AUTOMATICALLY SELECT FIRST 15
-    # ==================================================================
-
-    selected_tools = select_first_15_tools(
-        all_tools
-    )
-
-    if not selected_tools:
-        return
-
-    # ==================================================================
-    # STEP 5 — MANUAL GOLD LABELING
-    # ==================================================================
-
-    gold_labels = manually_label_tools(
-        selected_tools
-    )
-
-    # ==================================================================
-    # STEP 6 — SAVE GOLD BEFORE RUNNING PIPELINE
-    # ==================================================================
-
-    save_gold_set(
+    selected_tools = reconstruct_tools(
         gold_labels
     )
 
-    print()
-    print("=" * 100)
-    print("GOLD SET LOCKED")
-    print("=" * 100)
-
-    print()
-    print(
-        "The independent gold reference has now been saved."
-    )
-
-    print(
-        "The automated pipeline will now be executed."
-    )
-
-    input(
-        "\nPress ENTER to run Module 2 and Module 3..."
-    )
-
     # ==================================================================
-    # STEP 7 — RUN MODULE 2 + MODULE 3
+    # STEP 3 — RUN MODULE 2 + MODULE 3
     # ==================================================================
 
     pipeline_output = run_actual_pipeline(
@@ -1684,7 +1278,7 @@ def main():
     )
 
     # ==================================================================
-    # STEP 8 — COMPARE RESULTS
+    # STEP 4 — COMPARE GOLD VS PIPELINE
     # ==================================================================
 
     comparison = compare_results(
@@ -1693,7 +1287,7 @@ def main():
     )
 
     # ==================================================================
-    # STEP 9 — DISPLAY COMPARISON
+    # STEP 5 — DISPLAY COMPARISON
     # ==================================================================
 
     print_comparison(
@@ -1701,15 +1295,7 @@ def main():
     )
 
     # ==================================================================
-    # STEP 10 — COLLECT ERROR ANALYSIS
-    # ==================================================================
-
-    collect_error_analysis(
-        comparison
-    )
-
-    # ==================================================================
-    # STEP 11 — CALCULATE METRICS
+    # STEP 6 — CALCULATE METRICS
     # ==================================================================
 
     metrics = calculate_metrics(
@@ -1717,7 +1303,7 @@ def main():
     )
 
     # ==================================================================
-    # STEP 12 — DISPLAY METRICS
+    # STEP 7 — DISPLAY METRICS
     # ==================================================================
 
     print_metrics(
@@ -1725,11 +1311,13 @@ def main():
     )
 
     # ==================================================================
-    # STEP 13 — SAVE RESULTS
+    # STEP 8 — SAVE RESULTS
     # ==================================================================
 
-    save_comparison_json(
-        comparison
+    save_results(
+        gold_input,
+        comparison,
+        metrics
     )
 
     save_comparison_csv(
@@ -1751,48 +1339,42 @@ def main():
     print("=" * 110)
 
     print()
-    print(
-        f"Results directory:"
-    )
-
+    print("Results directory:")
     print(
         f"  {OUTPUT_DIR}"
     )
 
     print()
+    print("Files created:")
+
     print(
-        "Files created:"
+        f"  1. {RESULT_JSON.name}"
     )
 
     print(
-        f"  1. {GOLD_JSON.name}"
+        f"  2. {COMPARISON_CSV.name}"
     )
 
     print(
-        f"  2. {COMPARISON_JSON.name}"
-    )
-
-    print(
-        f"  3. {COMPARISON_CSV.name}"
-    )
-
-    print(
-        f"  4. {METRICS_JSON.name}"
+        f"  3. {METRICS_JSON.name}"
     )
 
     print()
+    print("Methodological property:")
+
     print(
-        "Methodological property:"
+        "The gold labels were supplied as an existing "
+        "independent reference set."
     )
 
     print(
-        "The gold labels were created and saved BEFORE "
-        "Module 2 and Module 3 were executed."
+        "Experiment 2 does not create, modify, or select "
+        "the gold labels."
     )
 
     print(
-        "Therefore, the automated predictions could not "
-        "influence the gold annotations."
+        "The pipeline is evaluated against the supplied "
+        "gold standard exactly as provided."
     )
 
     print()

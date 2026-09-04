@@ -1,11 +1,41 @@
 {
-    "experiment": "Experiment 1 — Gold-set capability mapping accuracy",
+    "experiment": "Experiment 2 — Gold-set capability mapping accuracy",
     "ontology_source": "modules.module_3_capability_normalization.CAPABILITY_ONTOLOGY",
-    "sampling_method": "First 30 tools from researcher-selected JSON files",
-    "tool_count": 30,
+    "sampling_method": "First 15 tools from researcher-selected JSON files",
+    "tool_count": 50,
     "gold_labels": [
         {
             "annotation_id": 1,
+            "tool": "fetch",
+            "description": "Fetches a URL from the internet and retrieves external web content",
+            "source_file": "c1c2c3.json",
+            "source_index": 0,
+            "gold_capabilities": [
+                "C1"
+            ]
+        },
+        {
+            "annotation_id": 2,
+            "tool": "read_mail",
+            "description": "Reads messages from the user's mailbox",
+            "source_file": "c1c2c3.json",
+            "source_index": 1,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 3,
+            "tool": "send_mail",
+            "description": "Sends an email to an external recipient",
+            "source_file": "c1c2c3.json",
+            "source_index": 2,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 4,
             "tool": "echo",
             "description": "Echoes back the input string",
             "source_file": "everything_tools.json",
@@ -13,7 +43,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 2,
+            "annotation_id": 5,
             "tool": "get-annotated-message",
             "description": "Demonstrates how annotations can be used to provide metadata about content.",
             "source_file": "everything_tools.json",
@@ -21,7 +51,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 3,
+            "annotation_id": 6,
             "tool": "get-env",
             "description": "Returns environment variables for debugging MCP server configuration",
             "source_file": "everything_tools.json",
@@ -31,7 +61,7 @@
             ]
         },
         {
-            "annotation_id": 4,
+            "annotation_id": 7,
             "tool": "get-resource-links",
             "description": "Returns resource links that reference different types of resources",
             "source_file": "everything_tools.json",
@@ -39,7 +69,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 5,
+            "annotation_id": 8,
             "tool": "get-resource-reference",
             "description": "Returns a resource reference that can be used by MCP clients",
             "source_file": "everything_tools.json",
@@ -47,15 +77,17 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 6,
+            "annotation_id": 9,
             "tool": "get-roots-list",
             "description": "Lists the current MCP roots provided by the client",
             "source_file": "everything_tools.json",
             "source_index": 5,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
         },
         {
-            "annotation_id": 7,
+            "annotation_id": 10,
             "tool": "get-structured-content",
             "description": "Returns structured content along with an output schema",
             "source_file": "everything_tools.json",
@@ -63,7 +95,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 8,
+            "annotation_id": 11,
             "tool": "get-sum",
             "description": "Returns the sum of two numbers",
             "source_file": "everything_tools.json",
@@ -71,7 +103,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 9,
+            "annotation_id": 12,
             "tool": "get-tiny-image",
             "description": "Returns a tiny MCP logo image",
             "source_file": "everything_tools.json",
@@ -79,7 +111,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 10,
+            "annotation_id": 13,
             "tool": "gzip-file-as-resource",
             "description": "Compresses a file using gzip and returns a resource or resource link",
             "source_file": "everything_tools.json",
@@ -89,7 +121,7 @@
             ]
         },
         {
-            "annotation_id": 11,
+            "annotation_id": 14,
             "tool": "toggle-simulated-logging",
             "description": "Toggles simulated random-level logging on or off",
             "source_file": "everything_tools.json",
@@ -99,7 +131,7 @@
             ]
         },
         {
-            "annotation_id": 12,
+            "annotation_id": 15,
             "tool": "toggle-subscriber-updates",
             "description": "Toggles simulated resource subscription updates on or off",
             "source_file": "everything_tools.json",
@@ -109,7 +141,7 @@
             ]
         },
         {
-            "annotation_id": 13,
+            "annotation_id": 16,
             "tool": "trigger-long-running-operation",
             "description": "Demonstrates a long-running operation with progress updates",
             "source_file": "everything_tools.json",
@@ -117,7 +149,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 14,
+            "annotation_id": 17,
             "tool": "trigger-elicitation-request",
             "description": "Triggers a request from the server for user elicitation",
             "source_file": "everything_tools.json",
@@ -127,7 +159,7 @@
             ]
         },
         {
-            "annotation_id": 15,
+            "annotation_id": 18,
             "tool": "trigger-elicitation-request-async",
             "description": "Triggers an asynchronous elicitation request",
             "source_file": "everything_tools.json",
@@ -137,7 +169,7 @@
             ]
         },
         {
-            "annotation_id": 16,
+            "annotation_id": 19,
             "tool": "trigger-sampling-request",
             "description": "Triggers a request from the server for LLM sampling",
             "source_file": "everything_tools.json",
@@ -147,7 +179,7 @@
             ]
         },
         {
-            "annotation_id": 17,
+            "annotation_id": 20,
             "tool": "trigger-sampling-request-async",
             "description": "Triggers an asynchronous sampling request",
             "source_file": "everything_tools.json",
@@ -157,7 +189,7 @@
             ]
         },
         {
-            "annotation_id": 18,
+            "annotation_id": 21,
             "tool": "simulate-research-query",
             "description": "Simulates a deep research operation",
             "source_file": "everything_tools.json",
@@ -165,7 +197,7 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 19,
+            "annotation_id": 22,
             "tool": "trigger-url-elicitation",
             "description": "Triggers URL elicitation for a browser flow",
             "source_file": "everything_tools.json",
@@ -175,7 +207,7 @@
             ]
         },
         {
-            "annotation_id": 20,
+            "annotation_id": 23,
             "tool": "write_file",
             "description": "Create/overwrite a file",
             "source_file": "filesystem_tools.json",
@@ -185,7 +217,7 @@
             ]
         },
         {
-            "annotation_id": 21,
+            "annotation_id": 24,
             "tool": "edit_file",
             "description": "Replace exact text in a file",
             "source_file": "filesystem_tools.json",
@@ -195,7 +227,7 @@
             ]
         },
         {
-            "annotation_id": 22,
+            "annotation_id": 25,
             "tool": "create_directory",
             "description": "Create a directory",
             "source_file": "filesystem_tools.json",
@@ -205,31 +237,37 @@
             ]
         },
         {
-            "annotation_id": 23,
+            "annotation_id": 26,
             "tool": "list_directory",
             "description": "List directory contents",
             "source_file": "filesystem_tools.json",
             "source_index": 3,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
         },
         {
-            "annotation_id": 24,
+            "annotation_id": 27,
             "tool": "list_directory_with_sizes",
             "description": "List contents and sizes",
             "source_file": "filesystem_tools.json",
             "source_index": 4,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
         },
         {
-            "annotation_id": 25,
+            "annotation_id": 28,
             "tool": "directory_tree",
             "description": "Recursively show directory tree",
             "source_file": "filesystem_tools.json",
             "source_index": 5,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
         },
         {
-            "annotation_id": 26,
+            "annotation_id": 29,
             "tool": "move_file",
             "description": "Move/rename files or directories",
             "source_file": "filesystem_tools.json",
@@ -239,23 +277,27 @@
             ]
         },
         {
-            "annotation_id": 27,
+            "annotation_id": 30,
             "tool": "search_files",
             "description": "Search files/directories by pattern",
             "source_file": "filesystem_tools.json",
             "source_index": 7,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
         },
         {
-            "annotation_id": 28,
+            "annotation_id": 31,
             "tool": "get_file_info",
             "description": "Retrieve file/directory metadata",
             "source_file": "filesystem_tools.json",
             "source_index": 8,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
         },
         {
-            "annotation_id": 29,
+            "annotation_id": 32,
             "tool": "list_allowed_directories",
             "description": "List accessible directories",
             "source_file": "filesystem_tools.json",
@@ -263,12 +305,185 @@
             "gold_capabilities": []
         },
         {
-            "annotation_id": 30,
+            "annotation_id": 33,
             "tool": "git_status",
             "description": "Shows the working tree status",
             "source_file": "git_tools.json",
             "source_index": 0,
-            "gold_capabilities": []
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 34,
+            "tool": "git_diff_unstaged",
+            "description": "Shows changes in the working directory that are not yet staged",
+            "source_file": "git_tools.json",
+            "source_index": 1,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 35,
+            "tool": "git_diff_staged",
+            "description": "Shows changes that are staged for commit",
+            "source_file": "git_tools.json",
+            "source_index": 2,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 36,
+            "tool": "git_diff",
+            "description": "Shows differences between branches or commits",
+            "source_file": "git_tools.json",
+            "source_index": 3,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 37,
+            "tool": "git_commit",
+            "description": "Records changes to the repository",
+            "source_file": "git_tools.json",
+            "source_index": 4,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 38,
+            "tool": "git_add",
+            "description": "Adds file contents to the staging area",
+            "source_file": "git_tools.json",
+            "source_index": 5,
+            "gold_capabilities": [
+                "C2",
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 39,
+            "tool": "git_reset",
+            "description": "Unstages all staged changes",
+            "source_file": "git_tools.json",
+            "source_index": 6,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 40,
+            "tool": "git_log",
+            "description": "Shows the commit logs",
+            "source_file": "git_tools.json",
+            "source_index": 7,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 41,
+            "tool": "git_create_branch",
+            "description": "Creates a new branch from an optional base branch",
+            "source_file": "git_tools.json",
+            "source_index": 8,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 42,
+            "tool": "git_checkout",
+            "description": "Switches branches",
+            "source_file": "git_tools.json",
+            "source_index": 9,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 43,
+            "tool": "git_show",
+            "description": "Shows the contents of a commit",
+            "source_file": "git_tools.json",
+            "source_index": 10,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 44,
+            "tool": "git_branch",
+            "description": "List Git branches",
+            "source_file": "git_tools.json",
+            "source_index": 11,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 45,
+            "tool": "create_entities",
+            "description": "Create multiple new entities in the knowledge graph",
+            "source_file": "memory_tools.json",
+            "source_index": 0,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 46,
+            "tool": "create_relations",
+            "description": "Create multiple new relations between entities in the knowledge graph. Relations should be in active voice",
+            "source_file": "memory_tools.json",
+            "source_index": 1,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 47,
+            "tool": "add_observations",
+            "description": "Add new observations to existing entities in the knowledge graph",
+            "source_file": "memory_tools.json",
+            "source_index": 2,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 48,
+            "tool": "delete_entities",
+            "description": "Delete multiple entities and their associated relations from the knowledge graph",
+            "source_file": "memory_tools.json",
+            "source_index": 3,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 49,
+            "tool": "delete_observations",
+            "description": "Delete specific observations from entities in the knowledge graph",
+            "source_file": "memory_tools.json",
+            "source_index": 4,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 50,
+            "tool": "delete_relations",
+            "description": "Delete multiple relations from the knowledge graph",
+            "source_file": "memory_tools.json",
+            "source_index": 5,
+            "gold_capabilities": [
+                "C4"
+            ]
         }
     ]
 }

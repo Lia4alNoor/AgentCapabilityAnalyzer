@@ -1,0 +1,70 @@
+{
+    "C1": {
+        "capability": "C1",
+        "canonical": "External Data Ingestion",
+        "true_positive": 1,
+        "false_positive": 7,
+        "false_negative": 0,
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222222222222222
+    },
+    "C2": {
+        "capability": "C2",
+        "canonical": "Sensitive Data Access",
+        "true_positive": 13,
+        "false_positive": 1,
+        "false_negative": 3,
+        "precision": 0.9285714285714286,
+        "recall": 0.8125,
+        "f1": 0.8666666666666666
+    },
+    "C3": {
+        "capability": "C3",
+        "canonical": "External Communication",
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 5,
+        "precision": 1.0,
+        "recall": 0.16666666666666666,
+        "f1": 0.2857142857142857
+    },
+    "C4": {
+        "capability": "C4",
+        "canonical": "State Modification",
+        "true_positive": 18,
+        "false_positive": 7,
+        "false_negative": 0,
+        "precision": 0.72,
+        "recall": 1.0,
+        "f1": 0.8372093023255813
+    },
+    "C5": {
+        "capability": "C5",
+        "canonical": "System Execution",
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+    },
+    "C6": {
+        "capability": "C6",
+        "canonical": "Physical Actuation",
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+    },
+    "_overall": {
+        "tool_count": 50,
+        "exact_set_correct": 38,
+        "exact_set_accuracy": 0.76,
+        "micro_precision": 0.6875,
+        "micro_recall": 0.8048780487804879,
+        "micro_f1": 0.7415730337078651
+    }
+}

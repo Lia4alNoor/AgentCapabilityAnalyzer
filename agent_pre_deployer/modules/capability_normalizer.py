@@ -66,8 +66,11 @@ RULES = [
     ("C1", r"\bfetch(es|ing)?\b", "Fetches content from an external source into the agent context.", "High"),
     ("C1", r"\b(download|crawl|scrape|browse)\b", "Retrieves external/web content into the agent context.", "High"),
     ("C1", r"\b(url|web|http[s]?|internet)\b", "References external web/URL content that can enter the agent.", "Medium"),
-    ("C1", r"\b(research|web)[ _-]?quer(y|ies)\b", "Performs an external query whose results enter the agent context.", "Medium"),
-    ("C1", r"\b(sampling[ _-]?request|elicitation)\b", "Solicits externally influenced content into the agent context.", "Low"),
+    #("C1", r"\b(research|web)[ _-]?quer(y|ies)\b", "Performs an external query whose results enter the agent context.", "Medium"),
+    #("C1", r"\b(sampling[ _-]?request|elicitation)\b", "Solicits externally influenced content into the agent context.", "Low"),
+    ("C1", r"\b(search|query)\b.*\b(web|internet|external source|remote source)\b",
+     "Retrieves information from an external source into the agent context.",
+     "Medium"),
     ("C1", r"\bclone\b", "Clones a remote repository, ingesting external content.", "Medium"),
 
     # --- C2 Sensitive Data Access ----------------------------------------
@@ -89,6 +92,9 @@ RULES = [
     ("C3", r"\b(publish|post|upload|transmit|share|submit)\b", "Publishes/uploads data to an external service.", "High"),
     ("C3", r"\bcreate[ _-]?issue\b", "Creates an issue on an external tracker (data leaves the system).", "High"),
     ("C3", r"\bpush(es|ing)?\b", "Pushes data/commits to a remote endpoint.", "High"),
+    ("C3", r"\b(sampling[ _-]?request|elicitation)\b",
+     "Requests interaction/content from an external user or model.",
+     "High"),
     ("C3", r"\b(notify|notification|webhook|broadcast)\b", "Emits notifications to external listeners.", "Medium"),
 
     # --- C4 State Modification --------------------------------------------
@@ -118,7 +124,7 @@ _COMPILED_RULES = [
 
 # Mutating verbs used by the readOnlyHint=false fallback
 _MUTATING_VERBS = re.compile(
-    r"\b(toggle|trigger|start|stop|restart|reset|switch|activate|deactivate)\b",
+    r"\b(toggle|start|stop|restart|reset|switch|activate|deactivate)\b",
     re.IGNORECASE,
 )
 
@@ -198,19 +204,6 @@ def get_normalization_matches(tool):
                 "destructiveHint=true confirms C4 -> confidence forced to High"
             )
 
-    # 4. Hint-only fallbacks (Low confidence, manual-review queue)
-    if open_world is True and "C1" not in best and "C3" not in best:
-        best["C1"] = {
-            "capability_id": "C1",
-            "canonical": CANONICAL_CONCEPTS["C1"],
-            "matched_expression": "openWorldHint",
-            "confidence_level": "Low",
-            "reason": (
-                "Hint-only fallback: openWorldHint=true with no C1/C3 keyword match — "
-                "tool talks to something external but direction is unclear; needs manual review."
-            ),
-            "hint_adjustments": [],
-        }
     if read_only is False and "C4" not in best and _MUTATING_VERBS.search(text):
         verb = _MUTATING_VERBS.search(text).group(0).lower()
         best["C4"] = {

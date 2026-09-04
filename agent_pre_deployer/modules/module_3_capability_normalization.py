@@ -122,7 +122,17 @@ def normalize_tool_complete(tool):
 
     normalized = {
         'primary_capability': norm_result.get('primary_capability'),
-        'all_capabilities': norm_result.get('all_capabilities'),
+        # FIX: norm_result.get('all_capabilities') with no default
+        # returns None whenever the normalizer omits the key (the
+        # natural outcome for a tool that matched no canonical
+        # capability, i.e. exactly the "UNMAPPED" case). That None
+        # was then stored under a key that IS present in this dict,
+        # so the ", []" default on the read side in
+        # map_tool_to_ontology() never triggered (.get(key, default)
+        # only falls back when the key is absent, not when it's
+        # None) - and `for cap_id in None` raised TypeError. Coercing
+        # to [] here means the key is never None to begin with.
+        'all_capabilities': norm_result.get('all_capabilities') or [],
         'matched_expressions': [m['matched_expression'] for m in norm_result.get('normalized_matches', [])],
         'normalized_concepts': [m['canonical'] for m in norm_result.get('normalized_matches', [])],
         'confidence': norm_result.get('confidence_score', 0.0),
@@ -146,7 +156,14 @@ def map_tool_to_ontology(tool):
 
     normalized = tool.get('normalized', {})
     primary_capability = normalized.get('primary_capability')
-    all_capabilities = normalized.get('all_capabilities', [])
+    # FIX: belt-and-suspenders alongside the fix in
+    # normalize_tool_complete() above - if map_tool_to_ontology()
+    # is ever called on a tool dict that didn't come from
+    # normalize_tool_complete() (or that logic changes upstream
+    # later), this still guards against iterating over None.
+    # ".get(key, [])" doesn't catch a key present with value None;
+    # "or []" does.
+    all_capabilities = normalized.get('all_capabilities') or []
     matches = normalized.get('matches', [])
 
     mapping = {
