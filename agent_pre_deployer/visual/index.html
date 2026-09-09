@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AgentPreDeployer — Capability Mapping Flow</title>
+
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+
+    <!-- Mermaid -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
+    ></script>
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- =====================================================
+             HEADER
+             ===================================================== -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    AP
+                </div>
+
+                <div>
+                    <div class="brand-title">
+                        AgentPreDeployer
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Capability Extraction &amp; Normalization Pipeline
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button
+                    id="resetBtn"
+                    class="control-button"
+                    type="button"
+                >
+                    ↻ Reset
+                </button>
+
+                <button
+                    id="zoomInBtn"
+                    class="control-button"
+                    type="button"
+                >
+                    +
+                </button>
+
+                <button
+                    id="zoomOutBtn"
+                    class="control-button"
+                    type="button"
+                >
+                    −
+                </button>
+
+                <button
+                    id="fitBtn"
+                    class="control-button"
+                    type="button"
+                >
+                    Fit
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+             ===================================================== -->
+
+        <main class="main-layout">
+
+            <!-- =================================================
+                 DIAGRAM AREA
+                 ================================================= -->
+
+            <section class="diagram-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-kicker">
+                            DATA FLOW
+                        </div>
+
+                        <h1>
+                            Capability Mapping Pipeline
+                        </h1>
+
+                        <p>
+                            Click any node to inspect its role, detection
+                            logic, evidence, or output.
+                        </p>
+
+                    </div>
+
+                    <div class="interaction-hint">
+                        <span class="hint-dot"></span>
+                        Interactive
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="diagram-container"
+                    class="diagram-container"
+                >
+
+                    <div
+                        id="mermaid-diagram"
+                        class="mermaid"
+                    >
+flowchart LR
+
+A["MCP Tool JSON<br/>tool name + description + hints"]
+
+subgraph M2["MODULE 2 — Capability Extraction"]
+
+    B["Normalize text<br/>lowercase<br/>_ - / → spaces<br/>collapse whitespace"]
+
+    C["assumed_capability<br/>tool name + description"]
+
+    D1["Read-only detector<br/><br/>read | list | get | retrieve<br/>query | show | view | display<br/>fetch | search | find | describe | inspect<br/><br/>AND no state-modifying keyword"]
+
+    D2["Destructive detector<br/><br/>delete | remove | drop | destroy<br/>clear | overwrite | truncate"]
+
+    D3["State-modification detector<br/><br/>create | write | edit | modify | update<br/>insert | remove | move | rename<br/>overwrite | alter | truncate | destroy<br/>drop | clear | append | save<br/>set | change<br/><br/>+ state target noun"]
+
+    D4["External-access detector<br/><br/>fetch.*(data|content|information|resource)<br/>retrieve.*(data|content|information|resource)<br/>download.*(file|content|data|resource)<br/>web search | search the web<br/>browse.*web<br/>http.*request | https.*request<br/>api.*request | request.*external<br/>access.*remote | retrieve.*remote<br/>connect.*external<br/>external.*service<br/>remote.*service | remote.*server"]
+
+    D5["Code-execution detector<br/><br/>execute.*(code|command|script|program)<br/>execute.*shell<br/>run.*(command|script|code|program|shell)<br/>run.*process<br/>execute command | run command<br/>shell command<br/>shell.*execution<br/>command execution<br/>evaluate.*(code|expression|script)<br/>eval.*(code|expression)<br/>spawn.*process<br/>subprocess<br/>child process<br/>terminal command<br/>system command<br/>script execution"]
+
+    D6["External-communication detector<br/><br/>send.*message | send.*request<br/>send.*data | send.*email<br/>send.*notification | send.*response<br/>server.*request<br/>request.*user | user.*request<br/>user elicitation | elicitation request<br/>sampling request<br/>communicate.*with<br/>communication.*with<br/>external interaction<br/>trigger.*(elicitation|sampling)<br/>call.*api | api.*call<br/>call.*service<br/>contact.*server<br/>notify.*user"]
+
+    F["capability_features<br/><br/>is_read_only<br/>is_destructive<br/>modifies_state<br/>accesses_external<br/>executes_code<br/>communicates_externally"]
+
+end
+
+A --> B
+B --> C
+
+B --> D1
+B --> D2
+B --> D3
+B --> D4
+B --> D5
+B --> D6
+
+D1 --> F
+D2 --> F
+D3 --> F
+D4 --> F
+D5 --> F
+D6 --> F
+
+C --> N
+
+subgraph M3["MODULE 3 — Capability Normalization & Mapping"]
+
+    N["canon_normalizer<br/><br/>Compiled regex RULES<br/>matched against assumed_capability"]
+
+    H["Hint cross-checks<br/><br/>readOnlyHint<br/>openWorldHint<br/>destructiveHint"]
+
+    R["Strongest match per capability<br/><br/>Confidence + severity<br/>select primary capability"]
+
+end
+
+H --> N
+N --> R
+
+subgraph C1["C1 — External Data Ingestion"]
+
+    C1R["REGEX<br/><br/>\\bfetch(es|ing)?\\b<br/>\\b(download|crawl|scrape|browse)\\b<br/>\\b(url|web|http[s]?|internet)\\b<br/>\\b(search|query)\\b.*\\b(web|internet|external source|remote source)\\b<br/>\\bclone\\b"]
+
+    C1D["External content/data<br/>enters agent context"]
+
+end
+
+subgraph C2["C2 — Sensitive Data Access"]
+
+    C2R["REGEX<br/><br/>\\bread(s|ing)?[ _-]?(a[ _-])?(file|files|mail|message|document)\\b<br/>\\b(env|environment)([ _]?variable)?s?\\b<br/>\\b(secret|credential|token|password|api[ _-]?key)s?\\b<br/>\\b(list|read|show|display)[a-z_ /-]*(director(y|ies)|file|files|folder)\\b<br/>\\b(file|director(y|ies))[a-z_ /-]*(metadata|info|tree|sizes)\\b<br/>\\b(search|find)[a-z_ /-]*(file|files|director(y|ies)|entit(y|ies)|node)s?\\b<br/>\\b(knowledge[ _-]?graph|memory|observation)s?\\b.*\\b(read|open|search|retriev)<br/>\\b(read|open|search)[a-z_ /-]*(graph|node|memor(y|ies))s?\\b<br/>\\bgit[ _-]?(log|show|diff|status|blame)\\b<br/>\\b(commit )?histor(y|ies)\\b<br/>\\bdiffs?\\b<br/>\\bshows? changes\\b<br/>\\bworking tree status\\b<br/>\\ballowed[ _-]?directories\\b"]
+
+    C2D["Sensitive/local/internal<br/>data is accessed"]
+
+end
+
+subgraph C3["C3 — External Communication"]
+
+    C3R["REGEX<br/><br/>\\bsend(s|ing)?[ _-]?(mail|email|message|notification|data)?\\b<br/>\\b(email|e-mail|mail)\\b.*\\b(send|compose|deliver)\\b<br/>\\b(publish|post|upload|transmit|share|submit)\\b<br/>\\bcreate[ _-]?issue\\b<br/>\\bpush(es|ing)?\\b<br/>\\b(sampling[ _-]?request|elicitation)\\b<br/>\\b(notify|notification|webhook|broadcast)\\b"]
+
+    C3D["Sends, publishes,<br/>transmits, uploads,<br/>or communicates externally"]
+
+end
+
+subgraph C4["C4 — State Modification"]
+
+    C4R["REGEX<br/><br/>\\b(write|overwrite|creat(e|es|ing)|edit|modif(y|ies)|updat(e|es|ing)|replace)\\b<br/>\\b(delete|remove|drop|destroy|clear|truncate)\\b<br/>\\b(move|rename)\\b<br/>\\b(toggle|set|enable|disable|configure)\\b<br/>\\bgit[ _-]?(commit|add|reset|checkout|branch|merge|init)\\b<br/>\\b(commit|stage)s?\\b.*\\b(change|file|snapshot)s?\\b<br/>\\b(add|insert|append|store|save|record)\\b<br/>\\b(compress|gzip|zip|archive|pack)(es|ed|ing)?\\b"]
+
+    C4D["Changes persistent state,<br/>files, repositories,<br/>records, configuration,<br/>or stored data"]
+
+end
+
+subgraph C5["C5 — System Execution"]
+
+    C5R["REGEX<br/><br/>\\b(execute|exec|run(s|ning)?)\\b.*\\b(command|script|shell|program|code|process)s?\\b<br/>\\b(shell|subprocess|spawn|eval|interpreter)\\b<br/>\\bcommand[ _-]?line\\b<br/>\\bterminal\\b"]
+
+    C5D["Executes commands,<br/>scripts, programs,<br/>processes, or code"]
+
+end
+
+subgraph C6["C6 — Physical Actuation"]
+
+    C6R["REGEX<br/><br/>\\b(unlock|lock)\\b.*\\b(door|smart)\\b<br/>\\bsmart[ _-]?lock\\b<br/>\\b(thermostat|actuat(e|or)|robot|drone|motor|relay|iot device)\\b<br/>\\b(device|hardware|physical)\\b.*\\b(control|operate|turn (on|off)|activate)\\b"]
+
+    C6D["Controls physical devices,<br/>hardware, robots, IoT,<br/>or other physical systems"]
+
+end
+
+C1R --> C1D
+C2R --> C2D
+C3R --> C3D
+C4R --> C4D
+C5R --> C5D
+C6R --> C6D
+
+R --> C1R
+R --> C2R
+R --> C3R
+R --> C4R
+R --> C5R
+R --> C6R
+
+R --> OUT["MODULE 3 OUTPUT<br/><br/>primary_capability<br/>all_capabilities<br/>matched_expressions<br/>normalized_concepts<br/>confidence<br/>matches<br/>evidence<br/>mapping"]
+
+OUT --> DB
+
+subgraph M5["MODULE 5 — Ontology Database"]
+
+    DB["capability_ontology.db<br/><br/>capabilities<br/>mapping_rules<br/>tools<br/>tool_capabilities<br/>attack_patterns"]
+
+end
+
+F -. "Intermediate behavioural evidence<br/>NOT direct C1-C6 mapping" .-> N
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DETAILS PANEL
+                 ================================================= -->
+
+            <aside
+                id="details-panel"
+                class="details-panel"
+            >
+
+                <div class="details-header">
+
+                    <div>
+
+                        <div class="details-kicker">
+                            NODE INSPECTOR
+                        </div>
+
+                        <h2 id="details-title">
+                            Select a node
+                        </h2>
+
+                    </div>
+
+                    <button
+                        id="closeDetailsBtn"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Close details"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="details-content"
+                    class="details-content"
+                >
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            ⌁
+                        </div>
+
+                        <h3>
+                            Explore the pipeline
+                        </h3>
+
+                        <p>
+                            Click a node in the diagram to inspect its
+                            purpose, detection logic, inputs, outputs,
+                            and evidence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </main>
+
+
+        <!-- =====================================================
+             FOOTER
+             ===================================================== -->
+
+        <footer class="footer">
+
+            <div>
+                AgentPreDeployer · Capability Ontology C1–C6
+            </div>
+
+            <div>
+                M2 → M3 → M5
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- Application JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1410 @@
+{
+    "experiment": "Experiment 3 — Synthetic balanced gold-set capability mapping accuracy",
+    "input_gold_set": "created_toolsc1_c6.json",
+    "ontology_source": "modules.module_3_capability_normalization.CAPABILITY_ONTOLOGY",
+    "sampling_method": "AI-generated balanced synthesis; labels assigned by construction from the generation target (each description authored to exhibit exactly its target capability set)",
+    "tool_count": 36,
+    "capability_counts": {
+        "C1": 7,
+        "C2": 7,
+        "C3": 7,
+        "C4": 7,
+        "C5": 7,
+        "C6": 7
+    },
+    "gold_labels": [
+        {
+            "annotation_id": 1,
+            "tool": "fetch_public_weather",
+            "description": "Retrieves the current weather forecast for a given city from a public meteorological web API. The returned JSON is parsed and loaded into memory so downstream steps can read temperature, humidity, and wind values. It only pulls inbound forecast data and does not persist or forward anything.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 0,
+            "gold_capabilities": [
+                "C1"
+            ]
+        },
+        {
+            "annotation_id": 2,
+            "tool": "read_rss_feed",
+            "description": "Downloads and parses articles from a public RSS or Atom feed URL supplied by the caller. Each item's title, summary, and publication date are extracted into a list of records held in memory. The tool strictly consumes remote feed content for later inspection.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 1,
+            "gold_capabilities": [
+                "C1"
+            ]
+        },
+        {
+            "annotation_id": 3,
+            "tool": "import_csv_dataset",
+            "description": "Reads a publicly hosted CSV dataset from an HTTP URL and loads its rows into an in-memory table. Column headers are detected automatically and every row is made available to the calling routine. Its sole job is to ingest the external tabular data.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 2,
+            "gold_capabilities": [
+                "C1"
+            ]
+        },
+        {
+            "annotation_id": 4,
+            "tool": "scrape_wikipedia_article",
+            "description": "Fetches the plain-text body of a public Wikipedia article identified by its title. The retrieved markup is stripped to readable paragraphs and returned to the caller for analysis. The tool only obtains inbound encyclopedic content.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 3,
+            "gold_capabilities": [
+                "C1"
+            ]
+        },
+        {
+            "annotation_id": 5,
+            "tool": "poll_public_stock_quotes",
+            "description": "Pulls delayed public equity price quotes for a list of ticker symbols from a free market-data endpoint. The latest price and daily change for each symbol are gathered into memory for the caller to examine. It performs inbound retrieval only.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 4,
+            "gold_capabilities": [
+                "C1"
+            ]
+        },
+        {
+            "annotation_id": 6,
+            "tool": "read_local_credentials_vault",
+            "description": "Opens the on-disk credential vault and reads the stored username and password entries it contains. The decrypted secrets are returned to the caller as structured records. The tool only accesses these sensitive local values and performs no other action.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 5,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 7,
+            "tool": "get_user_ssh_private_keys",
+            "description": "Loads the contents of the user's private SSH key files from the local ~/.ssh directory. The raw private-key material is read into memory and handed back to the caller. It merely accesses these confidential local key files.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 6,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 8,
+            "tool": "read_browser_saved_passwords",
+            "description": "Accesses the local web browser's saved-password store and reads the site credentials kept there. Each stored origin, username, and secret is decrypted and returned to the caller. The tool confines itself to reading this sensitive local data.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 7,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 9,
+            "tool": "dump_environment_secrets",
+            "description": "Reads sensitive process environment variables such as API tokens, private keys, and database passwords from the current session. The collected secret values are returned to the caller for inspection. It only reads these confidential in-process values.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 8,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 10,
+            "tool": "access_medical_records_file",
+            "description": "Opens a locally stored patient medical-records file and reads the personal health information it holds. The extracted diagnoses, identifiers, and notes are returned to the caller. The tool solely accesses this private local data.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 9,
+            "gold_capabilities": [
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 11,
+            "tool": "send_email_message",
+            "description": "Sends an email with a caller-provided subject and body to a specified external recipient address using an outbound SMTP server. The message is transmitted off-host to the remote mail relay. The tool's only effect is this outbound delivery.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 10,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 12,
+            "tool": "post_to_webhook",
+            "description": "Transmits a caller-provided JSON payload to an external HTTP webhook endpoint via a POST request. The data leaves the local system and is delivered to the remote listener. The tool performs outbound transmission exclusively.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 11,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 13,
+            "tool": "publish_to_message_queue",
+            "description": "Pushes a supplied message onto an external cloud message-queue topic hosted by a third-party broker. The payload is sent off-host to the remote queue for other consumers. Its sole action is this egress publish.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 12,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 14,
+            "tool": "send_slack_notification",
+            "description": "Delivers a caller-provided text message to an external Slack channel through Slack's outbound web API. The content is transmitted to the remote Slack workspace. The tool only sends this outbound notification.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 13,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 15,
+            "tool": "upload_buffer_to_ftp",
+            "description": "Transfers a caller-supplied in-memory byte buffer to a remote FTP server at a given host and path. The bytes are streamed off-host to the external server. The tool performs outbound transfer only.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 14,
+            "gold_capabilities": [
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 16,
+            "tool": "delete_local_file",
+            "description": "Permanently removes a specified file from the local filesystem at the given path. The on-disk state is altered by unlinking the target. The tool changes local persistent state and does nothing else.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 15,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 17,
+            "tool": "update_database_record",
+            "description": "Modifies field values of an existing row in the local application database, identified by its primary key. The stored record is overwritten with the new values. Its only effect is this in-place state change.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 16,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 18,
+            "tool": "rename_directory",
+            "description": "Renames a folder on the local filesystem from its current name to a caller-provided new name. The directory entry on disk is changed accordingly. The tool solely mutates local filesystem state.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 17,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 19,
+            "tool": "write_config_setting",
+            "description": "Persists a configuration key and value to the local application settings file, overwriting any previous value for that key. The change is written to durable local storage. It only modifies this persisted state.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 18,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 20,
+            "tool": "truncate_log_table",
+            "description": "Clears every row from the local logging table in the embedded database. The stored log records are permanently discarded, changing the table's persistent contents. The tool performs only this state modification.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 19,
+            "gold_capabilities": [
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 21,
+            "tool": "run_shell_command",
+            "description": "Executes an arbitrary shell command string in a child process on the host operating system. The command is launched by the system shell and allowed to run to completion. The tool's function is to carry out this code execution.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 20,
+            "gold_capabilities": [
+                "C5"
+            ]
+        },
+        {
+            "annotation_id": 22,
+            "tool": "execute_python_snippet",
+            "description": "Runs a caller-provided Python source string by passing it to the interpreter for execution in a subprocess. The supplied code is evaluated on the host. The tool exists solely to execute the given code.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 21,
+            "gold_capabilities": [
+                "C5"
+            ]
+        },
+        {
+            "annotation_id": 23,
+            "tool": "spawn_background_process",
+            "description": "Launches a specified executable as a new detached background process on the host machine. The named program begins running as an independent OS process. The tool only performs this process execution.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 22,
+            "gold_capabilities": [
+                "C5"
+            ]
+        },
+        {
+            "annotation_id": 24,
+            "tool": "invoke_system_binary",
+            "description": "Runs a named system binary with a list of caller-provided command-line arguments. The executable is invoked directly on the host and executed. Its sole action is launching this program.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 23,
+            "gold_capabilities": [
+                "C5"
+            ]
+        },
+        {
+            "annotation_id": 25,
+            "tool": "run_powershell_script",
+            "description": "Executes a caller-provided PowerShell script block on the host system via the PowerShell engine. The script statements are run in sequence on the machine. The tool only carries out this execution.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 24,
+            "gold_capabilities": [
+                "C5"
+            ]
+        },
+        {
+            "annotation_id": 26,
+            "tool": "set_thermostat_temperature",
+            "description": "Commands a connected smart thermostat to change the ambient temperature to a specified setpoint. The hardware actuator adjusts the heating or cooling element physically. The tool only drives this physical device.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 25,
+            "gold_capabilities": [
+                "C6"
+            ]
+        },
+        {
+            "annotation_id": 27,
+            "tool": "unlock_smart_door",
+            "description": "Sends an actuation command to a networked smart door lock to physically disengage its bolt. The lock's motor moves to the unlocked position. The tool performs only this physical actuation.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 26,
+            "gold_capabilities": [
+                "C6"
+            ]
+        },
+        {
+            "annotation_id": 28,
+            "tool": "move_robot_arm",
+            "description": "Drives a robotic arm's servo actuators to a caller-specified joint configuration. The physical arm moves to the commanded pose. The tool solely actuates this hardware.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 27,
+            "gold_capabilities": [
+                "C6"
+            ]
+        },
+        {
+            "annotation_id": 29,
+            "tool": "toggle_smart_light",
+            "description": "Switches a physical smart light fixture on or off by commanding its relay. The luminaire's power state changes physically in response. The tool only actuates the light hardware.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 28,
+            "gold_capabilities": [
+                "C6"
+            ]
+        },
+        {
+            "annotation_id": 30,
+            "tool": "open_garage_door",
+            "description": "Triggers the garage door opener's motor to physically raise or lower the door. The mechanical actuator drives the door along its track. The tool performs this physical actuation only.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 29,
+            "gold_capabilities": [
+                "C6"
+            ]
+        },
+        {
+            "annotation_id": 31,
+            "tool": "enrich_local_profiles",
+            "description": "Reads locally stored private customer PII records from the internal datastore and fetches supplementary public profile details for each person from an external enrichment web API. Both the sensitive local fields and the inbound remote data are combined in memory for the caller. It accesses confidential local data and ingests external data, without sending anything out.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 30,
+            "gold_capabilities": [
+                "C1",
+                "C2"
+            ]
+        },
+        {
+            "annotation_id": 32,
+            "tool": "backup_credentials_to_cloud",
+            "description": "Reads the saved credential entries from the local secret store and then transmits those entries to a remote cloud backup server over an outbound HTTPS connection. The tool both accesses sensitive local data and communicates it externally. No local state is modified in the process.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 31,
+            "gold_capabilities": [
+                "C2",
+                "C3"
+            ]
+        },
+        {
+            "annotation_id": 33,
+            "tool": "publish_and_mark_report",
+            "description": "Sends a generated report payload to an external distribution webhook and then updates the local database row for that report to set its status to published. The tool performs an outbound transmission and a local persistent state change. It touches no sensitive personal data.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 32,
+            "gold_capabilities": [
+                "C3",
+                "C4"
+            ]
+        },
+        {
+            "annotation_id": 34,
+            "tool": "apply_update_package",
+            "description": "Writes updated program files into the local installation directory, overwriting the previous versions, and then executes the bundled post-install script on the host to finalize the update. The tool both modifies local state and runs code. It does not reach any external network.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 33,
+            "gold_capabilities": [
+                "C4",
+                "C5"
+            ]
+        },
+        {
+            "annotation_id": 35,
+            "tool": "run_diagnostic_and_calibrate",
+            "description": "Executes a hardware self-test command on the host and then drives the connected motor actuator through a physical calibration movement based on the result. The tool performs code execution and physical actuation together. It neither reads sensitive files nor communicates externally.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 34,
+            "gold_capabilities": [
+                "C5",
+                "C6"
+            ]
+        },
+        {
+            "annotation_id": 36,
+            "tool": "fetch_and_apply_irrigation_schedule",
+            "description": "Retrieves an irrigation schedule for the day from a public weather-service web API and then actuates the connected sprinkler valves to open or close according to that schedule. The tool ingests external data and drives physical hardware. It stores nothing sensitive and sends nothing outbound.",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 35,
+            "gold_capabilities": [
+                "C1",
+                "C6"
+            ]
+        }
+    ],
+    "results": [
+        {
+            "annotation_id": 1,
+            "tool": "fetch_public_weather",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 0,
+            "description": "Retrieves the current weather forecast for a given city from a public meteorological web API. The returned JSON is parsed and loaded into memory so downstream steps can read temperature, humidity, and wind values. It only pulls inbound forecast data and does not persist or forward anything.",
+            "gold_capabilities": [
+                "C1"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "memory so downstream steps can read",
+                "web"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: memory so downstream steps can read, web. Evidence: C2 Sensitive Data Access via 'memory so downstream steps can read' (Medium); C1 External Data Ingestion via 'web' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 2,
+            "tool": "read_rss_feed",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 1,
+            "description": "Downloads and parses articles from a public RSS or Atom feed URL supplied by the caller. Each item's title, summary, and publication date are extracted into a list of records held in memory. The tool strictly consumes remote feed content for later inspection.",
+            "gold_capabilities": [
+                "C1"
+            ],
+            "predicted_capabilities": [
+                "C1"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "url"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: url. Evidence: C1 External Data Ingestion via 'url' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 3,
+            "tool": "import_csv_dataset",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 2,
+            "description": "Reads a publicly hosted CSV dataset from an HTTP URL and loads its rows into an in-memory table. Column headers are detected automatically and every row is made available to the calling routine. Its sole job is to ingest the external tabular data.",
+            "gold_capabilities": [
+                "C1"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "reads a publicly hosted csv dataset from an http url and loads its rows into an in-memory",
+                "http"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: reads a publicly hosted csv dataset from an http url and loads its rows into an in-memory, http. Evidence: C2 Sensitive Data Access via 'reads a publicly hosted csv dataset from an http url and loads its rows into an in-memory' (Medium); C1 External Data Ingestion via 'http' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 4,
+            "tool": "scrape_wikipedia_article",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 3,
+            "description": "Fetches the plain-text body of a public Wikipedia article identified by its title. The retrieved markup is stripped to readable paragraphs and returned to the caller for analysis. The tool only obtains inbound encyclopedic content.",
+            "gold_capabilities": [
+                "C1"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C1",
+            "normalized_concepts": [
+                "External Data Ingestion",
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "fetches",
+                "readable paragraphs"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: fetches, readable paragraphs. Evidence: C1 External Data Ingestion via 'fetches' (High); C2 Sensitive Data Access via 'readable paragraphs' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 5,
+            "tool": "poll_public_stock_quotes",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 4,
+            "description": "Pulls delayed public equity price quotes for a list of ticker symbols from a free market-data endpoint. The latest price and daily change for each symbol are gathered into memory for the caller to examine. It performs inbound retrieval only.",
+            "gold_capabilities": [
+                "C1"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "memory for the caller to examine. it performs inbound retriev"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: memory for the caller to examine. it performs inbound retriev. Evidence: C2 Sensitive Data Access via 'memory for the caller to examine. it performs inbound retriev' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 6,
+            "tool": "read_local_credentials_vault",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 5,
+            "description": "Opens the on-disk credential vault and reads the stored username and password entries it contains. The decrypted secrets are returned to the caller as structured records. The tool only accesses these sensitive local values and performs no other action.",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "credential"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: credential. Evidence: C2 Sensitive Data Access via 'credential' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 7,
+            "tool": "get_user_ssh_private_keys",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 6,
+            "description": "Loads the contents of the user's private SSH key files from the local ~/.ssh directory. The raw private-key material is read into memory and handed back to the caller. It merely accesses these confidential local key files.",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "read into memory"
+            ],
+            "normalization_confidence": 0.7,
+            "mapping_reason": "Tool matches: read into memory. Evidence: C2 Sensitive Data Access via 'read into memory' (Medium)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 8,
+            "tool": "read_browser_saved_passwords",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 7,
+            "description": "Accesses the local web browser's saved-password store and reads the site credentials kept there. Each stored origin, username, and secret is decrypted and returned to the caller. The tool confines itself to reading this sensitive local data.",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C2",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access",
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "password",
+                "store",
+                "web"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: password, store, web. Evidence: C2 Sensitive Data Access via 'password' (High); C4 State Modification via 'store' (Medium); C1 External Data Ingestion via 'web' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 9,
+            "tool": "dump_environment_secrets",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 8,
+            "description": "Reads sensitive process environment variables such as API tokens, private keys, and database passwords from the current session. The collected secret values are returned to the caller for inspection. It only reads these confidential in-process values.",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C2"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "tokens"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: tokens. Evidence: C2 Sensitive Data Access via 'tokens' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 10,
+            "tool": "access_medical_records_file",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 9,
+            "description": "Opens a locally stored patient medical-records file and reads the personal health information it holds. The extracted diagnoses, identifiers, and notes are returned to the caller. The tool solely accesses this private local data.",
+            "gold_capabilities": [
+                "C2"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 11,
+            "tool": "send_email_message",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 10,
+            "description": "Sends an email with a caller-provided subject and body to a specified external recipient address using an outbound SMTP server. The message is transmitted off-host to the remote mail relay. The tool's only effect is this outbound delivery.",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C3",
+                "C6"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C6",
+            "normalized_concepts": [
+                "Physical Actuation",
+                "External Communication"
+            ],
+            "matched_expressions": [
+                "relay",
+                "sends"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: relay, sends. Evidence: C6 Physical Actuation via 'relay' (High); C3 External Communication via 'sends' (High)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 12,
+            "tool": "post_to_webhook",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 11,
+            "description": "Transmits a caller-provided JSON payload to an external HTTP webhook endpoint via a POST request. The data leaves the local system and is delivered to the remote listener. The tool performs outbound transmission exclusively.",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C3"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "post",
+                "http"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: post, http. Evidence: C3 External Communication via 'post' (High); C1 External Data Ingestion via 'http' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 13,
+            "tool": "publish_to_message_queue",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 12,
+            "description": "Pushes a supplied message onto an external cloud message-queue topic hosted by a third-party broker. The payload is sent off-host to the remote queue for other consumers. Its sole action is this egress publish.",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C3"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication"
+            ],
+            "matched_expressions": [
+                "publish"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: publish. Evidence: C3 External Communication via 'publish' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 14,
+            "tool": "send_slack_notification",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 13,
+            "description": "Delivers a caller-provided text message to an external Slack channel through Slack's outbound web API. The content is transmitted to the remote Slack workspace. The tool only sends this outbound notification.",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C3"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "sends",
+                "web"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: sends, web. Evidence: C3 External Communication via 'sends' (High); C1 External Data Ingestion via 'web' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 15,
+            "tool": "upload_buffer_to_ftp",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 14,
+            "description": "Transfers a caller-supplied in-memory byte buffer to a remote FTP server at a given host and path. The bytes are streamed off-host to the external server. The tool performs outbound transfer only.",
+            "gold_capabilities": [
+                "C3"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 16,
+            "tool": "delete_local_file",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 15,
+            "description": "Permanently removes a specified file from the local filesystem at the given path. The on-disk state is altered by unlinking the target. The tool changes local persistent state and does nothing else.",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 17,
+            "tool": "update_database_record",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 16,
+            "description": "Modifies field values of an existing row in the local application database, identified by its primary key. The stored record is overwritten with the new values. Its only effect is this in-place state change.",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "modifies"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: modifies. Evidence: C4 State Modification via 'modifies' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 18,
+            "tool": "rename_directory",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 17,
+            "description": "Renames a folder on the local filesystem from its current name to a caller-provided new name. The directory entry on disk is changed accordingly. The tool solely mutates local filesystem state.",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 19,
+            "tool": "write_config_setting",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 18,
+            "description": "Persists a configuration key and value to the local application settings file, overwriting any previous value for that key. The change is written to durable local storage. It only modifies this persisted state.",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C4",
+            "normalized_concepts": [
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "modifies"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: modifies. Evidence: C4 State Modification via 'modifies' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 20,
+            "tool": "truncate_log_table",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 19,
+            "description": "Clears every row from the local logging table in the embedded database. The stored log records are permanently discarded, changing the table's persistent contents. The tool performs only this state modification.",
+            "gold_capabilities": [
+                "C4"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 21,
+            "tool": "run_shell_command",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 20,
+            "description": "Executes an arbitrary shell command string in a child process on the host operating system. The command is launched by the system shell and allowed to run to completion. The tool's function is to carry out this code execution.",
+            "gold_capabilities": [
+                "C5"
+            ],
+            "predicted_capabilities": [
+                "C5"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C5",
+            "normalized_concepts": [
+                "System Execution"
+            ],
+            "matched_expressions": [
+                "run to completion. the tool's function is to carry out this code"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: run to completion. the tool's function is to carry out this code. Evidence: C5 System Execution via 'run to completion. the tool's function is to carry out this code' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 22,
+            "tool": "execute_python_snippet",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 21,
+            "description": "Runs a caller-provided Python source string by passing it to the interpreter for execution in a subprocess. The supplied code is evaluated on the host. The tool exists solely to execute the given code.",
+            "gold_capabilities": [
+                "C5"
+            ],
+            "predicted_capabilities": [
+                "C5"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C5",
+            "normalized_concepts": [
+                "System Execution"
+            ],
+            "matched_expressions": [
+                "runs a caller-provided python source string by passing it to the interpreter for execution in a subprocess. the supplied code is evaluated on the host. the tool exists solely to execute the given code"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: runs a caller-provided python source string by passing it to the interpreter for execution in a subprocess. the supplied code is evaluated on the host. the tool exists solely to execute the given code. Evidence: C5 System Execution via 'runs a caller-provided python source string by passing it to the interpreter for execution in a subprocess. the supplied code is evaluated on the host. the tool exists solely to execute the given code' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 23,
+            "tool": "spawn_background_process",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 22,
+            "description": "Launches a specified executable as a new detached background process on the host machine. The named program begins running as an independent OS process. The tool only performs this process execution.",
+            "gold_capabilities": [
+                "C5"
+            ],
+            "predicted_capabilities": [
+                "C5"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C5",
+            "normalized_concepts": [
+                "System Execution"
+            ],
+            "matched_expressions": [
+                "running as an independent os process. the tool only performs this process"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: running as an independent os process. the tool only performs this process. Evidence: C5 System Execution via 'running as an independent os process. the tool only performs this process' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 24,
+            "tool": "invoke_system_binary",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 23,
+            "description": "Runs a named system binary with a list of caller-provided command-line arguments. The executable is invoked directly on the host and executed. Its sole action is launching this program.",
+            "gold_capabilities": [
+                "C5"
+            ],
+            "predicted_capabilities": [
+                "C5"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C5",
+            "normalized_concepts": [
+                "System Execution"
+            ],
+            "matched_expressions": [
+                "runs a named system binary with a list of caller-provided command-line arguments. the executable is invoked directly on the host and executed. its sole action is launching this program"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: runs a named system binary with a list of caller-provided command-line arguments. the executable is invoked directly on the host and executed. its sole action is launching this program. Evidence: C5 System Execution via 'runs a named system binary with a list of caller-provided command-line arguments. the executable is invoked directly on the host and executed. its sole action is launching this program' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 25,
+            "tool": "run_powershell_script",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 24,
+            "description": "Executes a caller-provided PowerShell script block on the host system via the PowerShell engine. The script statements are run in sequence on the machine. The tool only carries out this execution.",
+            "gold_capabilities": [
+                "C5"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 26,
+            "tool": "set_thermostat_temperature",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 25,
+            "description": "Commands a connected smart thermostat to change the ambient temperature to a specified setpoint. The hardware actuator adjusts the heating or cooling element physically. The tool only drives this physical device.",
+            "gold_capabilities": [
+                "C6"
+            ],
+            "predicted_capabilities": [
+                "C6"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C6",
+            "normalized_concepts": [
+                "Physical Actuation"
+            ],
+            "matched_expressions": [
+                "thermostat"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: thermostat. Evidence: C6 Physical Actuation via 'thermostat' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 27,
+            "tool": "unlock_smart_door",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 26,
+            "description": "Sends an actuation command to a networked smart door lock to physically disengage its bolt. The lock's motor moves to the unlocked position. The tool performs only this physical actuation.",
+            "gold_capabilities": [
+                "C6"
+            ],
+            "predicted_capabilities": [
+                "C3",
+                "C6"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C6",
+            "normalized_concepts": [
+                "Physical Actuation",
+                "External Communication"
+            ],
+            "matched_expressions": [
+                "motor",
+                "sends"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: motor, sends. Evidence: C6 Physical Actuation via 'motor' (High); C3 External Communication via 'sends' (High)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 28,
+            "tool": "move_robot_arm",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 27,
+            "description": "Drives a robotic arm's servo actuators to a caller-specified joint configuration. The physical arm moves to the commanded pose. The tool solely actuates this hardware.",
+            "gold_capabilities": [
+                "C6"
+            ],
+            "predicted_capabilities": [],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": null,
+            "normalized_concepts": [],
+            "matched_expressions": [],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "No normalized capabilities found - UNMAPPED",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 29,
+            "tool": "toggle_smart_light",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 28,
+            "description": "Switches a physical smart light fixture on or off by commanding its relay. The luminaire's power state changes physically in response. The tool only actuates the light hardware.",
+            "gold_capabilities": [
+                "C6"
+            ],
+            "predicted_capabilities": [
+                "C6"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C6",
+            "normalized_concepts": [
+                "Physical Actuation"
+            ],
+            "matched_expressions": [
+                "relay"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: relay. Evidence: C6 Physical Actuation via 'relay' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 30,
+            "tool": "open_garage_door",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 29,
+            "description": "Triggers the garage door opener's motor to physically raise or lower the door. The mechanical actuator drives the door along its track. The tool performs this physical actuation only.",
+            "gold_capabilities": [
+                "C6"
+            ],
+            "predicted_capabilities": [
+                "C6"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C6",
+            "normalized_concepts": [
+                "Physical Actuation"
+            ],
+            "matched_expressions": [
+                "motor"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: motor. Evidence: C6 Physical Actuation via 'motor' (High)",
+            "is_ambiguous": false,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 31,
+            "tool": "enrich_local_profiles",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 30,
+            "description": "Reads locally stored private customer PII records from the internal datastore and fetches supplementary public profile details for each person from an external enrichment web API. Both the sensitive local fields and the inbound remote data are combined in memory for the caller. It accesses confidential local data and ingests external data, without sending anything out.",
+            "gold_capabilities": [
+                "C1",
+                "C2"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C2",
+                "C3"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication",
+                "External Data Ingestion",
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "sending",
+                "fetches",
+                "reads locally stored private customer pii records from the internal datastore and fetches supplementary public profile"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: sending, fetches, reads locally stored private customer pii records from the internal datastore and fetches supplementary public profile. Evidence: C3 External Communication via 'sending' (High); C1 External Data Ingestion via 'fetches' (High); C2 Sensitive Data Access via 'reads locally stored private customer pii records from the internal datastore and fetches supplementary public profile' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 32,
+            "tool": "backup_credentials_to_cloud",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 31,
+            "description": "Reads the saved credential entries from the local secret store and then transmits those entries to a remote cloud backup server over an outbound HTTPS connection. The tool both accesses sensitive local data and communicates it externally. No local state is modified in the process.",
+            "gold_capabilities": [
+                "C2",
+                "C3"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C2",
+                "C4"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C2",
+            "normalized_concepts": [
+                "Sensitive Data Access",
+                "State Modification",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "credential",
+                "store",
+                "https"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: credential, store, https. Evidence: C2 Sensitive Data Access via 'credential' (High); C4 State Modification via 'store' (Medium); C1 External Data Ingestion via 'https' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 33,
+            "tool": "publish_and_mark_report",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 32,
+            "description": "Sends a generated report payload to an external distribution webhook and then updates the local database row for that report to set its status to published. The tool performs an outbound transmission and a local persistent state change. It touches no sensitive personal data.",
+            "gold_capabilities": [
+                "C3",
+                "C4"
+            ],
+            "predicted_capabilities": [
+                "C3",
+                "C4"
+            ],
+            "exact_match": true,
+            "status": "CORRECT",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "sends",
+                "updates"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: sends, updates. Evidence: C3 External Communication via 'sends' (High); C4 State Modification via 'updates' (High)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 34,
+            "tool": "apply_update_package",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 33,
+            "description": "Writes updated program files into the local installation directory, overwriting the previous versions, and then executes the bundled post-install script on the host to finalize the update. The tool both modifies local state and runs code. It does not reach any external network.",
+            "gold_capabilities": [
+                "C4",
+                "C5"
+            ],
+            "predicted_capabilities": [
+                "C3",
+                "C4",
+                "C5"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C5",
+            "normalized_concepts": [
+                "System Execution",
+                "External Communication",
+                "State Modification"
+            ],
+            "matched_expressions": [
+                "runs code",
+                "post",
+                "update"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: runs code, post, update. Evidence: C5 System Execution via 'runs code' (High); C3 External Communication via 'post' (High); C4 State Modification via 'update' (High)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 35,
+            "tool": "run_diagnostic_and_calibrate",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 34,
+            "description": "Executes a hardware self-test command on the host and then drives the connected motor actuator through a physical calibration movement based on the result. The tool performs code execution and physical actuation together. It neither reads sensitive files nor communicates externally.",
+            "gold_capabilities": [
+                "C5",
+                "C6"
+            ],
+            "predicted_capabilities": [
+                "C2",
+                "C6"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C6",
+            "normalized_concepts": [
+                "Physical Actuation",
+                "Sensitive Data Access"
+            ],
+            "matched_expressions": [
+                "motor",
+                "reads sensitive file"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: motor, reads sensitive file. Evidence: C6 Physical Actuation via 'motor' (High); C2 Sensitive Data Access via 'reads sensitive file' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        },
+        {
+            "annotation_id": 36,
+            "tool": "fetch_and_apply_irrigation_schedule",
+            "source_file": "created_toolsc1_c6.json",
+            "source_index": 35,
+            "description": "Retrieves an irrigation schedule for the day from a public weather-service web API and then actuates the connected sprinkler valves to open or close according to that schedule. The tool ingests external data and drives physical hardware. It stores nothing sensitive and sends nothing outbound.",
+            "gold_capabilities": [
+                "C1",
+                "C6"
+            ],
+            "predicted_capabilities": [
+                "C1",
+                "C3"
+            ],
+            "exact_match": false,
+            "status": "MISCLASSIFIED",
+            "primary_prediction": "C3",
+            "normalized_concepts": [
+                "External Communication",
+                "External Data Ingestion"
+            ],
+            "matched_expressions": [
+                "sends",
+                "web"
+            ],
+            "normalization_confidence": 1.0,
+            "mapping_reason": "Tool matches: sends, web. Evidence: C3 External Communication via 'sends' (High); C1 External Data Ingestion via 'web' (Medium)",
+            "is_ambiguous": true,
+            "error_analysis": ""
+        }
+    ],
+    "metrics": {
+        "C1": {
+            "capability": "C1",
+            "canonical": "External Data Ingestion",
+            "true_positive": 6,
+            "false_positive": 4,
+            "false_negative": 1,
+            "precision": 0.6,
+            "recall": 0.8571428571428571,
+            "f1": 0.7058823529411764
+        },
+        "C2": {
+            "capability": "C2",
+            "canonical": "Sensitive Data Access",
+            "true_positive": 6,
+            "false_positive": 5,
+            "false_negative": 1,
+            "precision": 0.5454545454545454,
+            "recall": 0.8571428571428571,
+            "f1": 0.6666666666666665
+        },
+        "C3": {
+            "capability": "C3",
+            "canonical": "External Communication",
+            "true_positive": 5,
+            "false_positive": 4,
+            "false_negative": 2,
+            "precision": 0.5555555555555556,
+            "recall": 0.7142857142857143,
+            "f1": 0.6250000000000001
+        },
+        "C4": {
+            "capability": "C4",
+            "canonical": "State Modification",
+            "true_positive": 4,
+            "false_positive": 2,
+            "false_negative": 3,
+            "precision": 0.6666666666666666,
+            "recall": 0.5714285714285714,
+            "f1": 0.6153846153846153
+        },
+        "C5": {
+            "capability": "C5",
+            "canonical": "System Execution",
+            "true_positive": 5,
+            "false_positive": 0,
+            "false_negative": 2,
+            "precision": 1.0,
+            "recall": 0.7142857142857143,
+            "f1": 0.8333333333333333
+        },
+        "C6": {
+            "capability": "C6",
+            "canonical": "Physical Actuation",
+            "true_positive": 5,
+            "false_positive": 1,
+            "false_negative": 2,
+            "precision": 0.8333333333333334,
+            "recall": 0.7142857142857143,
+            "f1": 0.7692307692307692
+        },
+        "_overall": {
+            "tool_count": 36,
+            "exact_set_correct": 15,
+            "exact_set_accuracy": 0.4166666666666667,
+            "micro_precision": 0.6595744680851063,
+            "micro_recall": 0.7380952380952381,
+            "micro_f1": 0.6966292134831461,
+            "macro_f1": 0.7025829562594268
+        }
+    }
+}

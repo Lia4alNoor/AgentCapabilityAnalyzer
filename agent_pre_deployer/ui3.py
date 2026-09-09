@@ -14,7 +14,7 @@ from modules import (
     module_7_attack_pattern_analysis,
     module_8_risk_assessment,
     module_9_report_generation,
-    module_10,
+    module_10_0,
 )
 
 CAPABILITY_SEED = module_5_ontology_database.CAPABILITY_SEED
