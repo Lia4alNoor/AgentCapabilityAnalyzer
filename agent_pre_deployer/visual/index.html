@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -8,7 +10,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>AgentPreDeployer — Capability Mapping Flow</title>
+    <title>
+        AgentPreDeployer — Capability Mapping Flow
+    </title>
 
     <link
         rel="stylesheet"
@@ -19,11 +23,14 @@
     <script
         src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
     ></script>
+
 </head>
+
 
 <body>
 
     <div class="app-shell">
+
 
         <!-- =====================================================
              HEADER
@@ -38,6 +45,7 @@
                 </div>
 
                 <div>
+
                     <div class="brand-title">
                         AgentPreDeployer
                     </div>
@@ -45,9 +53,11 @@
                     <div class="brand-subtitle">
                         Capability Extraction &amp; Normalization Pipeline
                     </div>
+
                 </div>
 
             </div>
+
 
             <div class="topbar-actions">
 
@@ -94,11 +104,13 @@
 
         <main class="main-layout">
 
+
             <!-- =================================================
                  DIAGRAM AREA
                  ================================================= -->
 
             <section class="diagram-section">
+
 
                 <div class="section-header">
 
@@ -113,19 +125,77 @@
                         </h1>
 
                         <p>
-                            Click any node to inspect its role, detection
-                            logic, evidence, or output.
+                            Select a tool to trace its primary capability
+                            path, or click any node to inspect its logic.
                         </p>
 
                     </div>
 
+
                     <div class="interaction-hint">
+
                         <span class="hint-dot"></span>
+
                         Interactive
+
                     </div>
 
                 </div>
 
+
+                <!-- =================================================
+                     TOOL PATH EXPLORER
+                     ================================================= -->
+
+                <div
+                    id="tool-explorer"
+                    class="tool-explorer"
+                >
+
+                    <div class="tool-explorer-header">
+
+                        <div>
+
+                            <div class="tool-explorer-kicker">
+                                TOOL PATH EXPLORER
+                            </div>
+
+                            <div class="tool-explorer-title">
+                                Select a normalized tool
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="selected-tool-status"
+                            class="selected-tool-status"
+                        >
+                            No tool selected
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="capability-legend"
+                        class="capability-legend"
+                    >
+                    </div>
+
+
+                    <div
+                        id="tool-buttons"
+                        class="tool-buttons"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DIAGRAM
+                     ================================================= -->
 
                 <div
                     id="diagram-container"
@@ -136,6 +206,7 @@
                         id="mermaid-diagram"
                         class="mermaid"
                     >
+
 flowchart LR
 
 A["MCP Tool JSON<br/>tool name + description + hints"]
@@ -267,6 +338,7 @@ subgraph M5["MODULE 5 — Ontology Database"]
 end
 
 F -. "Intermediate behavioural evidence<br/>NOT direct C1-C6 mapping" .-> N
+
                     </div>
 
                 </div>
@@ -297,6 +369,7 @@ F -. "Intermediate behavioural evidence<br/>NOT direct C1-C6 mapping" .-> N
 
                     </div>
 
+
                     <button
                         id="closeDetailsBtn"
                         class="icon-button"
@@ -325,9 +398,9 @@ F -. "Intermediate behavioural evidence<br/>NOT direct C1-C6 mapping" .-> N
                         </h3>
 
                         <p>
-                            Click a node in the diagram to inspect its
-                            purpose, detection logic, inputs, outputs,
-                            and evidence.
+                            Select a tool above to trace its primary
+                            capability path, or click a node in the
+                            diagram to inspect its purpose and logic.
                         </p>
 
                     </div>
@@ -362,4 +435,5 @@ F -. "Intermediate behavioural evidence<br/>NOT direct C1-C6 mapping" .-> N
     <script src="app.js"></script>
 
 </body>
+
 </html>

@@ -932,7 +932,7 @@ def render():
 
 
         st.caption(
-            "Level-1 composition matches indicate required capabilities are present. "
+            "Composition matches indicate required capabilities are present. "
             "A match does not establish that an attack was executed."
         )
 
@@ -1011,40 +1011,20 @@ def render():
                     "severity-low",
                 )
 
-
-                st.markdown(
-                    f"""
-                    <div class="composition-card">
-
-                        <div class="composition-header">
-
-                            <div>
-
-                                <div class="pattern-id">
-                                    {pattern_id}
-                                </div>
-
-                                <div class="pattern-name">
-                                    {pattern_name}
-                                </div>
-
-                            </div>
-
-                            <span class="status-badge {severity_class}">
-                                {severity}
-                            </span>
-
-                        </div>
-
-                        <div class="sequence">
-                            {sequence_text}
-                        </div>
-
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
+                composition_html = (
+                    '<div class="composition-card">'
+                    '<div class="composition-header">'
+                    '<div>'
+                    f'<div class="pattern-id">{pattern_id}</div>'
+                    f'<div class="pattern-name">{pattern_name}</div>'
+                    '</div>'
+                    f'<span class="status-badge {severity_class}">{severity}</span>'
+                    '</div>'
+                    f'<div class="sequence">{sequence_text}</div>'
+                    '</div>'
                 )
 
+                st.markdown(composition_html, unsafe_allow_html=True)
 
                 col_left, col_right = st.columns(2)
 
@@ -1483,15 +1463,14 @@ def render():
                 )
 
 
-                st.markdown(
-                    f"""
-                    <div class="finding risk-high">
-                        <strong>{pattern_id}</strong><br>
-                        {gap_text}
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
+                gap_html = (
+                    f'<div class="finding risk-high">'
+                    f'<strong>{pattern_id}</strong><br>'
+                    f'{gap_text}'
+                    f'</div>'
                 )
+
+                st.markdown(gap_html, unsafe_allow_html=True)
 
 
                 if proposals:

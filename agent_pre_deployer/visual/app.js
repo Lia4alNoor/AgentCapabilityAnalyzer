@@ -1,3 +1,14 @@
+/* =========================================================
+   AgentPreDeployer
+   Interactive Mermaid Capability Mapping
+
+   NODE DETAILS
+   ========================================================= */
+
+
+/* =========================================================
+   NODE DETAILS
+   ========================================================= */
 
 const NODE_DETAILS = {
 
@@ -287,7 +298,7 @@ const NODE_DETAILS = {
         description:
             "Tool metadata hints are used as additional evidence when normalizing capabilities.",
 
-        rules: [
+        hints: [
             "readOnlyHint",
             "openWorldHint",
             "destructiveHint"
@@ -672,35 +683,382 @@ const GROUP_DETAILS = {
 
 
 /* =========================================================
+   TOOL DATA
+   ========================================================= */
+
+const TOOL_DATA = [
+
+    {
+        name: "fetch_public_weather",
+        primary: "C2",
+        mapped: ["C2", "C1"]
+    },
+
+    {
+        name: "read_rss_feed",
+        primary: "C1",
+        mapped: ["C1"]
+    },
+
+    {
+        name: "import_csv_dataset",
+        primary: "C2",
+        mapped: ["C2", "C1"]
+    },
+
+    {
+        name: "scrape_wikipedia_article",
+        primary: "C1",
+        mapped: ["C1", "C2"]
+    },
+
+    {
+        name: "poll_public_stock_quotes",
+        primary: "C2",
+        mapped: ["C2"]
+    },
+
+    {
+        name: "read_local_credentials_vault",
+        primary: "C2",
+        mapped: ["C2"]
+    },
+
+    {
+        name: "get_user_ssh_private_keys",
+        primary: "C2",
+        mapped: ["C2"]
+    },
+
+    {
+        name: "read_browser_saved_passwords",
+        primary: "C2",
+        mapped: ["C2", "C4", "C1"]
+    },
+
+    {
+        name: "dump_environment_secrets",
+        primary: "C2",
+        mapped: ["C2"]
+    },
+
+    {
+        name: "access_medical_records_file",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "send_email_message",
+        primary: "C6",
+        mapped: ["C6", "C3"]
+    },
+
+    {
+        name: "post_to_webhook",
+        primary: "C3",
+        mapped: ["C3", "C1"]
+    },
+
+    {
+        name: "publish_to_message_queue",
+        primary: "C3",
+        mapped: ["C3"]
+    },
+
+    {
+        name: "send_slack_notification",
+        primary: "C3",
+        mapped: ["C3", "C1"]
+    },
+
+    {
+        name: "upload_buffer_to_ftp",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "delete_local_file",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "update_database_record",
+        primary: "C4",
+        mapped: ["C4"]
+    },
+
+    {
+        name: "rename_directory",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "write_config_setting",
+        primary: "C4",
+        mapped: ["C4"]
+    },
+
+    {
+        name: "truncate_log_table",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "run_shell_command",
+        primary: "C5",
+        mapped: ["C5"]
+    },
+
+    {
+        name: "execute_python_snippet",
+        primary: "C5",
+        mapped: ["C5"]
+    },
+
+    {
+        name: "spawn_background_process",
+        primary: "C5",
+        mapped: ["C5"]
+    },
+
+    {
+        name: "invoke_system_binary",
+        primary: "C5",
+        mapped: ["C5"]
+    },
+
+    {
+        name: "run_powershell_script",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "set_thermostat_temperature",
+        primary: "C6",
+        mapped: ["C6"]
+    },
+
+    {
+        name: "unlock_smart_door",
+        primary: "C6",
+        mapped: ["C6", "C3"]
+    },
+
+    {
+        name: "move_robot_arm",
+        primary: "UNMAPPED",
+        mapped: []
+    },
+
+    {
+        name: "toggle_smart_light",
+        primary: "C6",
+        mapped: ["C6"]
+    },
+
+    {
+        name: "open_garage_door",
+        primary: "C6",
+        mapped: ["C6"]
+    },
+
+    {
+        name: "enrich_local_profiles",
+        primary: "C3",
+        mapped: ["C3", "C1", "C2"]
+    },
+
+    {
+        name: "backup_credentials_to_cloud",
+        primary: "C2",
+        mapped: ["C2", "C4", "C1"]
+    },
+
+    {
+        name: "publish_and_mark_report",
+        primary: "C3",
+        mapped: ["C3", "C4"]
+    },
+
+    {
+        name: "apply_update_package",
+        primary: "C5",
+        mapped: ["C5", "C3", "C4"]
+    },
+
+    {
+        name: "run_diagnostic_and_calibrate",
+        primary: "C6",
+        mapped: ["C6", "C2"]
+    },
+
+    {
+        name: "fetch_and_apply_irrigation_schedule",
+        primary: "C3",
+        mapped: ["C3", "C1"]
+    }
+
+];
+
+
+/* =========================================================
+   HINT CONFIGURATION
+   ========================================================= */
+
+const HINT_CONFIG = {
+
+    readOnlyHint: {
+        label: "readOnlyHint",
+        description: "Tool is intended to be read-only"
+    },
+
+    openWorldHint: {
+        label: "openWorldHint",
+        description: "Tool can interact with external/open-world resources"
+    },
+
+    destructiveHint: {
+        label: "destructiveHint",
+        description: "Tool may perform destructive operations"
+    }
+
+};
+
+
+/* =========================================================
+   CAPABILITY VISUAL CONFIGURATION
+   ========================================================= */
+
+const CAPABILITY_CONFIG = {
+
+    C1: {
+        label: "C1",
+        name: "External Data Ingestion",
+        color: "#2563eb",
+        background: "#eff6ff",
+        ring: "rgba(37, 99, 235, 0.22)"
+    },
+
+    C2: {
+        label: "C2",
+        name: "Sensitive Data Access",
+        color: "#7c3aed",
+        background: "#faf5ff",
+        ring: "rgba(124, 58, 237, 0.22)"
+    },
+
+    C3: {
+        label: "C3",
+        name: "External Communication",
+        color: "#16a34a",
+        background: "#f0fdf4",
+        ring: "rgba(22, 163, 74, 0.22)"
+    },
+
+    C4: {
+        label: "C4",
+        name: "State Modification",
+        color: "#ea580c",
+        background: "#fff7ed",
+        ring: "rgba(234, 88, 12, 0.22)"
+    },
+
+    C5: {
+        label: "C5",
+        name: "System Execution",
+        color: "#dc2626",
+        background: "#fef2f2",
+        ring: "rgba(220, 38, 38, 0.22)"
+    },
+
+    C6: {
+        label: "C6",
+        name: "Physical Actuation",
+        color: "#0891b2",
+        background: "#ecfeff",
+        ring: "rgba(8, 145, 178, 0.22)"
+    },
+
+    UNMAPPED: {
+        label: "—",
+        name: "Unmapped",
+        color: "#94a3b8",
+        background: "#f8fafc",
+        ring: "rgba(148, 163, 184, 0.18)"
+    }
+
+};
+
+
+/* =========================================================
    DOM REFERENCES
    ========================================================= */
 
 const diagramContainer =
-    document.getElementById("diagram-container");
+    document.getElementById(
+        "diagram-container"
+    );
 
 const diagram =
-    document.getElementById("mermaid-diagram");
+    document.getElementById(
+        "mermaid-diagram"
+    );
 
 const detailsTitle =
-    document.getElementById("details-title");
+    document.getElementById(
+        "details-title"
+    );
 
 const detailsContent =
-    document.getElementById("details-content");
+    document.getElementById(
+        "details-content"
+    );
 
 const resetBtn =
-    document.getElementById("resetBtn");
+    document.getElementById(
+        "resetBtn"
+    );
 
 const zoomInBtn =
-    document.getElementById("zoomInBtn");
+    document.getElementById(
+        "zoomInBtn"
+    );
 
 const zoomOutBtn =
-    document.getElementById("zoomOutBtn");
+    document.getElementById(
+        "zoomOutBtn"
+    );
 
 const fitBtn =
-    document.getElementById("fitBtn");
+    document.getElementById(
+        "fitBtn"
+    );
 
 const closeDetailsBtn =
-    document.getElementById("closeDetailsBtn");
+    document.getElementById(
+        "closeDetailsBtn"
+    );
+
+const toolButtonsContainer =
+    document.getElementById(
+        "tool-buttons"
+    );
+
+const capabilityLegend =
+    document.getElementById(
+        "capability-legend"
+    );
+
+const selectedToolStatus =
+    document.getElementById(
+        "selected-tool-status"
+    );
 
 
 /* =========================================================
@@ -710,6 +1068,8 @@ const closeDetailsBtn =
 let zoomLevel = 1;
 
 let selectedNode = null;
+
+let selectedTool = null;
 
 let isDragging = false;
 
@@ -788,15 +1148,23 @@ document.addEventListener(
 
         try {
 
+            renderCapabilityLegend();
+
+            renderToolButtons();
+
             await mermaid.run({
+
                 nodes: [
                     document.getElementById(
                         "mermaid-diagram"
                     )
                 ]
+
             });
 
             setupDiagram();
+
+            setupHintVisualization();
 
             setupControls();
 
@@ -815,14 +1183,24 @@ document.addEventListener(
                 "Diagram error";
 
             detailsContent.innerHTML = `
+
                 <div class="empty-state">
-                    <div class="empty-icon">!</div>
-                    <h3>Unable to render diagram</h3>
+
+                    <div class="empty-icon">
+                        !
+                    </div>
+
+                    <h3>
+                        Unable to render diagram
+                    </h3>
+
                     <p>
                         Check the browser console for the
                         Mermaid rendering error.
                     </p>
+
                 </div>
+
             `;
 
         }
@@ -832,13 +1210,1348 @@ document.addEventListener(
 
 
 /* =========================================================
+   RENDER CAPABILITY LEGEND
+   ========================================================= */
+
+function renderCapabilityLegend() {
+
+    const capabilities = [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+    ];
+
+    capabilityLegend.innerHTML =
+        capabilities
+            .map(
+                capability => {
+
+                    const config =
+                        CAPABILITY_CONFIG[
+                            capability
+                        ];
+
+                    return `
+
+                        <div
+                            class="legend-item"
+                            title="${escapeHtml(config.name)}"
+                        >
+
+                            <span
+                                class="legend-dot"
+                                style="
+                                    background:
+                                        ${config.color};
+                                "
+                            ></span>
+
+                            ${config.label}
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   RENDER TOOL BUTTONS
+   ========================================================= */
+
+function renderToolButtons() {
+
+    toolButtonsContainer.innerHTML =
+        TOOL_DATA
+            .map(
+                (tool, index) => {
+
+                    const config =
+                        CAPABILITY_CONFIG[
+                            tool.primary
+                        ] ||
+                        CAPABILITY_CONFIG.UNMAPPED;
+
+                    const isUnmapped =
+                        tool.primary ===
+                        "UNMAPPED";
+
+
+                    const secondary =
+                        tool.mapped
+                            .filter(
+                                capability =>
+                                    capability !==
+                                    tool.primary
+                            )
+                            .join(", ");
+
+
+                    return `
+
+                        <button
+                            type="button"
+                            class="tool-button ${isUnmapped ? "unmapped" : ""}"
+                            data-tool-index="${index}"
+
+                            style="
+                                --tool-color:
+                                    ${config.color};
+
+                                --tool-bg:
+                                    ${config.background};
+
+                                --tool-ring:
+                                    ${config.ring};
+
+                                --tool-border:
+                                    ${config.color};
+                            "
+
+                            title="${escapeHtml(
+                                tool.name
+                            )}"
+                        >
+
+                            <span
+                                class="tool-button-name"
+                            >
+                                ${escapeHtml(
+                                    tool.name
+                                )}
+                            </span>
+
+                            <span
+                                class="tool-capability"
+                            >
+                                ${
+                                    isUnmapped
+                                        ? "UNMAPPED"
+                                        : config.label
+                                }
+                            </span>
+
+                            ${
+                                secondary
+                                    ? `
+                                        <span
+                                            class="tool-secondary"
+                                        >
+                                            +${escapeHtml(
+                                                secondary
+                                            )}
+                                        </span>
+                                    `
+                                    : ""
+                            }
+
+                        </button>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    toolButtonsContainer
+        .querySelectorAll(
+            ".tool-button"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+                        const index =
+                            Number(
+                                button.dataset.toolIndex
+                            );
+
+                        selectTool(
+                            TOOL_DATA[index],
+                            button
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   SELECT TOOL
+   ========================================================= */
+
+function selectTool(
+    tool,
+    button
+) {
+
+    selectedTool =
+        tool;
+
+    selectedNode =
+        null;
+
+
+    toolButtonsContainer
+        .querySelectorAll(
+            ".tool-button"
+        )
+        .forEach(
+            element =>
+                element.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if (
+        tool.primary ===
+        "UNMAPPED"
+    ) {
+
+        clearHighlighting();
+
+        selectedToolStatus.textContent =
+            `${tool.name} · UNMAPPED`;
+
+        renderToolDetails(
+            tool
+        );
+
+        /*
+         * Still show the hint state if
+         * hint metadata exists.
+         */
+
+        highlightToolHints(
+            tool
+        );
+
+        return;
+    }
+
+
+    const config =
+        CAPABILITY_CONFIG[
+            tool.primary
+        ];
+
+
+    selectedToolStatus.textContent =
+        `${tool.name} · ${tool.primary}`;
+
+
+    clearHighlighting();
+
+
+    highlightToolPath(
+        tool.primary,
+        config.color
+    );
+
+
+    /*
+     * Hints are highlighted independently
+     * from the capability path.
+     */
+
+    highlightToolHints(
+        tool
+    );
+
+
+    renderToolDetails(
+        tool
+    );
+
+}
+
+
+/* =========================================================
+   RENDER TOOL DETAILS
+   ========================================================= */
+
+function renderToolDetails(
+    tool
+) {
+
+    const config =
+        CAPABILITY_CONFIG[
+            tool.primary
+        ] ||
+        CAPABILITY_CONFIG.UNMAPPED;
+
+
+    const secondary =
+        tool.mapped
+            .filter(
+                capability =>
+                    capability !==
+                    tool.primary
+            );
+
+
+    detailsTitle.textContent =
+        tool.name;
+
+
+    const primaryText =
+        tool.primary === "UNMAPPED"
+            ? "No ontology mapping"
+            : `${tool.primary} — ${config.name}`;
+
+
+    let html = `
+
+        <div class="badge-row">
+
+            <span
+                class="badge"
+                style="
+                    background:
+                        ${config.background};
+
+                    color:
+                        ${config.color};
+                "
+            >
+                ${escapeHtml(
+                    tool.primary
+                )}
+            </span>
+
+            <span class="badge blue">
+                Normalized Tool
+            </span>
+
+        </div>
+
+
+        <div class="detail-section">
+
+            <div class="detail-section-title">
+                Tool
+            </div>
+
+            <div
+                class="tool-result-card"
+
+                style="
+                    --tool-color:
+                        ${config.color};
+
+                    --tool-bg:
+                        ${config.background};
+
+                    --tool-border:
+                        ${config.color};
+                "
+            >
+
+                <div class="tool-result-name">
+                    ${escapeHtml(
+                        tool.name
+                    )}
+                </div>
+
+                <div class="tool-result-primary">
+                    ${escapeHtml(
+                        primaryText
+                    )}
+                </div>
+
+                ${
+                    secondary.length
+                        ? `
+                            <div class="secondary-capabilities">
+
+                                Secondary mappings:
+                                <strong>
+                                    ${escapeHtml(
+                                        secondary.join(
+                                            ", "
+                                        )
+                                    )}
+                                </strong>
+
+                            </div>
+                        `
+                        : ""
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    /*
+     * Hint status in the inspector.
+     */
+
+    html += renderToolHintDetails(
+        tool
+    );
+
+
+    if (
+        tool.primary !==
+        "UNMAPPED"
+    ) {
+
+        const path =
+            getCapabilityPath(
+                tool.primary
+            );
+
+
+        html += `
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Primary Path
+                </div>
+
+                <div class="path-strip">
+
+                    ${
+                        path
+                            .map(
+                                (node, index) => `
+
+                                    <span
+                                        class="path-node"
+                                        style="
+                                            background:
+                                                ${config.background};
+
+                                            color:
+                                                ${config.color};
+                                        "
+                                    >
+                                        ${escapeHtml(
+                                            node.label
+                                        )}
+                                    </span>
+
+                                    ${
+                                        index <
+                                        path.length - 1
+                                            ? `
+                                                <span
+                                                    class="path-arrow"
+                                                >
+                                                    →
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Trace Interpretation
+                </div>
+
+                <div class="detail-card">
+
+                    The selected tool is traced through
+                    <strong>Module 2</strong>,
+                    <strong>Module 3</strong>,
+                    its selected
+                    <strong>${escapeHtml(
+                        tool.primary
+                    )}</strong>
+                    capability branch, and finally the
+                    <strong>Module 3 output</strong>
+                    and ontology database.
+
+                </div>
+
+            </div>
+
+        `;
+
+    } else {
+
+        html += `
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Trace Status
+                </div>
+
+                <div class="detail-card">
+
+                    This tool has no mapped primary
+                    capability in the current normalization
+                    output, so no C1–C6 path is highlighted.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    detailsContent.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   TOOL HINT DETAILS
+   ========================================================= */
+
+function renderToolHintDetails(
+    tool
+) {
+
+    const hints =
+        getToolHints(
+            tool
+        );
+
+
+    const hintKeys =
+        Object.keys(
+            HINT_CONFIG
+        );
+
+
+    return `
+
+        <div class="detail-section">
+
+            <div class="detail-section-title">
+                Hint Cross-checks
+            </div>
+
+            <div class="rule-list">
+
+                ${
+                    hintKeys
+                        .map(
+                            (key, index) => {
+
+                                const value =
+                                    hints[key];
+
+                                const state =
+                                    value === true
+                                        ? "ACTIVE"
+                                        : value === false
+                                            ? "FALSE"
+                                            : "NOT PROVIDED";
+
+
+                                return `
+
+                                    <div class="rule-item">
+
+                                        <span
+                                            class="rule-number"
+                                        >
+                                            ${index + 1}
+                                        </span>
+
+                                        <code>
+
+                                            <strong>
+                                                ${escapeHtml(
+                                                    HINT_CONFIG[key].label
+                                                )}
+                                            </strong>
+
+                                            :
+                                            ${escapeHtml(
+                                                state
+                                            )}
+
+                                        </code>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("")
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   GET TOOL HINTS
+   ========================================================= */
+
+function getToolHints(
+    tool
+) {
+
+    /*
+     * Do NOT infer missing hints from the tool name
+     * or capability mapping.
+     *
+     * The visualization should represent actual
+     * metadata when it is supplied.
+     */
+
+    if (
+        !tool ||
+        !tool.hints
+    ) {
+
+        return {};
+
+    }
+
+
+    return {
+
+        readOnlyHint:
+            tool.hints.readOnlyHint,
+
+        openWorldHint:
+            tool.hints.openWorldHint,
+
+        destructiveHint:
+            tool.hints.destructiveHint
+
+    };
+
+}
+
+
+/* =========================================================
+   CAPABILITY PATH DEFINITIONS
+   ========================================================= */
+
+function getCapabilityPath(
+    capability
+) {
+
+    const paths = {
+
+        C1: [
+            { id: "A", label: "MCP Tool JSON" },
+            { id: "B", label: "Normalize text" },
+            { id: "C", label: "assumed_capability" },
+            { id: "N", label: "canon_normalizer" },
+            { id: "R", label: "Strongest Match" },
+            { id: "C1R", label: "C1 Regex" },
+            { id: "C1D", label: "C1 Meaning" },
+            { id: "OUT", label: "Module 3 Output" },
+            { id: "DB", label: "Ontology DB" }
+        ],
+
+        C2: [
+            { id: "A", label: "MCP Tool JSON" },
+            { id: "B", label: "Normalize text" },
+            { id: "C", label: "assumed_capability" },
+            { id: "N", label: "canon_normalizer" },
+            { id: "R", label: "Strongest Match" },
+            { id: "C2R", label: "C2 Regex" },
+            { id: "C2D", label: "C2 Meaning" },
+            { id: "OUT", label: "Module 3 Output" },
+            { id: "DB", label: "Ontology DB" }
+        ],
+
+        C3: [
+            { id: "A", label: "MCP Tool JSON" },
+            { id: "B", label: "Normalize text" },
+            { id: "C", label: "assumed_capability" },
+            { id: "N", label: "canon_normalizer" },
+            { id: "R", label: "Strongest Match" },
+            { id: "C3R", label: "C3 Regex" },
+            { id: "C3D", label: "C3 Meaning" },
+            { id: "OUT", label: "Module 3 Output" },
+            { id: "DB", label: "Ontology DB" }
+        ],
+
+        C4: [
+            { id: "A", label: "MCP Tool JSON" },
+            { id: "B", label: "Normalize text" },
+            { id: "C", label: "assumed_capability" },
+            { id: "N", label: "canon_normalizer" },
+            { id: "R", label: "Strongest Match" },
+            { id: "C4R", label: "C4 Regex" },
+            { id: "C4D", label: "C4 Meaning" },
+            { id: "OUT", label: "Module 3 Output" },
+            { id: "DB", label: "Ontology DB" }
+        ],
+
+        C5: [
+            { id: "A", label: "MCP Tool JSON" },
+            { id: "B", label: "Normalize text" },
+            { id: "C", label: "assumed_capability" },
+            { id: "N", label: "canon_normalizer" },
+            { id: "R", label: "Strongest Match" },
+            { id: "C5R", label: "C5 Regex" },
+            { id: "C5D", label: "C5 Meaning" },
+            { id: "OUT", label: "Module 3 Output" },
+            { id: "DB", label: "Ontology DB" }
+        ],
+
+        C6: [
+            { id: "A", label: "MCP Tool JSON" },
+            { id: "B", label: "Normalize text" },
+            { id: "C", label: "assumed_capability" },
+            { id: "N", label: "canon_normalizer" },
+            { id: "R", label: "Strongest Match" },
+            { id: "C6R", label: "C6 Regex" },
+            { id: "C6D", label: "C6 Meaning" },
+            { id: "OUT", label: "Module 3 Output" },
+            { id: "DB", label: "Ontology DB" }
+        ]
+
+    };
+
+
+    return (
+        paths[capability] ||
+        []
+    );
+
+}
+
+
+/* =========================================================
+   HINT VISUALIZATION
+   ========================================================= */
+
+function setupHintVisualization() {
+
+    const node =
+        findNodeElement(
+            "H"
+        );
+
+
+    if (!node) {
+
+        console.warn(
+            "Hint node H was not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Replace the text inside the existing
+     * Mermaid H node with three individually
+     * addressable hint indicators.
+     *
+     * We deliberately keep H as one Mermaid node
+     * so no Mermaid source changes are required.
+     */
+
+    const label =
+        node.querySelector(
+            ".nodeLabel"
+        );
+
+
+    if (!label) {
+
+        console.warn(
+            "Hint node label was not found."
+        );
+
+        return;
+
+    }
+
+
+    label.innerHTML = `
+
+        <div class="hint-visual">
+
+            <div
+                class="hint-visual-title"
+            >
+                Hint Cross-checks
+            </div>
+
+
+            <div
+                class="hint-indicator"
+                data-hint-key="readOnlyHint"
+            >
+
+                <span class="hint-indicator-number">
+                    1
+                </span>
+
+                <span class="hint-indicator-name">
+                    readOnlyHint
+                </span>
+
+                <span class="hint-indicator-state">
+                    —
+                </span>
+
+            </div>
+
+
+            <div
+                class="hint-indicator"
+                data-hint-key="openWorldHint"
+            >
+
+                <span class="hint-indicator-number">
+                    2
+                </span>
+
+                <span class="hint-indicator-name">
+                    openWorldHint
+                </span>
+
+                <span class="hint-indicator-state">
+                    —
+                </span>
+
+            </div>
+
+
+            <div
+                class="hint-indicator"
+                data-hint-key="destructiveHint"
+            >
+
+                <span class="hint-indicator-number">
+                    3
+                </span>
+
+                <span class="hint-indicator-name">
+                    destructiveHint
+                </span>
+
+                <span class="hint-indicator-state">
+                    —
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HIGHLIGHT TOOL HINTS
+   ========================================================= */
+
+function highlightToolHints(
+    tool
+) {
+
+    const hintNode =
+        findNodeElement(
+            "H"
+        );
+
+
+    if (!hintNode) {
+        return;
+    }
+
+
+    /*
+     * Make sure the individual hint indicators
+     * exist before attempting to update them.
+     */
+
+    const indicators =
+        hintNode.querySelectorAll(
+            ".hint-indicator"
+        );
+
+
+    if (!indicators.length) {
+        return;
+    }
+
+
+    const hints =
+        getToolHints(
+            tool
+        );
+
+
+    /*
+     * The H node itself is part of the selected
+     * path when a tool is selected.
+     */
+
+    hintNode.classList.remove(
+        "hint-node-active"
+    );
+
+
+    hintNode.classList.remove(
+        "hint-node-neutral"
+    );
+
+
+    let hasActiveHint =
+        false;
+
+    let hasProvidedHint =
+        false;
+
+
+    indicators.forEach(
+        indicator => {
+
+            const key =
+                indicator.dataset.hintKey;
+
+            const value =
+                hints[key];
+
+
+            indicator.classList.remove(
+                "hint-active"
+            );
+
+            indicator.classList.remove(
+                "hint-false"
+            );
+
+            indicator.classList.remove(
+                "hint-missing"
+            );
+
+
+            const state =
+                indicator.querySelector(
+                    ".hint-indicator-state"
+                );
+
+
+            if (
+                value === true
+            ) {
+
+                hasActiveHint =
+                    true;
+
+                hasProvidedHint =
+                    true;
+
+
+                indicator.classList.add(
+                    "hint-active"
+                );
+
+
+                if (state) {
+
+                    state.textContent =
+                        "ACTIVE";
+
+                }
+
+            } else if (
+                value === false
+            ) {
+
+                hasProvidedHint =
+                    true;
+
+
+                indicator.classList.add(
+                    "hint-false"
+                );
+
+
+                if (state) {
+
+                    state.textContent =
+                        "FALSE";
+
+                }
+
+            } else {
+
+                indicator.classList.add(
+                    "hint-missing"
+                );
+
+
+                if (state) {
+
+                    state.textContent =
+                        "—";
+
+                }
+
+            }
+
+        }
+    );
+
+
+    if (
+        hasActiveHint
+    ) {
+
+        hintNode.classList.add(
+            "hint-node-active"
+        );
+
+    } else if (
+        hasProvidedHint
+    ) {
+
+        hintNode.classList.add(
+            "hint-node-neutral"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   HIGHLIGHT TOOL PATH
+   ========================================================= */
+
+function highlightToolPath(
+    capability,
+    color
+) {
+
+    const svg =
+        diagram.querySelector(
+            "svg"
+        );
+
+
+    if (!svg) {
+        return;
+    }
+
+
+    const path =
+        getCapabilityPath(
+            capability
+        );
+
+
+    if (!path.length) {
+        return;
+    }
+
+
+    /*
+     * Dim the entire graph first.
+     */
+
+    svg
+        .querySelectorAll(
+            ".node"
+        )
+        .forEach(
+            node =>
+                node.classList.add(
+                    "node-dimmed"
+                )
+        );
+
+
+    svg
+        .querySelectorAll(
+            ".edgePath"
+        )
+        .forEach(
+            edge =>
+                edge.classList.add(
+                    "edge-dimmed"
+                )
+        );
+
+
+    /*
+     * Highlight nodes belonging to
+     * the selected route.
+     */
+
+    path.forEach(
+        pathNode => {
+
+            const element =
+                findNodeElement(
+                    pathNode.id
+                );
+
+
+            if (!element) {
+                return;
+            }
+
+
+            element.classList.remove(
+                "node-dimmed"
+            );
+
+
+            element.classList.add(
+                "node-selected"
+            );
+
+
+            element.classList.add(
+                "node-path-highlight"
+            );
+
+
+            element.style
+                .setProperty(
+                    "--path-color",
+                    color
+                );
+
+        }
+    );
+
+
+    /*
+     * Highlight each edge between
+     * consecutive nodes.
+     */
+
+    for (
+        let i = 0;
+        i < path.length - 1;
+        i++
+    ) {
+
+        const from =
+            path[i].id;
+
+        const to =
+            path[i + 1].id;
+
+
+        const edge =
+            findEdgeBetween(
+                from,
+                to
+            );
+
+
+        if (edge) {
+
+            edge.classList.remove(
+                "edge-dimmed"
+            );
+
+            edge.classList.add(
+                "edge-highlight"
+            );
+
+            edge.style
+                .setProperty(
+                    "--path-color",
+                    color
+                );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   FIND EDGE BETWEEN TWO MERMAID NODES
+   ========================================================= */
+
+function findEdgeBetween(
+    sourceId,
+    targetId
+) {
+
+    const svg =
+        diagram.querySelector(
+            "svg"
+        );
+
+
+    if (!svg) {
+        return null;
+    }
+
+
+    const edges =
+        Array.from(
+            svg.querySelectorAll(
+                ".edgePath"
+            )
+        );
+
+
+    const directPatterns = [
+
+        `L-${sourceId}-${targetId}`,
+
+        `L-${targetId}-${sourceId}`,
+
+        `${sourceId}-${targetId}`,
+
+        `${targetId}-${sourceId}`
+
+    ];
+
+
+    for (
+        const edge of edges
+    ) {
+
+        const edgeId =
+            edge.id || "";
+
+
+        for (
+            const pattern
+            of directPatterns
+        ) {
+
+            if (
+                edgeId.includes(
+                    pattern
+                )
+            ) {
+
+                return edge;
+
+            }
+
+        }
+
+    }
+
+
+    for (
+        const edge of edges
+    ) {
+
+        const descendants =
+            edge.querySelectorAll(
+                "*"
+            );
+
+
+        for (
+            const element
+            of descendants
+        ) {
+
+            const attributes =
+                Array.from(
+                    element.attributes || []
+                );
+
+
+            const attributeText =
+                attributes
+                    .map(
+                        attribute =>
+                            `${attribute.name}=${attribute.value}`
+                    )
+                    .join(" ");
+
+
+            if (
+                (
+                    attributeText.includes(
+                        sourceId
+                    ) &&
+                    attributeText.includes(
+                        targetId
+                    )
+                )
+            ) {
+
+                return edge;
+
+            }
+
+        }
+
+    }
+
+
+    return null;
+}
+
+
+/* =========================================================
    SETUP DIAGRAM
    ========================================================= */
 
 function setupDiagram() {
 
     const svg =
-        diagram.querySelector("svg");
+        diagram.querySelector(
+            "svg"
+        );
+
 
     if (!svg) {
 
@@ -849,14 +2562,6 @@ function setupDiagram() {
         return;
     }
 
-
-    /*
-     * Mermaid gives nodes IDs such as:
-     *
-     * flowchart-A-...
-     *
-     * We extract the logical node ID.
-     */
 
     const nodes =
         svg.querySelectorAll(
@@ -871,6 +2576,7 @@ function setupDiagram() {
                 extractLogicalNodeId(
                     node.id
                 );
+
 
             if (!logicalId) {
                 return;
@@ -914,10 +2620,12 @@ function setupDiagram() {
             const clusterId =
                 cluster.id || "";
 
+
             const logicalId =
                 extractClusterId(
                     clusterId
                 );
+
 
             if (!logicalId) {
                 return;
@@ -937,6 +2645,7 @@ function setupDiagram() {
                 event => {
 
                     event.stopPropagation();
+
 
                     if (
                         GROUP_DETAILS[
@@ -972,13 +2681,6 @@ function extractLogicalNodeId(
     }
 
 
-    /*
-     * Typical Mermaid generated IDs:
-     *
-     * flowchart-A-0
-     * flowchart-D1-1
-     */
-
     const match =
         mermaidId.match(
             /flowchart-([A-Za-z0-9_]+)-/
@@ -991,10 +2693,6 @@ function extractLogicalNodeId(
 
     }
 
-
-    /*
-     * Fallback for other Mermaid versions.
-     */
 
     const parts =
         mermaidId.split("-");
@@ -1026,11 +2724,6 @@ function extractClusterId(
         return null;
     }
 
-
-    /*
-     * Mermaid cluster IDs can vary by version.
-     * Search for known identifiers.
-     */
 
     const knownIds = [
         "M2",
@@ -1075,6 +2768,21 @@ function selectNode(
     selectedNode =
         nodeId;
 
+    selectedTool =
+        null;
+
+
+    toolButtonsContainer
+        .querySelectorAll(
+            ".tool-button"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "active"
+                )
+        );
+
 
     clearHighlighting();
 
@@ -1113,14 +2821,21 @@ function selectNode(
             nodeId;
 
         detailsContent.innerHTML = `
+
             <div class="empty-state">
-                <h3>No detail definition</h3>
+
+                <h3>
+                    No detail definition
+                </h3>
+
                 <p>
                     The node exists in the Mermaid graph,
                     but no additional inspector content
                     has been configured for it.
                 </p>
+
             </div>
+
         `;
 
     }
@@ -1177,18 +2892,24 @@ function renderNodeDetails(
     ) {
 
         html += `
+
             <div class="badge-row">
+
                 ${
                     data.badges
                         .map(
                             (badge, index) =>
                                 `<span class="badge ${getBadgeClass(index)}">
-                                    ${escapeHtml(badge)}
+                                    ${escapeHtml(
+                                        badge
+                                    )}
                                 </span>`
                         )
                         .join("")
                 }
+
             </div>
+
         `;
 
     }
@@ -1201,6 +2922,7 @@ function renderNodeDetails(
     if (data.description) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
@@ -1208,12 +2930,15 @@ function renderNodeDetails(
                 </div>
 
                 <div class="detail-description">
+
                     ${escapeHtml(
                         data.description
                     )}
+
                 </div>
 
             </div>
+
         `;
 
     }
@@ -1229,6 +2954,7 @@ function renderNodeDetails(
     ) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
@@ -1241,15 +2967,23 @@ function renderNodeDetails(
                         data.fields
                             .map(
                                 field => `
+
                                     <div class="key-value">
+
                                         <div class="key">
-                                            ${escapeHtml(field[0])}
+                                            ${escapeHtml(
+                                                field[0]
+                                            )}
                                         </div>
 
                                         <div class="value">
-                                            ${escapeHtml(field[1])}
+                                            ${escapeHtml(
+                                                field[1]
+                                            )}
                                         </div>
+
                                     </div>
+
                                 `
                             )
                             .join("")
@@ -1258,13 +2992,14 @@ function renderNodeDetails(
                 </div>
 
             </div>
+
         `;
 
     }
 
 
     /*
-     * Rules
+     * Detection Rules
      */
 
     if (
@@ -1273,17 +3008,99 @@ function renderNodeDetails(
     ) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
                     Detection Rules
                 </div>
 
-                <div class="code-block">
-${data.rules.map(escapeHtml).join("\n")}
+                <div class="rule-list">
+
+                    ${
+                        data.rules
+                            .map(
+                                (rule, index) => `
+
+                                    <div class="rule-item">
+
+                                        <span
+                                            class="rule-number"
+                                        >
+                                            ${index + 1}
+                                        </span>
+
+                                        <code>
+                                            ${escapeHtml(
+                                                rule
+                                            )}
+                                        </code>
+
+                                    </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
                 </div>
 
             </div>
+
+        `;
+
+    }
+
+
+    /*
+     * Hints
+     */
+
+    if (
+        data.hints &&
+        data.hints.length
+    ) {
+
+        html += `
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Hints
+                </div>
+
+                <div class="rule-list">
+
+                    ${
+                        data.hints
+                            .map(
+                                (hint, index) => `
+
+                                    <div class="rule-item">
+
+                                        <span
+                                            class="rule-number"
+                                        >
+                                            ${index + 1}
+                                        </span>
+
+                                        <code>
+                                            ${escapeHtml(
+                                                hint
+                                            )}
+                                        </code>
+
+                                    </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            </div>
+
         `;
 
     }
@@ -1299,6 +3116,7 @@ ${data.rules.map(escapeHtml).join("\n")}
     ) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
@@ -1311,15 +3129,21 @@ ${data.rules.map(escapeHtml).join("\n")}
                         data.tables
                             .map(
                                 table => `
+
                                     <div class="key-value">
+
                                         <div class="key">
                                             Table
                                         </div>
 
                                         <div class="value">
-                                            ${escapeHtml(table)}
+                                            ${escapeHtml(
+                                                table
+                                            )}
                                         </div>
+
                                     </div>
+
                                 `
                             )
                             .join("")
@@ -1328,6 +3152,7 @@ ${data.rules.map(escapeHtml).join("\n")}
                 </div>
 
             </div>
+
         `;
 
     }
@@ -1340,6 +3165,7 @@ ${data.rules.map(escapeHtml).join("\n")}
     if (data.meaning) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
@@ -1347,12 +3173,15 @@ ${data.rules.map(escapeHtml).join("\n")}
                 </div>
 
                 <div class="detail-card">
+
                     ${escapeHtml(
                         data.meaning
                     )}
+
                 </div>
 
             </div>
+
         `;
 
     }
@@ -1365,6 +3194,7 @@ ${data.rules.map(escapeHtml).join("\n")}
     if (data.ontology) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
@@ -1372,14 +3202,17 @@ ${data.rules.map(escapeHtml).join("\n")}
                 </div>
 
                 <div class="detail-card">
+
                     <strong>
                         ${escapeHtml(
                             data.ontology
                         )}
                     </strong>
+
                 </div>
 
             </div>
+
         `;
 
     }
@@ -1392,6 +3225,7 @@ ${data.rules.map(escapeHtml).join("\n")}
     if (data.important) {
 
         html += `
+
             <div class="detail-section">
 
                 <div class="detail-section-title">
@@ -1399,19 +3233,183 @@ ${data.rules.map(escapeHtml).join("\n")}
                 </div>
 
                 <div class="detail-card">
+
                     ${escapeHtml(
                         data.important
                     )}
+
                 </div>
 
             </div>
+
         `;
 
     }
 
 
-  
+    /*
+     * Inputs
+     */
 
+    if (
+        data.inputs &&
+        data.inputs.length
+    ) {
+
+        html += `
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Inputs
+                </div>
+
+                <div class="detail-card">
+
+                    ${
+                        data.inputs
+                            .map(
+                                field => `
+
+                                    <div class="key-value">
+
+                                        <div class="key">
+                                            ${escapeHtml(
+                                                field[0]
+                                            )}
+                                        </div>
+
+                                        <div class="value">
+                                            ${escapeHtml(
+                                                field[1]
+                                            )}
+                                        </div>
+
+                                    </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+     * Outputs
+     */
+
+    if (
+        data.outputs &&
+        data.outputs.length
+    ) {
+
+        html += `
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Outputs
+                </div>
+
+                <div class="detail-card">
+
+                    ${
+                        data.outputs
+                            .map(
+                                output => `
+
+                                    <div class="key-value">
+
+                                        <div class="key">
+                                            Output
+                                        </div>
+
+                                        <div class="value">
+                                            ${escapeHtml(
+                                                output
+                                            )}
+                                        </div>
+
+                                    </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+     * Path
+     */
+
+    if (
+        data.path &&
+        data.path.length
+    ) {
+
+        html += `
+
+            <div class="detail-section">
+
+                <div class="detail-section-title">
+                    Path
+                </div>
+
+                <div class="path-strip">
+
+                    ${
+                        data.path
+                            .map(
+                                (item, index) => `
+
+                                    <span
+                                        class="path-node"
+                                    >
+                                        ${escapeHtml(
+                                            item
+                                        )}
+                                    </span>
+
+                                    ${
+                                        index <
+                                        data.path.length - 1
+                                            ? `
+                                                <span
+                                                    class="path-arrow"
+                                                >
+                                                    →
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
 
 
     detailsContent.innerHTML =
@@ -1440,6 +3438,21 @@ function showGroupDetails(
     selectedNode =
         groupId;
 
+    selectedTool =
+        null;
+
+
+    toolButtonsContainer
+        .querySelectorAll(
+            ".tool-button"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "active"
+                )
+        );
+
 
     clearHighlighting();
 
@@ -1453,7 +3466,9 @@ function showGroupDetails(
             .map(
                 badge =>
                     `<span class="badge blue">
-                        ${escapeHtml(badge)}
+                        ${escapeHtml(
+                            badge
+                        )}
                     </span>`
             )
             .join("");
@@ -1472,9 +3487,11 @@ function showGroupDetails(
             </div>
 
             <div class="detail-description">
+
                 ${escapeHtml(
                     data.description
                 )}
+
             </div>
 
         </div>
@@ -1533,17 +3550,20 @@ function highlightGroup(
 
 
     nodes.forEach(
-        node =>
+        node => {
+
             node.classList.add(
                 "node-selected"
-            )
+            );
+
+        }
     );
 
 }
 
 
 /* =========================================================
-   CONNECTED PATH HIGHLIGHTING
+   ORIGINAL NODE PATH HIGHLIGHTING
    ========================================================= */
 
 function highlightConnectedPath(
@@ -1561,13 +3581,6 @@ function highlightConnectedPath(
     }
 
 
-    /*
-     * Mermaid edges have different generated IDs
-     * between versions. Instead of relying entirely
-     * on generated IDs, inspect edge labels and
-     * nearby graph structure.
-     */
-
     const node =
         findNodeElement(
             nodeId
@@ -1578,11 +3591,6 @@ function highlightConnectedPath(
         return;
     }
 
-
-    /*
-     * Highlight adjacent edges using the SVG
-     * geometry relationships where possible.
-     */
 
     const edges =
         svg.querySelectorAll(
@@ -1595,6 +3603,7 @@ function highlightConnectedPath(
 
             const edgeId =
                 edge.id || "";
+
 
             if (
                 edgeId.includes(
@@ -1610,6 +3619,72 @@ function highlightConnectedPath(
 
         }
     );
+
+}
+
+
+/* =========================================================
+   CLEAR HINT VISUALIZATION
+   ========================================================= */
+
+function clearHintVisualization() {
+
+    const hintNode =
+        findNodeElement(
+            "H"
+        );
+
+
+    if (!hintNode) {
+        return;
+    }
+
+
+    hintNode.classList.remove(
+        "hint-node-active"
+    );
+
+
+    hintNode.classList.remove(
+        "hint-node-neutral"
+    );
+
+
+    hintNode
+        .querySelectorAll(
+            ".hint-indicator"
+        )
+        .forEach(
+            indicator => {
+
+                indicator.classList.remove(
+                    "hint-active"
+                );
+
+                indicator.classList.remove(
+                    "hint-false"
+                );
+
+                indicator.classList.remove(
+                    "hint-missing"
+                );
+
+
+                const state =
+                    indicator.querySelector(
+                        ".hint-indicator-state"
+                    );
+
+
+                if (state) {
+
+                    state.textContent =
+                        "—";
+
+                }
+
+            }
+        );
 
 }
 
@@ -1636,10 +3711,32 @@ function clearHighlighting() {
             ".node-selected"
         )
         .forEach(
-            element =>
+            element => {
+
                 element.classList.remove(
                     "node-selected"
-                )
+                );
+
+            }
+        );
+
+
+    svg
+        .querySelectorAll(
+            ".node-path-highlight"
+        )
+        .forEach(
+            element => {
+
+                element.classList.remove(
+                    "node-path-highlight"
+                );
+
+                element.style.removeProperty(
+                    "--path-color"
+                );
+
+            }
         );
 
 
@@ -1648,10 +3745,13 @@ function clearHighlighting() {
             ".node-dimmed"
         )
         .forEach(
-            element =>
+            element => {
+
                 element.classList.remove(
                     "node-dimmed"
-                )
+                );
+
+            }
         );
 
 
@@ -1660,10 +3760,17 @@ function clearHighlighting() {
             ".edge-highlight"
         )
         .forEach(
-            element =>
+            element => {
+
                 element.classList.remove(
                     "edge-highlight"
-                )
+                );
+
+                element.style.removeProperty(
+                    "--path-color"
+                );
+
+            }
         );
 
 
@@ -1672,11 +3779,17 @@ function clearHighlighting() {
             ".edge-dimmed"
         )
         .forEach(
-            element =>
+            element => {
+
                 element.classList.remove(
                     "edge-dimmed"
-                )
+                );
+
+            }
         );
+
+
+    clearHintVisualization();
 
 }
 
@@ -1690,10 +3803,32 @@ function resetView() {
     selectedNode =
         null;
 
+    selectedTool =
+        null;
+
+
+    toolButtonsContainer
+        .querySelectorAll(
+            ".tool-button"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "active"
+                )
+        );
+
+
     clearHighlighting();
+
+
+    selectedToolStatus.textContent =
+        "No tool selected";
+
 
     detailsTitle.textContent =
         "Select a node";
+
 
     detailsContent.innerHTML = `
 
@@ -1708,9 +3843,10 @@ function resetView() {
             </h3>
 
             <p>
-                Click a node in the diagram to inspect
-                its purpose, detection logic, inputs,
-                outputs, and evidence.
+                Select a tool to trace its primary capability
+                path, or click a node in the diagram to inspect
+                its purpose, detection logic, inputs, outputs,
+                and evidence.
             </p>
 
         </div>
@@ -1792,6 +3928,7 @@ function setupControls() {
             detailsTitle.textContent =
                 "Select a node";
 
+
             detailsContent.innerHTML = `
 
                 <div class="empty-state">
@@ -1805,17 +3942,38 @@ function setupControls() {
                     </h3>
 
                     <p>
-                        Click a node in the diagram to inspect
-                        its purpose, detection logic, inputs,
-                        outputs, and evidence.
+                        Select a tool to trace its primary
+                        capability path, or click a node in
+                        the diagram to inspect its logic.
                     </p>
 
                 </div>
 
             `;
 
+
             selectedNode =
                 null;
+
+            selectedTool =
+                null;
+
+
+            toolButtonsContainer
+                .querySelectorAll(
+                    ".tool-button"
+                )
+                .forEach(
+                    button =>
+                        button.classList.remove(
+                            "active"
+                        )
+                );
+
+
+            selectedToolStatus.textContent =
+                "No tool selected";
+
 
             clearHighlighting();
 
@@ -1866,10 +4024,6 @@ function setupPanZoom() {
     diagramContainer.addEventListener(
         "mousedown",
         event => {
-
-            /*
-             * Don't start panning when clicking a node.
-             */
 
             if (
                 event.target.closest(
@@ -2047,10 +4201,6 @@ function fitDiagram() {
     }
 
 
-    /*
-     * Reset first.
-     */
-
     zoomLevel =
         1;
 
@@ -2060,10 +4210,6 @@ function fitDiagram() {
     translateY =
         0;
 
-
-    /*
-     * Get actual diagram dimensions.
-     */
 
     const svgRect =
         svg.getBoundingClientRect();
