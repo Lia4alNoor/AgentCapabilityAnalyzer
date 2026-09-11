@@ -646,7 +646,7 @@ def render():
         # =====================================================
 
         st.header(
-            "Identified Tools wuth"
+            "Identified Tools with"
         )
 
 
@@ -1147,46 +1147,7 @@ def render():
         st.divider()
 
 
-        st.markdown(
-            "### 📚 Reference Materials"
-        )
 
-
-        st.caption(
-            "The following section contains reference material only — "
-            "not analysis results."
-        )
-
-
-        st.divider()
-
-
-        excluded_patterns = (
-            composition_analysis_data.get(
-                "excluded_patterns",
-                []
-            )
-        )
-
-
-        if excluded_patterns:
-
-            with st.expander(
-                "📚 **REFERENCE: Excluded Patterns**",
-                expanded=False,
-            ):
-
-                st.caption(
-                    "Literature patterns excluded from composition matching "
-                    "(retained as evidence only)."
-                )
-
-
-                for pattern_id in excluded_patterns:
-
-                    st.write(
-                        f"• {pattern_id}"
-                    )
 
 
     # =========================================================
